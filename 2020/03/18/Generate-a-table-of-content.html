@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+<script defer=true src="/assets/js/main.min.js"></script>
+
+<!-- CSS --> 
+<link rel="stylesheet" href="/assets/css/main.css">
+<!--Favicon-->
+<link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+<!-- Canonical -->
+<link rel="canonical" href="http://0.0.0.0:4000/2020/03/18/Generate-a-table-of-content.html">
+<!-- RSS -->
+<link rel="alternate" type="application/atom+xml" title="BBLog" href="http://0.0.0.0:4000/feed.xml"/>
+
+
+<!-- KaTeX 0.8.3 -->
+<!-- if you have any issue check https://github.com/KaTeX/KaTeX -->
+
+<script src="/assets/js/vendor/katex.min.js"></script>
+
+<!-- Go to www.addthis.com/dashboard to customize sharing tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e83809c0faa0389"></script>
+
+<!-- Google Analytics -->
+
+<!-- Global site tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161813252-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-161813252-1');
+</script>
+
+<!-- Page analysis (analytics.js) -->
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-161813252-1', 'auto');
+  ga('send', 'pageview');
+</script>
+ <!-- End Google Analytics -->
+<!-- jekyll-seo-tag to add metadata tags for search engines and social networks -->
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Generate a table of content | BBLog</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Generate a table of content" />
+<meta name="author" content="Bin Liang" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Test article, get the source on github. Using Kramdown GFM" />
+<meta property="og:description" content="Test article, get the source on github. Using Kramdown GFM" />
+<link rel="canonical" href="http://0.0.0.0:4000/2020/03/18/Generate-a-table-of-content.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/2020/03/18/Generate-a-table-of-content.html" />
+<meta property="og:site_name" content="BBLog" />
+<meta property="og:image" content="http://0.0.0.0:4000/assets/img/mac.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-18T00:00:00+00:00" />
+<script type="application/ld+json">
+{"url":"http://0.0.0.0:4000/2020/03/18/Generate-a-table-of-content.html","headline":"Generate a table of content","dateModified":"2020-03-18T00:00:00+00:00","datePublished":"2020-03-18T00:00:00+00:00","author":{"@type":"Person","name":"Bin Liang"},"description":"Test article, get the source on github. Using Kramdown GFM","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://0.0.0.0:4000/assets/img/feather_pen.jpg"},"name":"Bin Liang"},"@type":"BlogPosting","image":"http://0.0.0.0:4000/assets/img/mac.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/2020/03/18/Generate-a-table-of-content.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<!-- jekyll-feed to add metadata for ATOM style RSS feed -->
+<link type="application/atom+xml" rel="alternate" href="http://0.0.0.0:4000/feed.xml" title="BBLog" />
+
+<!-- Manual seo tags -->
+<!--
+<title>Generate a table of content | BBLog</title>
+<meta name="description" content="Test article, get the source on github.Using Kramdown GFM">
+-->
+
+  </head>
+  
+  <body>
+    <header class="site-header">
+    <!-- Logo, title & hamburger button -->
+    <a id="brand" aria-label="BBLog" href="/">
+        
+        <img alt="logo img" class="logo" src="/assets/img/feather_pen.jpg" />
+        
+        <h1 class="site-title">BBLog</h1>
+    </a>
+
+    <!-- Hamburger button on the top right corner for mobile display -->
+    <a id="burger" aria-label="toggle" href="#">&#9776</a>
+
+    <!-- Menu bar -->
+    <ul id="menu">
+        <!-- Build menu recursively -->
+        <!-- assign variables at page scope ONCE to avoid assign conflict in recursive include snippet -->
+        
+        
+        <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0: -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    
+    <li>
+        <a aria-label="Home" title="Home" href="/blog/page2/">
+            <i class="fa fa-home menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Home</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0: -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    
+    <li class="dropdown">
+        <a aria-label="Blogs" title="Blogs" href="#">
+            <i class="fa fa-newspaper-o menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Blogs</span>
+        </a>
+        <!-- Build sub-menu recursively -->
+        <ul class="dropdown-menu">
+
+        <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0.1 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.1: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.1: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.1: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.1: -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    
+    <li>
+        <a aria-label="Categories" title="Categories" href="/categories/">
+            <i class="fa fa-list menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Categories</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.1: -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    
+    <li>
+        <a aria-label="Tags" title="Tags" href="/tags/">
+            <i class="fa fa-tags menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Tags</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.1: -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.1: -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.1: -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.1: -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.1: -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+
+        </ul>
+    </li>
+    
+
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0: -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    
+    <li class="dropdown">
+        <a aria-label="Portfolio" title="Portfolio" href="#">
+            <i class="fa fa-th menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Portfolio</span>
+        </a>
+        <!-- Build sub-menu recursively -->
+        <ul class="dropdown-menu">
+
+        <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0.2 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.2: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.2: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.2: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.2: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.2: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.2: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.2: -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    
+    <li>
+        <a aria-label="Collection 1" title="Collection 1" href="/pages/collection1.html">
+            <i class="fa fa-code-branch menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Collection 1</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.2: -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    
+    <li>
+        <a aria-label="Gallery" title="Gallery" href="/pages/gallery.html">
+            <i class="fa fa-images menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Gallery</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.2: -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.2: -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+
+        </ul>
+    </li>
+    
+
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0: -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0: -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    
+    <li>
+        <a aria-label="Search" title="Search" href="/search/">
+            <i class="fa fa-search menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Search</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0: -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    
+    <li>
+        <a aria-label="About" title="About" href="/about/">
+            <i class="fa fa-user menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">About</span>
+        </a>
+    </li>
+    
+
+
+    </ul>
+</header>
+
+    
+<aside class="sidebar">
+    <header>
+      <div class="about">
+        <div class="cover-author-image">
+          <a href="/"><img src="/assets/img/potrait.jpg" alt="liangbin"></a>
+        </div>
+        <div class="author-name">Bin Liang</div>
+        <p>I am a network architect with full stack development experience. My current research focuses include DCN, global meta data plane and in general: converged compute, storage and networking architecture.</p>
+      </div>
+    </header> <!-- End Header -->
+    
+   	<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+	<div class="addthis_inline_share_toolbox"> <p><strong>Sharing:</strong></p></div>
+
+    <footer>
+      <section class="contact">
+        <h3 class="contact-title">Follow me</h3>
+        <ul>
+          
+          
+          
+          
+          
+            <li class="github"><a href="http://github.com/liangbin-pub" target="_blank"><i class="fa fa-github"></i></a></li>
+          
+          
+            <li class="linkedin"><a href="https://in.linkedin.com/in/liangbin888" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+          
+          
+            <li class="email"><a href="mailto:fw.liangb@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+          
+          
+            <li class="rss"><a href="/feed.xml"><i class="fa fa-rss"></i></a></li>
+          
+        </ul>
+      </section> <!-- End Section Contact -->
+      <div class="copyright">
+        <p>2020 &copy; Bin Liang</p>
+      </div>
+    </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+
+    <div class="content content-box clearfix">
+      <div class="article">
+        
+
+<meta property="og:url"          content="/2020/03/18/Generate-a-table-of-content.html" />
+<meta property="og:type"         content="article" />
+<meta property="og:title"        content="Generate a table of content" />
+<meta property="og:description"  content="Test article, get the source on github.
+
+Using Kramdown GFM
+
+" />
+<meta property="og:image"        content="assets/img/mac.jpg" />
+
+
+<!-- Page Feature Image and Title as Header -->
+<header id="main" style="background-repeat:no-repeat;background-image: url('/assets/img/mac.jpg')">
+  
+    <h1 id="Generate+a+table+of+content" class="title">Generate a table of content</h1>
+      
+      
+        
+
+
+<div class="post-info"><a href="https://github.com/liangbin-pub" target="_blank">
+      <img src="/assets/img/myAvatar.svg">
+    
+    <p class="meta">
+      Bin Liang - March 18, 2020
+    </p></a></div>
+
+      
+  
+</header>
+
+<!-- Article content -->
+<section class="post-content">
+  
+  <p>Test article, get the source on <a href="https://github.com/Sylhare/Type-on-Strap/blob/gh-pages/_posts/2013-12-12-toc.js-for-table-of-content.md">github</a>.</p>
+
+<h1 id="using-kramdown-gfm-">Using Kramdown GFM <!--more--></h1>
+
+<!-- To be placed at the beginning of the post, it is where the table of content will be generated -->
+<ul id="markdown-toc">
+  <li><a href="#using-kramdown-gfm-" id="markdown-toc-using-kramdown-gfm-">Using Kramdown GFM <!--more--></a>    <ul>
+      <li><a href="#basic-usage" id="markdown-toc-basic-usage">Basic Usage</a></li>
+    </ul>
+  </li>
+  <li><a href="#using-tocjs" id="markdown-toc-using-tocjs">Using toc.js</a>    <ul>
+      <li><a href="#customize-with-tocjs" id="markdown-toc-customize-with-tocjs">Customize with toc.js</a>        <ul>
+          <li><a href="#use-with-this-jekyll-template" id="markdown-toc-use-with-this-jekyll-template">Use with this jekyll template</a></li>
+        </ul>
+      </li>
+      <li><a href="#basic-usage-1" id="markdown-toc-basic-usage-1">Basic Usage</a></li>
+      <li><a href="#how-it-would-look-like" id="markdown-toc-how-it-would-look-like">How it would look like</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="basic-usage">Basic Usage</h2>
+
+<p>You need to put this at the beginning of the page where you want the table of content to be displayed</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* TOC
+{:toc}
+</code></pre></div></div>
+
+<p>It will then render the markdown and html titles (lines that begins with <code class="language-plaintext highlighter-rouge">#</code> or using the <code class="language-plaintext highlighter-rouge">&lt;h1&gt;&lt;/h1&gt;</code> tages)</p>
+
+<h1 id="using-tocjs">Using toc.js</h1>
+
+<p>Demo display of <a href="https://github.com/ghiculescu/jekyll-table-of-contents">jekyll-table-of-contents</a> by ghiculescu.</p>
+
+<!-- To be placed at the beginning of the post, it is where the table of content will be generated -->
+<div id="toc"></div>
+
+<h2 id="customize-with-tocjs">Customize with toc.js</h2>
+
+<p><a href="https://github.com/ghiculescu/jekyll-table-of-contents">toc.js</a> stands for table of content, it is a js plugin that generates automatically a table of content of a post.</p>
+
+<h3 id="use-with-this-jekyll-template">Use with this jekyll template</h3>
+
+<p>If you want to customize the theme it is up to you, you can add the <code class="language-plaintext highlighter-rouge">toc.js</code> file into the <code class="language-plaintext highlighter-rouge">asset &gt; js</code> and add it into the <code class="language-plaintext highlighter-rouge">page.html</code> layout with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/js/toc.js"</span> <span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+<p>Then you can use it as it is said on the repository.</p>
+
+<h2 id="basic-usage-1">Basic Usage</h2>
+
+<p>The script requires jQuery. First, reference toc.js in templates where you would like to add the table of content. Then, create an HTML element wherever you want your table of contents to appear:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"toc"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>Then you put your post with titles and all like:</p>
+
+<div class="language-apiblueprint highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gu">## Title</span>
+<span class="gu">## Mid title 1</span>
+This is text on page one
+<span class="gu">## Mid title 2</span>
+This is text for page two
+<span class="gu">### Sub title 2.a</span>
+Some more text
+</code></pre></div></div>
+
+<p>Then at the end of your post, you call the .toc() function using:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#toc</span><span class="dl">'</span><span class="p">).</span><span class="nx">toc</span><span class="p">();</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h2 id="how-it-would-look-like">How it would look like</h2>
+
+<p><img src="https://user-images.githubusercontent.com/20642750/39189661-c22099f2-47a0-11e8-826e-2ec3ef4cc4f4.png" alt="image" /></p>
+
+<script>
+// toc.js 
+// Copied here for the example, can be placed in assets/js for real use in your template.
+// https://github.com/ghiculescu/jekyll-table-of-contents
+(function($){
+  $.fn.toc = function(options) {
+    var defaults = {
+      noBackToTopLinks: false,
+      title: '<i>Jump to...</i>',
+      minimumHeaders: 3,
+      headers: 'h1, h2, h3, h4, h5, h6',
+      listType: 'ol', // values: [ol|ul]
+      showEffect: 'show', // values: [show|slideDown|fadeIn|none]
+      showSpeed: 'slow', // set to 0 to deactivate effect
+      classes: { list: '',
+                 item: ''
+               }
+    },
+    settings = $.extend(defaults, options);
+
+    function fixedEncodeURIComponent (str) {
+      return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
+        return '%' + c.charCodeAt(0).toString(16);
+      });
+    }
+
+    function createLink (header) {
+      var innerText = (header.textContent === undefined) ? header.innerText : header.textContent;
+      return "<a href='#" + fixedEncodeURIComponent(header.id) + "'>" + innerText + "</a>";
+    }
+
+    var headers = $(settings.headers).filter(function() {
+      // get all headers with an ID
+      var previousSiblingName = $(this).prev().attr( "name" );
+      if (!this.id && previousSiblingName) {
+        this.id = $(this).attr( "id", previousSiblingName.replace(/\./g, "-") );
+      }
+      return this.id;
+    }), output = $(this);
+    if (!headers.length || headers.length < settings.minimumHeaders || !output.length) {
+      $(this).hide();
+      return;
+    }
+
+    if (0 === settings.showSpeed) {
+      settings.showEffect = 'none';
+    }
+
+    var render = {
+      show: function() { output.hide().html(html).show(settings.showSpeed); },
+      slideDown: function() { output.hide().html(html).slideDown(settings.showSpeed); },
+      fadeIn: function() { output.hide().html(html).fadeIn(settings.showSpeed); },
+      none: function() { output.html(html); }
+    };
+
+    var get_level = function(ele) { return parseInt(ele.nodeName.replace("H", ""), 10); };
+    var highest_level = headers.map(function(_, ele) { return get_level(ele); }).get().sort()[0];
+    var return_to_top = '<i class="icon-arrow-up back-to-top"> </i>';
+
+    var level = get_level(headers[0]),
+      this_level,
+      html = settings.title + " <" +settings.listType + " class=\"" + settings.classes.list +"\">";
+    headers.on('click', function() {
+      if (!settings.noBackToTopLinks) {
+        window.location.hash = this.id;
+      }
+    })
+    .addClass('clickable-header')
+    .each(function(_, header) {
+      this_level = get_level(header);
+      if (!settings.noBackToTopLinks && this_level === highest_level) {
+        $(header).addClass('top-level-header').after(return_to_top);
+      }
+      if (this_level === level) // same level as before; same indenting
+        html += "<li class=\"" + settings.classes.item + "\">" + createLink(header);
+      else if (this_level <= level){ // higher level than before; end parent ol
+        for(var i = this_level; i < level; i++) {
+          html += "</li></"+settings.listType+">"
+        }
+        html += "<li class=\"" + settings.classes.item + "\">" + createLink(header);
+      }
+      else if (this_level > level) { // lower level than before; expand the previous to contain a ol
+        for(i = this_level; i > level; i--) {
+          html += "<" + settings.listType + " class=\"" + settings.classes.list +"\">" +
+                  "<li class=\"" + settings.classes.item + "\">"
+        }
+        html += createLink(header);
+      }
+      level = this_level; // update for the next one
+    });
+    html += "</"+settings.listType+">";
+    if (!settings.noBackToTopLinks) {
+      $(document).on('click', '.back-to-top', function() {
+        $(window).scrollTop(0);
+        window.location.hash = '';
+      });
+    }
+
+    render[settings.showEffect]();
+  };
+})(jQuery);
+</script>
+
+<!-- To be copied at the end of the post to render the table of content -->
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#toc').toc();
+});
+</script>
+
+
+  
+</section>
+
+<!-- Article Tag list -->
+
+
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/tags#Customization">
+      <p><i class="fa fa-tag fa-fw"></i> Customization</p>
+    </a>
+    
+    <a class="button" href="/tags#Markdown">
+      <p><i class="fa fa-tag fa-fw"></i> Markdown</p>
+    </a>
+    
+    <a class="button" href="/tags#kramdown">
+      <p><i class="fa fa-tag fa-fw"></i> kramdown</p>
+    </a>
+    
+    <a class="button" href="/tags#toc.js">
+      <p><i class="fa fa-tag fa-fw"></i> toc.js</p>
+    </a>
+    
+  </div>
+</footer>
+
+
+<!-- For post only -->
+
+  <!-- List related posts below Tags, limit 5 -->
+  <p><strong>Related posts :</strong></p>
+  <ul>
+    
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="/2020/04/05/markdown-and-html.html">Markdown and HTML</a></li>
+          
+          
+      
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="/2020/04/04/color-post.html">Color Post</a></li>
+          
+          
+      
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="/2020/03/18/blogging-with-title.html">Blogging with title</a></li>
+          
+          
+      
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+    
+  </ul>
+
+  <!-- List Social media sharing buttons --
+  
+
+<div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2F2020%2F03%2F18%2FGenerate-a-table-of-content.html" target="_blank" title=" Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=Generate+a+table+of+content%20http%3A%2F%2F0.0.0.0%3A4000%2F2020%2F03%2F18%2FGenerate-a-table-of-content.html" target="_blank" title="">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://0.0.0.0:4000/2020/03/18/Generate-a-table-of-content.html&title=Generate+a+table+of+content%20%7C%20BBLog" target="_blank" title=" Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Generate+a+table+of+content%20%7C%20BBLog&body=:%20http://0.0.0.0:4000/2020/03/18/Generate-a-table-of-content.html" target="_blank" title="">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+  -->
+  
+  <!-- Disqus comments -->
+  
+    <div class="comments">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'liangbin-pub-github-io';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view comments.</noscript>
+
+    </div>
+  
+
+  <!-- Post navigation -->
+  
+    <div id="post-nav">
+    
+    <div id="previous-post">
+        <a alt="Blogging with title" href="/2020/03/18/blogging-with-title.html">
+            <p>Previous post</p>
+            Blogging with title
+        </a>
+    </div>
+    
+
+    
+    <div id="next-post">
+        <a alt="Markup: Syntax Highlighting" href="/2020/03/08/Markup-Syntax-Highlighting.html">
+            <p>Next post</p>
+            Markup: Syntax Highlighting
+        </a>
+    </div>
+    
+</div>
+
+  
+
+
+
+      </div>
+      <footer class="site-footer">
+    <p class="text">
+        Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/">Gitgub Pages</a>
+</p>
+        <!--            
+            <div class="footer-icons">
+                <ul>
+                !-- Social icons from Font Awesome, if enabled --
+                
+<li>
+    <a feed.xml href="http://0.0.0.0:4000/" title="Follow RSS feed">
+    <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a href="https://github.com/sylhare" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+        -->
+</footer>
+
+
+
+    </div>
+  </body>
+</html>
