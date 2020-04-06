@@ -91,11 +91,14 @@
         <!-- Build menu recursively -->
         <!-- assign variables at page scope ONCE to avoid assign conflict in recursive include snippet -->
         
-        
         <!-- Build nested menu list recursively from page front matter -->
 <!-- Caller controls outer ul style, parameter: 0 - parent menu_id as relationship anchor, start with 0 -->
 
-    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0: -->
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0  -->
     
 
      
@@ -110,20 +113,15 @@
     <li class="separator"> | </li>
 
     
-    
     <li>
-        <a aria-label="Home" title="Home" href="/blog/page2/">
+        <a aria-label="Home" title="Home" href="/">
             <i class="fa fa-home menu-icon" aria-hidden="true"></i>
             <span class="menu-title">Home</span>
         </a>
     </li>
     
 
-    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0: -->
-    
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0: -->
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0  -->
     
 
      
@@ -137,7 +135,6 @@
 
     <li class="separator"> | </li>
 
-    
     
     <li class="dropdown">
         <a aria-label="Blogs" title="Blogs" href="#">
@@ -150,19 +147,31 @@
         <!-- Build nested menu list recursively from page front matter -->
 <!-- Caller controls outer ul style, parameter: 0.1 - parent menu_id as relationship anchor, start with 0 -->
 
-    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.1: -->
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.1  -->
     
     <!--     Filter out - page don't want to be listed -->
         
-    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.1: -->
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.1  -->
     
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.1: -->
+
+     
+
     
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.1: -->
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.1  -->
     
 
      
@@ -176,7 +185,6 @@
 
     <li class="separator"> | </li>
 
-    
     
     <li>
         <a aria-label="Categories" title="Categories" href="/categories/">
@@ -186,7 +194,7 @@
     </li>
     
 
-    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.1: -->
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.1  -->
     
 
      
@@ -201,7 +209,6 @@
     <li class="separator"> | </li>
 
     
-    
     <li>
         <a aria-label="Tags" title="Tags" href="/tags/">
             <i class="fa fa-tags menu-icon" aria-hidden="true"></i>
@@ -210,7 +217,7 @@
     </li>
     
 
-    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.1: -->
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.1  -->
     
 
      
@@ -220,7 +227,7 @@
      
     <!--     Filter out - page is not descendant of parent anchor -->
     
-    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.1: -->
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.1  -->
     
 
      
@@ -230,7 +237,7 @@
      
     <!--     Filter out - page is not descendant of parent anchor -->
     
-    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.1: -->
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.1  -->
     
 
      
@@ -240,7 +247,7 @@
      
     <!--     Filter out - page is not descendant of parent anchor -->
     
-    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.1: -->
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.1  -->
     
 
      
@@ -250,7 +257,7 @@
      
     <!--     Filter out - page is not descendant of parent anchor -->
     
-    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.1: -->
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.1  -->
     
 
      
@@ -265,15 +272,33 @@
     </li>
     
 
-    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0: -->
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0  -->
     
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0: -->
+
+     
+
     
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0: -->
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0  -->
     
 
      
@@ -287,7 +312,6 @@
 
     <li class="separator"> | </li>
 
-    
     
     <li class="dropdown">
         <a aria-label="Portfolio" title="Portfolio" href="#">
@@ -300,79 +324,11 @@
         <!-- Build nested menu list recursively from page front matter -->
 <!-- Caller controls outer ul style, parameter: 0.2 - parent menu_id as relationship anchor, start with 0 -->
 
-    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.2: -->
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.2  -->
     
     <!--     Filter out - page don't want to be listed -->
         
-    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.2: -->
-    
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.2: -->
-    
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.2: -->
-    
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.2: -->
-    
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.2: -->
-    
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.2: -->
-    
-
-     
-
-    
-    
-    
-
-    
-    
-
-    <li class="separator"> | </li>
-
-    
-    
-    <li>
-        <a aria-label="Collection 1" title="Collection 1" href="/pages/collection1.html">
-            <i class="fa fa-code-branch menu-icon" aria-hidden="true"></i>
-            <span class="menu-title">Collection 1</span>
-        </a>
-    </li>
-    
-
-    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.2: -->
-    
-
-     
-
-    
-    
-    
-
-    
-    
-
-    <li class="separator"> | </li>
-
-    
-    
-    <li>
-        <a aria-label="Gallery" title="Gallery" href="/pages/gallery.html">
-            <i class="fa fa-images menu-icon" aria-hidden="true"></i>
-            <span class="menu-title">Gallery</span>
-        </a>
-    </li>
-    
-
-    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.2: -->
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.2  -->
     
 
      
@@ -382,7 +338,103 @@
      
     <!--     Filter out - page is not descendant of parent anchor -->
     
-    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.2: -->
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <a aria-label="Collection 1" title="Collection 1" href="/pages/collection1.html">
+            <i class="fa fa-code-branch menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Collection 1</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <a aria-label="Gallery" title="Gallery" href="/pages/gallery.html">
+            <i class="fa fa-images menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Gallery</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.2  -->
     
 
      
@@ -397,15 +449,33 @@
     </li>
     
 
-    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0: -->
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0  -->
     
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0: -->
+
+     
+
     
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0: -->
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0  -->
     
 
      
@@ -419,7 +489,6 @@
 
     <li class="separator"> | </li>
 
-    
     
     <li>
         <a aria-label="Search" title="Search" href="/search/">
@@ -429,7 +498,7 @@
     </li>
     
 
-    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0: -->
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0  -->
     
 
      
@@ -443,7 +512,6 @@
 
     <li class="separator"> | </li>
 
-    
     
     <li>
         <a aria-label="About" title="About" href="/about/">
@@ -465,7 +533,7 @@
           <a href="/"><img src="/assets/img/potrait.jpg" alt="liangbin"></a>
         </div>
         <div class="author-name">Bin Liang</div>
-        <p>I am a network architect with full stack development experience. My current research focuses include DCN, global meta data plane and in general: converged compute, storage and networking architecture.</p>
+        <p>I am a network architect with full stack development experience.  My current research focuses include DCN, global meta data plane  and in general: converged compute, storage and networking architecture.</p>
       </div>
     </header> <!-- End Header -->
     
