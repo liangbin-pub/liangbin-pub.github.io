@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+<script defer=true src="/assets/js/main.min.js"></script>
+
+<!-- CSS --> 
+<link rel="stylesheet" href="/assets/css/main.css">
+<!--Favicon-->
+<link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+<!-- Canonical -->
+<link rel="canonical" href="http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html">
+<!-- RSS -->
+<link rel="alternate" type="application/atom+xml" title="BLog" href="http://0.0.0.0:4000/feed.xml"/>
+
+
+<!-- KaTeX 0.8.3 -->
+<!-- if you have any issue check https://github.com/KaTeX/KaTeX -->
+
+<script src="/assets/js/vendor/katex.min.js"></script>
+
+<!-- Go to www.addthis.com/dashboard to customize sharing tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e83809c0faa0389"></script>
+
+<!-- Google Analytics -->
+
+<!-- Global site tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161813252-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-161813252-1');
+</script>
+
+<!-- Page analysis (analytics.js) -->
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-161813252-1', 'auto');
+  ga('send', 'pageview');
+</script>
+ <!-- End Google Analytics -->
+<!-- jekyll-seo-tag to add metadata tags for search engines and social networks -->
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Reflection on OSI Model | BLog</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Reflection on OSI Model" />
+<meta name="author" content="Bin Liang" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Reflection on OSI model In the world of internetworking, the most popular standard has to be TCP/IP protocol, which forms the basis of the Internet connecting billions of computers and devices around the world. It’s so popular and vital to our daily life now a days that it’s used even when communication is local across compatible networks. For example, popular network file system NFS uses IP protocol even though it’s used mainly in homogenous ethernet LAN environment. The software standards like TCP/IP allowing reliable communication without demanding reliable networks is the key enabling technologies for internetworking. Looking back the standard battle with ATM in 1990s, one key success factor is it’s decomposed layered hierarchy. Each layer taking responsibilitu for just a portion of the overall communication task. To avoid ambiguous in terms, Open System Interconnect (OSI) model is developed which describes networks as a series of layers: Layer number layer name Main function Example protocol 7 Application Application running over network DNS, Web 6 Presentation Translate between Application and network format   5 Session Session lifecycle management across network RPC,named pipes 4 Transport Additional connection below session layer TCP 3 Network Translate between logic address/name to physical address IP 2 Data Link Transform between packet and bits Ethernet 1 Physical TX/RX bit stream over physical media IEEE 802 The key to protocol families following OSI model is that communication occurs logically at same level of the protocol between sender and receiver, while services from lower level implement it. Just like abstract data types which simplifies the programmer’s task by hiding the implementation details of the data type, offering services needed by upper layer at each protocol layer makes the standard easier to understand and implement with cross industry compatability, especially for lower level protocol vendors. For 20 years since mid 1990s, Internet has enjoyed exponential growth thanks to the dominant position of TCP/IP. Network vendors like Cisco took lead and protocols are added and expanded with a bottom up approach to protect the investment in lower level infrastructures. It is until recent years we see some challenges and movements against long-standing TCP/IP stack and traditional network infrastructures (both topology and component levels), driven by OTT providers’ performance, scalbility and fault tolrance demands. The analysis for the huge success of AWS, Azure, GCP and Ali cloud in the past 5-10 years deserves a dedicate study series but here is one important factor from technology point of view: they just need purposely built network for their intent business need, so they built proprietary homogeneous network infrastructure from scratch with optimized and simplified protocol stack, achiving cost, power consumption and networking efficiency. It is on the right track but start to show limitions facing challenges from: Data volume and dispersal driven by AI and IoT Dynamic business logic driven by tenant IT migration Simply put, the “simplification” approach OTT providers have enjoyed for their past success is just not enough when facing these new challenges, which demands REAL application driven design, with Top Down principle. Back to OSI model, we have to abandon the assumption of TCP/IP, Ethernet, etc and go back to basic: Layers are for seperation of responsibilities in a hierarchical way Upper layer should not aware or concern about lower layer Lower layer is responsible of fulfilling or rejecting the requests from upper layer Which means, instead of the bottom-up approach where upper layer operates based on what lower level offers, upper layer operates purly based on its own need and send only intent to lower layer, where lower layer has the flexibility to choose available and viable technology to fulfill or reject the request. Think of a future where we can have harmonized heterogeneous network clusters (devices, topologies or protocols) within data centers and extend into edge, campus even SoC, tailored for different compute-storage usage, totally transparent to applications layer; Think of a laptop where all bandwidth of wired and available wifi band can be utilized simultaneously; Think of google-search-like information query from application; Think of instructions rathan than data been networked to fulfill the request using remote data, etc. This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!" />
+<meta property="og:description" content="Reflection on OSI model In the world of internetworking, the most popular standard has to be TCP/IP protocol, which forms the basis of the Internet connecting billions of computers and devices around the world. It’s so popular and vital to our daily life now a days that it’s used even when communication is local across compatible networks. For example, popular network file system NFS uses IP protocol even though it’s used mainly in homogenous ethernet LAN environment. The software standards like TCP/IP allowing reliable communication without demanding reliable networks is the key enabling technologies for internetworking. Looking back the standard battle with ATM in 1990s, one key success factor is it’s decomposed layered hierarchy. Each layer taking responsibilitu for just a portion of the overall communication task. To avoid ambiguous in terms, Open System Interconnect (OSI) model is developed which describes networks as a series of layers: Layer number layer name Main function Example protocol 7 Application Application running over network DNS, Web 6 Presentation Translate between Application and network format   5 Session Session lifecycle management across network RPC,named pipes 4 Transport Additional connection below session layer TCP 3 Network Translate between logic address/name to physical address IP 2 Data Link Transform between packet and bits Ethernet 1 Physical TX/RX bit stream over physical media IEEE 802 The key to protocol families following OSI model is that communication occurs logically at same level of the protocol between sender and receiver, while services from lower level implement it. Just like abstract data types which simplifies the programmer’s task by hiding the implementation details of the data type, offering services needed by upper layer at each protocol layer makes the standard easier to understand and implement with cross industry compatability, especially for lower level protocol vendors. For 20 years since mid 1990s, Internet has enjoyed exponential growth thanks to the dominant position of TCP/IP. Network vendors like Cisco took lead and protocols are added and expanded with a bottom up approach to protect the investment in lower level infrastructures. It is until recent years we see some challenges and movements against long-standing TCP/IP stack and traditional network infrastructures (both topology and component levels), driven by OTT providers’ performance, scalbility and fault tolrance demands. The analysis for the huge success of AWS, Azure, GCP and Ali cloud in the past 5-10 years deserves a dedicate study series but here is one important factor from technology point of view: they just need purposely built network for their intent business need, so they built proprietary homogeneous network infrastructure from scratch with optimized and simplified protocol stack, achiving cost, power consumption and networking efficiency. It is on the right track but start to show limitions facing challenges from: Data volume and dispersal driven by AI and IoT Dynamic business logic driven by tenant IT migration Simply put, the “simplification” approach OTT providers have enjoyed for their past success is just not enough when facing these new challenges, which demands REAL application driven design, with Top Down principle. Back to OSI model, we have to abandon the assumption of TCP/IP, Ethernet, etc and go back to basic: Layers are for seperation of responsibilities in a hierarchical way Upper layer should not aware or concern about lower layer Lower layer is responsible of fulfilling or rejecting the requests from upper layer Which means, instead of the bottom-up approach where upper layer operates based on what lower level offers, upper layer operates purly based on its own need and send only intent to lower layer, where lower layer has the flexibility to choose available and viable technology to fulfill or reject the request. Think of a future where we can have harmonized heterogeneous network clusters (devices, topologies or protocols) within data centers and extend into edge, campus even SoC, tailored for different compute-storage usage, totally transparent to applications layer; Think of a laptop where all bandwidth of wired and available wifi band can be utilized simultaneously; Think of google-search-like information query from application; Think of instructions rathan than data been networked to fulfill the request using remote data, etc. This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!" />
+<link rel="canonical" href="http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html" />
+<meta property="og:site_name" content="BLog" />
+<meta property="og:image" content="http://0.0.0.0:4000/assets/img/software.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-31T00:00:00+00:00" />
+<script type="application/ld+json">
+{"image":"http://0.0.0.0:4000/assets/img/software.jpg","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://0.0.0.0:4000/assets/img/logo.png"},"name":"Bin Liang"},"headline":"Reflection on OSI Model","dateModified":"2020-05-31T00:00:00+00:00","datePublished":"2020-05-31T00:00:00+00:00","author":{"@type":"Person","name":"Bin Liang"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html"},"url":"http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html","description":"Reflection on OSI model In the world of internetworking, the most popular standard has to be TCP/IP protocol, which forms the basis of the Internet connecting billions of computers and devices around the world. It’s so popular and vital to our daily life now a days that it’s used even when communication is local across compatible networks. For example, popular network file system NFS uses IP protocol even though it’s used mainly in homogenous ethernet LAN environment. The software standards like TCP/IP allowing reliable communication without demanding reliable networks is the key enabling technologies for internetworking. Looking back the standard battle with ATM in 1990s, one key success factor is it’s decomposed layered hierarchy. Each layer taking responsibilitu for just a portion of the overall communication task. To avoid ambiguous in terms, Open System Interconnect (OSI) model is developed which describes networks as a series of layers: Layer number layer name Main function Example protocol 7 Application Application running over network DNS, Web 6 Presentation Translate between Application and network format   5 Session Session lifecycle management across network RPC,named pipes 4 Transport Additional connection below session layer TCP 3 Network Translate between logic address/name to physical address IP 2 Data Link Transform between packet and bits Ethernet 1 Physical TX/RX bit stream over physical media IEEE 802 The key to protocol families following OSI model is that communication occurs logically at same level of the protocol between sender and receiver, while services from lower level implement it. Just like abstract data types which simplifies the programmer’s task by hiding the implementation details of the data type, offering services needed by upper layer at each protocol layer makes the standard easier to understand and implement with cross industry compatability, especially for lower level protocol vendors. For 20 years since mid 1990s, Internet has enjoyed exponential growth thanks to the dominant position of TCP/IP. Network vendors like Cisco took lead and protocols are added and expanded with a bottom up approach to protect the investment in lower level infrastructures. It is until recent years we see some challenges and movements against long-standing TCP/IP stack and traditional network infrastructures (both topology and component levels), driven by OTT providers’ performance, scalbility and fault tolrance demands. The analysis for the huge success of AWS, Azure, GCP and Ali cloud in the past 5-10 years deserves a dedicate study series but here is one important factor from technology point of view: they just need purposely built network for their intent business need, so they built proprietary homogeneous network infrastructure from scratch with optimized and simplified protocol stack, achiving cost, power consumption and networking efficiency. It is on the right track but start to show limitions facing challenges from: Data volume and dispersal driven by AI and IoT Dynamic business logic driven by tenant IT migration Simply put, the “simplification” approach OTT providers have enjoyed for their past success is just not enough when facing these new challenges, which demands REAL application driven design, with Top Down principle. Back to OSI model, we have to abandon the assumption of TCP/IP, Ethernet, etc and go back to basic: Layers are for seperation of responsibilities in a hierarchical way Upper layer should not aware or concern about lower layer Lower layer is responsible of fulfilling or rejecting the requests from upper layer Which means, instead of the bottom-up approach where upper layer operates based on what lower level offers, upper layer operates purly based on its own need and send only intent to lower layer, where lower layer has the flexibility to choose available and viable technology to fulfill or reject the request. Think of a future where we can have harmonized heterogeneous network clusters (devices, topologies or protocols) within data centers and extend into edge, campus even SoC, tailored for different compute-storage usage, totally transparent to applications layer; Think of a laptop where all bandwidth of wired and available wifi band can be utilized simultaneously; Think of google-search-like information query from application; Think of instructions rathan than data been networked to fulfill the request using remote data, etc. This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<!-- jekyll-feed to add metadata for ATOM style RSS feed -->
+<link type="application/atom+xml" rel="alternate" href="http://0.0.0.0:4000/feed.xml" title="BLog" />
+
+<!-- Manual seo tags -->
+<!--
+<title>Reflection on OSI Model | BLog</title>
+<meta name="description" content="Reflection on OSI modelIn the world of internetworking, the most popular standard has to be TCP/IP protocol, which forms the basis of the Internet connecting...">
+-->
+
+  </head>
+  
+  <body>
+    <header class="site-header">
+    <!-- Logo, title & hamburger button -->
+    <a class="brand" aria-label="BLog" href="/">
+        
+        <img alt="logo img" class="logo" src="/assets/img/logo.png" />
+        
+        <h1 class="site-title">BLog</h1>
+    </a>
+
+    <!-- Hamburger button on the top right corner for mobile display -->
+    <!--   Checkbox with label for mobile screen to implement drawer menu -->
+    <label for="drop" class="toggle hamburger">&#9776</label>
+    <input type="checkbox" id="drop" />
+
+    <!-- Menu bar -->
+    <ul class="menu">
+        <!-- Build menu recursively -->
+        <!-- assign variables at page scope ONCE to avoid assign conflict in recursive include snippet -->
+        
+        <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page3/ menu_id: 0.0 Parent Anchor: 0  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Home" title="Home" href="/">
+            <i class="fa fa-home menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Home</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li class="dropdown">
+        <!--   Link for dropdown li in bigger screen to implement hover menu-->
+        <a aria-label="Blogs" title="Blogs" href="#">
+            <i class="fa fa-newspaper-o menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Blogs</span>
+        </a>
+
+        <!--   Checkbox with label for dropdown li in mobile screen to implement drawer menu -->
+        <!--     Put input before label in case CSS needs to style label based on input events -->
+        <input type="checkbox" id="drop-Blogs"/>
+        <label for="drop-Blogs" class="toggle">Blogs</label>
+
+        <!-- dropdown-menu sub menu follows immediately -->
+        <ul class="dropdown-menu">
+            <!-- Build sub-menu recursively -->
+            <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0.1 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page3/ menu_id: 0.0 Parent Anchor: 0.1  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.1  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Categories" title="Categories" href="/categories/">
+            <i class="fa fa-list menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Categories</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Tags" title="Tags" href="/tags/">
+            <i class="fa fa-tags menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Tags</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+
+        </ul>
+    </li>
+    
+
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li class="dropdown">
+        <!--   Link for dropdown li in bigger screen to implement hover menu-->
+        <a aria-label="Portfolio" title="Portfolio" href="#">
+            <i class="fa fa-th menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Portfolio</span>
+        </a>
+
+        <!--   Checkbox with label for dropdown li in mobile screen to implement drawer menu -->
+        <!--     Put input before label in case CSS needs to style label based on input events -->
+        <input type="checkbox" id="drop-Portfolio"/>
+        <label for="drop-Portfolio" class="toggle">Portfolio</label>
+
+        <!-- dropdown-menu sub menu follows immediately -->
+        <ul class="dropdown-menu">
+            <!-- Build sub-menu recursively -->
+            <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0.2 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page3/ menu_id: 0.0 Parent Anchor: 0.2  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.2  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li class="dropdown">
+        <!--   Link for dropdown li in bigger screen to implement hover menu-->
+        <a aria-label="Collection 1" title="Collection 1" href="#">
+            <i class="fa fa-code-branch menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Collection 1</span>
+        </a>
+
+        <!--   Checkbox with label for dropdown li in mobile screen to implement drawer menu -->
+        <!--     Put input before label in case CSS needs to style label based on input events -->
+        <input type="checkbox" id="drop-Collection 1"/>
+        <label for="drop-Collection 1" class="toggle">Collection 1</label>
+
+        <!-- dropdown-menu sub menu follows immediately -->
+        <ul class="dropdown-menu">
+            <!-- Build sub-menu recursively -->
+            <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0.2.0 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page3/ menu_id: 0.0 Parent Anchor: 0.2.0  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.2.0  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Sub Collection" title="Sub Collection" href="/pages/sub-collection.html">
+            <i class="fa fa-code-branch menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Sub Collection</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+
+        </ul>
+    </li>
+    
+
+    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Gallery" title="Gallery" href="/pages/gallery.html">
+            <i class="fa fa-images menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Gallery</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+
+        </ul>
+    </li>
+    
+
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Search" title="Search" href="/search/">
+            <i class="fa fa-search menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Search</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="About" title="About" href="/about/">
+            <i class="fa fa-user menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">About</span>
+        </a>
+    </li>
+    
+
+
+    </ul>
+</header>
+
+    
+<aside class="sidebar">
+    <header>
+      <div class="about">
+        <div class="cover-author-image">
+          <a href="/"><img src="/assets/img/potrait.jpg" alt="liangbin"></a>
+        </div>
+        <div class="author-name">Bin Liang</div>
+        <p>I am a network architect with full stack development experience.  My current research focuses include DCN, global meta data plane  and in general NCS: Networked Compute & Storage archsitecture.</p>
+      </div>
+    </header> <!-- End Header -->
+    
+   	<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+	<div class="addthis_inline_share_toolbox"> <p><strong>Sharing:</strong></p></div>
+
+    <footer>
+      <section class="contact">
+        <h3 class="contact-title">Follow me</h3>
+        <ul>
+          
+          
+          
+          
+          
+            <li class="github"><a href="http://github.com/liangbin-pub" target="_blank"><i class="fa fa-github"></i></a></li>
+          
+          
+            <li class="linkedin"><a href="https://in.linkedin.com/in/liangbin888" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+          
+          
+            <li class="email"><a href="mailto:fw.liangb@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+          
+          
+            <li class="rss"><a href="/feed.xml"><i class="fa fa-rss"></i></a></li>
+          
+        </ul>
+      </section> <!-- End Section Contact -->
+      <div class="copyright">
+        <p>2020 &copy; Bin Liang</p>
+      </div>
+    </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+
+    <div class="content content-box clearfix">
+      <div class="article">
+        
+
+<meta property="og:url"          content="/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html" />
+<meta property="og:type"         content="article" />
+<meta property="og:title"        content="Reflection on OSI Model" />
+<meta property="og:description"  content="Reflection on OSI model
+
+In the world of internetworking, the most popular standard has to be TCP/IP protocol, which forms the basis of the Internet connecting billions of computers and devices around the world. It’s so popular and vital to our da..." />
+<meta property="og:image"        content="assets/img/software.jpg" />
+
+
+<!-- Page Feature Image and Title as Header -->
+<header id="main" style="background-repeat:no-repeat;background-image: url('/assets/img/software.jpg')">
+  
+    <h1 id="Reflection+on+OSI+Model" class="title">Reflection on OSI Model</h1>
+      
+      
+        
+
+
+<div class="post-info"><a href="https://github.com/liangbin-pub" target="_blank">
+      <img src="/assets/img/myAvatar.svg">
+    
+    <p class="meta">
+      Bin Liang - May 31, 2020
+    </p></a></div>
+
+      
+  
+</header>
+
+<!-- Article content -->
+<section class="post-content">
+  
+  <h2 id="reflection-on-osi-model">Reflection on OSI model</h2>
+
+<p>In the world of internetworking, the most popular standard has to be TCP/IP protocol, which forms the basis of the <strong>Internet</strong> connecting billions of computers and devices around the world. It’s so popular and vital to our daily life now a days that it’s used even when communication is local across compatible networks. For example, popular network file system NFS uses IP protocol even though it’s used mainly in homogenous ethernet LAN environment.</p>
+
+<p>The software standards like TCP/IP allowing reliable communication without demanding reliable networks is the key enabling technologies for internetworking. Looking back the standard battle with ATM in 1990s, one key success factor is it’s decomposed layered hierarchy. Each layer taking responsibilitu for just a portion of the overall communication task. To avoid ambiguous in terms, Open System Interconnect (OSI) model is developed which describes networks as a series of layers:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Layer number</th>
+      <th style="text-align: left">layer name</th>
+      <th style="text-align: left">Main function</th>
+      <th style="text-align: left">Example protocol</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td style="text-align: left">Application</td>
+      <td style="text-align: left">Application running over network</td>
+      <td style="text-align: left">DNS, Web</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td style="text-align: left">Presentation</td>
+      <td style="text-align: left">Translate between Application and network format</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: left">Session</td>
+      <td style="text-align: left">Session lifecycle management across network</td>
+      <td style="text-align: left">RPC,named pipes</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: left">Transport</td>
+      <td style="text-align: left">Additional connection below session layer</td>
+      <td style="text-align: left">TCP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: left">Network</td>
+      <td style="text-align: left">Translate between logic address/name to physical address</td>
+      <td style="text-align: left">IP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: left">Data Link</td>
+      <td style="text-align: left">Transform between packet and bits</td>
+      <td style="text-align: left">Ethernet</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">Physical</td>
+      <td style="text-align: left">TX/RX bit stream over physical media</td>
+      <td style="text-align: left">IEEE 802</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The key to protocol families following OSI model is that communication occurs logically at same level of the protocol between sender and receiver, while services from lower level implement it. Just like abstract data types which simplifies the programmer’s task by hiding the implementation details of the data type, offering services needed by upper layer at each protocol layer makes the standard easier to understand and implement with cross industry compatability, especially for lower level protocol vendors.</p>
+
+<p>For 20 years since mid 1990s, Internet has enjoyed exponential growth thanks to the dominant position of TCP/IP. Network vendors like Cisco took lead and protocols are added and expanded with a bottom up approach to protect the investment in lower level infrastructures. It is until recent years we see some challenges and movements against long-standing TCP/IP stack and traditional network infrastructures (both topology and component levels), driven by OTT providers’ performance, scalbility and fault tolrance demands.</p>
+
+<p>The analysis for the huge success of AWS, Azure, GCP and Ali cloud in the past 5-10 years deserves a dedicate study series but here is one important factor from technology point of view: they just need purposely built network for their intent business need, so they built proprietary homogeneous network infrastructure from scratch with optimized and simplified protocol stack, achiving cost, power consumption and networking efficiency.</p>
+
+<p>It is on the right track but start to show limitions facing challenges from:</p>
+<ul>
+  <li>Data volume and dispersal driven by AI and IoT</li>
+  <li>Dynamic business logic driven by tenant IT migration</li>
+</ul>
+
+<p>Simply put, the <strong><em>“simplification”</em></strong> approach OTT providers have enjoyed for their past success is just not enough when facing these new challenges, which demands <strong>REAL</strong> application driven design, with <strong>Top Down</strong> principle.</p>
+
+<p>Back to OSI model, we have to abandon the assumption of TCP/IP, Ethernet, etc and go back to basic:</p>
+<ol>
+  <li>Layers are for seperation of responsibilities in a hierarchical way</li>
+  <li>Upper layer should not aware or concern about lower layer</li>
+  <li>Lower layer is responsible of fulfilling or rejecting the requests from upper layer</li>
+</ol>
+
+<p>Which means, instead of the bottom-up approach where upper layer operates based on what lower level offers, upper layer operates purly based on its own need and send only intent to lower layer, where lower layer has the flexibility to choose available and viable technology to fulfill or reject the request.</p>
+
+<p>Think of a future where we can have harmonized heterogeneous network clusters (devices, topologies or protocols) within data centers and extend into edge, campus even SoC, tailored for different compute-storage usage, totally transparent to applications layer; Think of a laptop where all bandwidth of wired and available wifi band can be utilized simultaneously; Think of google-search-like information query from application; Think of instructions rathan than data been networked to fulfill the request using remote data, etc.</p>
+
+<p>This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!</p>
+
+  
+</section>
+
+<!-- Article reference in same series, sort by set_order -->
+
+  <!-- site.sets are  -->
+  
+	
+	
+	<div class="article-series">
+		<h3>NCS Reflection - Series</h3>
+		<p>This series presents my reflection on basics in the field of Networking and in general - NCS</p>
+
+		<ul class="listing">
+	
+		<li class="active">
+			<a href="/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html">
+				<article>
+					<div>
+						<h4>1. Reflection on OSI Model</h4>
+						<p class="description"></p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
+		<li >
+			<a href="/networked%20compute%20and%20storage/2020/06/11/Reflection-On-Network-Intelligence.html">
+				<article>
+					<div>
+						<h4>2. Reflection on Network Intelligence</h4>
+						<p class="description"></p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
+</ul>
+	</div>
+
+
+<!-- Article Tag list -->
+
+
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/tags#Insight">
+      <p><i class="fa fa-tag fa-fw"></i> Insight</p>
+    </a>
+    
+    <a class="button" href="/tags#Solution">
+      <p><i class="fa fa-tag fa-fw"></i> Solution</p>
+    </a>
+    
+    <a class="button" href="/tags#Technology">
+      <p><i class="fa fa-tag fa-fw"></i> Technology</p>
+    </a>
+    
+  </div>
+</footer>
+
+
+<!-- For post only -->
+
+  <!-- List related posts below Tags, limit 5 -->
+  <p><strong>Related posts :</strong></p>
+  <ul>
+    
+    
+      
+        
+          <li><a href="/networked%20compute%20and%20storage/2020/06/25/Fugaku-TofuD-Interconnect-Study.html">Fugaku TofuD Interconnect Study</a></li>
+          
+          
+      
+    
+      
+        
+          <li><a href="/networked%20compute%20and%20storage/2020/06/23/Fugaku-Is-The-New-King.html">Fugaku is the new King</a></li>
+          
+          
+      
+    
+      
+        
+          <li><a href="/networked%20compute%20and%20storage/2020/06/11/Reflection-On-Network-Intelligence.html">Reflection on Network Intelligence</a></li>
+          
+          
+      
+    
+      
+        
+      
+        
+      
+        
+      
+      
+    
+      
+        
+          <li><a href="/knowledge%20graph/2020/05/27/JHU-Covid19-Study.html">JHU Covid19 Tracking Site Study</a></li>
+          
+          
+      
+    
+      
+        
+          <li><a href="/networked%20compute%20and%20storage/2020/05/11/NCS-Readme.html">NCS Category readme</a></li>
+          
+          
+      
+        
+  </ul>
+
+  <!-- List Social media sharing buttons --
+  
+
+<div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fnetworked%2520compute%2520and%2520storage%2F2020%2F05%2F31%2FReflection-On-OSI-Model.html" target="_blank" title=" Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=Reflection+on+OSI+Model%20http%3A%2F%2F0.0.0.0%3A4000%2Fnetworked%2520compute%2520and%2520storage%2F2020%2F05%2F31%2FReflection-On-OSI-Model.html" target="_blank" title="">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html&title=Reflection+on+OSI+Model%20%7C%20BLog" target="_blank" title=" Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Reflection+on+OSI+Model%20%7C%20BLog&body=:%20http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html" target="_blank" title="">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+  -->
+  
+  <!-- Disqus comments -->
+  
+    <div class="comments">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'liangbin-pub-github-io';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view comments.</noscript>
+
+    </div>
+  
+
+  <!-- Post navigation -->
+  
+    <div id="post-nav">
+    
+    <div id="previous-post">
+        <a alt="Reflection on Network Intelligence" href="/networked%20compute%20and%20storage/2020/06/11/Reflection-On-Network-Intelligence.html">
+            <p>Previous post</p>
+            Reflection on Network Intelligence
+        </a>
+    </div>
+    
+
+    
+    <div id="next-post">
+        <a alt="JHU Covid19 Tracking Site Study" href="/knowledge%20graph/2020/05/27/JHU-Covid19-Study.html">
+            <p>Next post</p>
+            JHU Covid19 Tracking Site Study
+        </a>
+    </div>
+    
+</div>
+
+  
+
+
+
+      </div>
+      <footer class="site-footer">
+    <p class="text">
+        Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/">Gitgub Pages</a>
+</p>
+        <!--            
+            <div class="footer-icons">
+                <ul>
+                !-- Social icons from Font Awesome, if enabled --
+                
+<li>
+    <a feed.xml href="http://0.0.0.0:4000/" title="Follow RSS feed">
+    <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a href="https://github.com/sylhare" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+        -->
+</footer>
+
+
+
+    </div>
+  </body>
+</html>

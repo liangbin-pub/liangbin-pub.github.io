@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+<script defer=true src="/assets/js/main.min.js"></script>
+
+<!-- CSS --> 
+<link rel="stylesheet" href="/assets/css/main.css">
+<!--Favicon-->
+<link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+<!-- Canonical -->
+<link rel="canonical" href="http://0.0.0.0:4000/knowledge%20graph/2020/05/27/JHU-Covid19-Study.html">
+<!-- RSS -->
+<link rel="alternate" type="application/atom+xml" title="BLog" href="http://0.0.0.0:4000/feed.xml"/>
+
+
+<!-- KaTeX 0.8.3 -->
+<!-- if you have any issue check https://github.com/KaTeX/KaTeX -->
+
+<script src="/assets/js/vendor/katex.min.js"></script>
+
+<!-- Go to www.addthis.com/dashboard to customize sharing tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e83809c0faa0389"></script>
+
+<!-- Google Analytics -->
+
+<!-- Global site tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161813252-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-161813252-1');
+</script>
+
+<!-- Page analysis (analytics.js) -->
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-161813252-1', 'auto');
+  ga('send', 'pageview');
+</script>
+ <!-- End Google Analytics -->
+<!-- jekyll-seo-tag to add metadata tags for search engines and social networks -->
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>JHU Covid19 Tracking Site Study | BLog</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="JHU Covid19 Tracking Site Study" />
+<meta name="author" content="Bin Liang" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="内容摘要 本文首先分析了约翰霍普金斯大学（JHU）新冠病例跟踪网站的背景及原理（第1-2章），随后在第3章指出其在生产，管理领域的潜在应用并在第4章提出了基于开放框架的实现方案。文章最后附上对JHU新冠病例跟踪网站技术实现的分析。 目录 {#目录 .TOC-Heading} 内容摘要 1 1、背景 3 2、实现原理及分析 4 2.1、目标及成功因素分析 4 2.2、动态网站 4 2.3、GIS集成及开发运行平台 7 2.4、整合的数据面 7 3、潜在应用价值 8 4、开发框架方案 9 附录 11 1、背景 {width=”6.5in” height=”2.892361111111111in”} 2019年12月31日，世界卫生组织收到通报，人口达1千1百万的中国第七大城市湖北省武汉市爆发”不明肺炎”。2020年1月13日，泰国报告首例中国境外病例。截止到2020年1月23日，全球累计确诊病例已经超过800例，涵盖20多个国家和地区。面对这一快速演进的公共健康危机，为了更好地监视及跟踪全球各地报告的病例，约翰霍普金斯大学（JHU）Lauren Gardner副教授团队（博士生Ensheng Dong和Hongru Du）在ESRI公司的协助下于2020年1月24日发布了跟踪全球及美国各州COVID-19新冠病例的实时动态网站[1]。该网站通过一个基于ESRI公司ArcGIS地理信息平台开发的网页面板（Web Dashboard）来展示各国家，地区确诊，死亡及康复病例的数量和位置。自发布以来，以其与地图系统相结合的图形化，直观，实时的数据呈现形式快速地获得了全球性关注，迄今访问量已接近10亿次（987,359,014，截止04/30/2020），成为研究人员，公共卫生机构以及普通大众都易于使用的新冠大流行主流跟踪工具。 下面, 我们将基于互联网公开信息，分析该网站的实现原理及价值，最后给出一种基于开放架构的动态实时信息面板的实现方案。 2、实现原理及分析 2.1、目标及成功因素分析 以终为始，首先，我们先大概梳理一下JHU新冠病例跟踪网站的设计目标以便后续更好地理解其设计并予以评估。 从Lauren团队博客[2]及发表在Lancet的文章[3]可以了解到这个网站具有以下目标： 实时地跟踪疫情爆发情况 受众是研究人员，医疗卫生机构以及普通民众 良好的用户友好性 另外，由于疫情发展的紧迫性，显然快速上线也是该网站的目标之一 时势造英雄，不难看出该网站的广泛成功与其目标的合理设定密不可分。 随着疫情的快速发展和人们对其传播手段，危害程度认知的不断增加，无论是普通民众，卫生医疗机构还是政府决策机构都意识到这场疫情的严重程度和广泛程度都将是史无前例的。人们迫切地需要了解周边，亲友社区疫情的发展状况；政府，医疗系统迫切地需要掌握疫情的传播态势以便合理调配有限的资源；研究，决策机构迫切地需要掌握宏观数据以支撑政策调整，这些都需要准确，有效的信息。通过目标1，4的实现，该网站及时地抓住了目标受众的关注点，吸引了大量的流量；通过目标3的实现，该网站能在最短的时间内吸引住使用者并通过地图实现空间关联，通过走势图实现时间关联，形成强烈的带入感和有效的信息传递；另外，由于整合了不同数据源的异构数据，在各类受众及时获取相关信息的同时，这个工具还起到了协调研究，统一认识，公开透明，降低恐慌的作用，与各自为政的源数据发布机构以及其他类似网站，应用相比，该网站以其数据统一，界面直观脱颖而出也就顺理成章了。 但同时，正所谓成也萧何，败也萧何，由于目标4的约束，该团队在没有前期准备的前提下只能就地取材，导致技术选择空间有常狭窄（详见附录技术分析），造成了它一定程度的先天不足，后面平台分析部分会进一步阐述并在第4章提出一种开放的优化设计方案。 下面结合其设计目标就其实现原理进行分析。 2.2、动态网站 现代网站设计可以简单分为静态和动态两大类，但并不是如字面理解以显示是否动态作为区分的原则，静态页面也能在客户界面形成动态效果。静态网站是指所有用户可见的页面及内容都是预先生成的静态文件，用户的交互仅仅用于控制不同的静态页面及内容的加载，也就是说其内容和形式都是死的，所有用户看到的页面都是源自同一页面集，适合于单向的具有广播性质的信息传递。而动态网站最大的特点是在传统静态页面的基础上，还可以根据用户的交互动态地生成新的页面，把网站的部分设计能力提供给了使用者，使其可以按照时间，空间及其他属性对所需信息进行筛选并定制合适的页面呈现形式（布局，图，表控制等）。动态网站既具有桌面应用以使用者意图为核心的特点，同时又具备网站的实时远程更新能力，真正做到千人千面，各取所需，非常适于面向使用者的个性化数据呈现，整合及分析。 那么动态网站是如何实现其交互式自定义特性的呢？ 首先，所有网站都包含前端（用户浏览器端执行和显示的内容）和后端（服务器或云端用户不可见的支撑性服务）。对于静态网站，后端仅仅是按前端请求发送一系列静态网页文件，如html文件，css页面风格文件，JavaScript前端脚本文件及图片等。而动态网站的后端还包含用户不直接可见的本地代码及数据，前端的用户交互以及后端数据面的改变都可以触发后端本地代码的执行并将执行结果通过前端界面体现给使用者。所以后端代码的执行实现了动态网站的自定义特性。注意后端代码因为是在服务器端执行，不是必须使用浏览器支持的Web语言如JavaScript，可以按照功能，性能以及掌握程度选择任何编程语言甚至组合，如C/C++， Java， PHP，Go Lang等。JHU新冠病例跟踪网站团队选择了基于JavaScript的后端实现，应该还是出于目标4对于上线时间要求。 复杂的软件必须有清晰合理的架构，否则无法开发和维护。该网站的后端软件架构采取了较为常见的模型-视图-控制（MVC）软件架构模式，快速而简洁地实现了前后端交互式自定义特性，见下图： {width=”3.2391951006124233in” height=”2.080213254593176in”} 用户进入浏览器看到后端提供的初始视图（对网站而言就是页面） 用户通过鼠标点选与后端控制器交互，控制器完成业务逻辑后要求模型进行相应的状态改变 模型完成状态改变后生成新的视图 用户在浏览器里看到动态更新的视图，完成本次交互式自定义 JHU的这个新冠病例跟踪网站采用动态网站的形式很好地满足了设计目标1和3的要求。进入网站，用户首先看到的就是全球累计病例的热点地图以及确诊，死亡，测试病例的当前国家排名列表和历史时间线图。使用者无论点击地图热点还是列表项都可以逐步缩小关注范围（例如点选美国，进而选择德州，直至Collin县），可以看到页面上其他图，表都同步进行了对应的更新。这种牵一发而动全身的联动能力充分体现了动态网站的用户驱动数据筛选的特点。 {width=”6.410942694663167in” height=”2.1390365266841647in”} 另外，动态网站这种通过点击筛选视图并逐层下探（Drill Down）的能力使关注不同信息的使用者都可以快速定位到感兴趣的信息层次及范围，极大地提高了信息对用户的相关度和准确性。 {width=”4.80748687664042in” height=”2.488490813648294in”} 该动态网站的详细技术实现分析请见附录，总结如下： 通过与地理信息系统（GIS）的协同提供了基于地图的空间信息呈现 通过模型-视图-控制（MVC）软件架构模式实现了使用者意图驱动的页面定制能力 前后端开发语言统一使用了目前较为主流的Java Script，可以集成大量的第三方工具，极大地缩短了开发周期 2.3、GIS集成及开发运行平台 通过对JHU新冠病例跟踪网站的技术分析（见附件）可以看到该项目选择了美国ESRI（环境系统研究）公司的商用ArcGIS服务作为其地理信息系统（GIS）服务伙伴。同时开发及运行平台也采用了该公司的网站应用平台。约翰霍普金斯大学与ESRI公司有着长期的合作关系，在较多项目里都有应用，对该公司的系统有比较丰富的经验，这应该是新冠病例跟踪网站团队为在最短时间内上线而作出上述选择的主要原因。事实上，无论是GIS服务还是动态网站开发，运行平台都有较多选择，包括不少获得广泛使用的免费，开源方案。选择ArcGIS地理信息服务本身没有大的问题，无非是费用问题，但是选择其相应的网站开发运行平台是这个项目最大的败笔。ESRI公司的开发，运行平台是一个收费，闭源的私有环境，尽管其技术核心是基于NodeJS，React等开源工具，但是通过接口封装等捆绑手段使得在这一平台上开发的系统失去了开放性和可迁移性。第三方想参与开发，贡献代码都必须使用同一平台；开源社区常见的基于开放平台的二次开发，增强也完全不可能。这种封闭性极大的限制了开源社区的参与和共同开发，严重影响了它功能的进一步丰富以及数据量增大后性能的改善，其后果从近期该网站的活跃度及影响力的下降略见一斑（访问量增速持续降低）。鉴于该网站对于ESRI的网站开发运行环境并无核心技术依赖，采用一种开放的直接基于常用开源工具的开发运行方案将更加有利于其长期发展和应用场景的拓展。本文将在第4章对这一方案进一步加以说明。 2.4、整合的数据面 前面在目标及成功因素分析部分谈到了数据的重要性。JHU新冠病例跟踪网站成功的一个重要因素就是其对原始数据进行的清洗及整合。由于近几年保守的国家主义思潮对国际化合作的强负面影响，我们面对的是来自数十个近乎孤立，具有不同可信度数据源的，大量的无统一规范的原始数据。这一问题极大地影响了对这些宝贵数据的及时理解和利用，一定程度上造成了早期大众的恐慌和政策的混乱。JHU新冠病例跟踪网站团队的一个核心贡献是把源自多个公开渠道的疫情数据进行清洗，整合并公开发布。统一后的数据源使得研究人员的工作获得了简化并使其研究成果具有可比性，提高了可信度和使用价值；基于统一数据源的多角度定制化呈现推动了大众，医疗系统和政策制定者认知的统一，减少了混乱，提高了抗疫效果。可以说数据整合的工作奠定了这个项目成功的基础。 3、潜在应用价值 通过前面对该网站的原理分析，不难看到将业务数据与时间，空间信息结合并以动态，自定义的图形化方式呈现给用户可以极大地加强使用者的参与度，提升数据的有效价值，使宝贵的数据财富走出IT，成为企事业，政府各个部门创造价值的利器。 下面抛砖引玉，就企业场景列举一些可能的应用以资参考： 资产管理：区域统计，投入/损耗趋势，定位等 绩效跟踪：时间线，分类统计，团队趋势分析等 市场，客户分析：技术热点，趋势预测等 场所管理 风险管理 故障热点分析 供应链监控，分析 运维效率 通过上面列举的一些应用，不难看出在数据为王的IT，CT以及OT大融合的趋势下，数据的价值发掘将成为企业降低成本，提高效率，创造价值的核心能力，其影响范围将远远超出传统IT的范畴，深度融入到企业各职能部门的日常运作中去。然而，为实现这一愿景我们必需解决一个核心问题：数据的管理者和使用者通常是各职能部门，他们理解，维护并使用这些数据，可是他们不具备IT编程的能力或资源；反之，IT部门掌握IT系统编程的能力及资源，但是并不理解数据及其如何被使用。传统的企业应用严重依赖于IT人员与各职能部门联合开发，不但成本高，周期长，而且维护困难，最重要的是难以量体裁衣，满足快速变化的数据源及使用方式的需求。JHU新冠病例跟踪网站展示了一定的动态定制化能力，但是由于其数据类型相对单纯及封闭平台的限制，远远不能满足以上实际应用场景。结合上述核心问题并参考JHU新冠网站设计原则，下面我们将针对这类应用场景，提出一种更加完善的，基于开放框架和数据/系统解耦开发的实现方案。 4、开发框架方案 本设计方案含三大组成部分： 通用数据服务框架，实现动态网站或网站应用前端及后端主体，由IT开发维护 数据模型仓库，使能数据服务框架对数据的理解和操作以形成业务逻辑，由数据使用者通过数据服务框架界面定义 数据仓库，保存原始及整合后数据 方案目标： 通用数据服务框架 a. 通用性，提供框架服务和工具集，与业务逻辑设计解耦 b. 基于成熟开源工具以利用社区资源，减少重复开发，降低开发周期 c. 友好，直观有效的时间，空间关联的多维度信息呈现 d. 提供深度定制化能力，在呈现界面（视图）定制能力的基础上提供无编程的数据模型定义，关联能力（模型），实现IT与业务功能开发的解耦 e. 基于用户定义数据模型的自动数据导入，处理及呈现 f. 前端封装支持动态网站和移动端原生应用 开发运维平台 a. 数据服务框架代码放于GitHub项目仓库，适当时机开源 b. 数据服务框架开发环境通过Docker Compose灵活部署在PC，虚机或公有云 c. 数据服务框架运维平台通过Docker Compose灵活部署在园区，私有云或公有云 d. 非IT人员通过数据服务框架运行平台进行非程序化数据模型定义，并可导入导出 e. 原始数据加密保存或部署在安全的数据仓库 使用本方案，任何公司或部门都可以从开源仓库下载通用数据服务框架并将之部署到内网服务器，私有云或公有云。部署后各职能部门可以配置独立或共享的数据源以使能数据服务框架接收或导入原始数据，之后可视化地定义不同的数据模型以指导数据服务框架理解，处理和呈现数据。这一方案将充分地实现业务逻辑设计与应用系统设计的解耦，通过高度的定制化能力使各部门发挥所长，分工合作，实现信息融合，创造数据价值。 参考文献： Johns Hopkins University COVID-19 Dashboard https://coronavirus.jhu.edu/map.html Lauren Gardner Mapping2019-nCoV博客 https://coronavirus.jhu.edu/map.html Ensheng Dong， Hongru Du，Lauren Gardner An interactive web-based dashboard to track COVID-19 in real time https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30120-1/fulltext []{#_Toc39301165 .anchor}附录 Johns Hopkins University COVID-19 Dashboard 技术分析 {width=”6.5in” height=”2.892361111111111in”} 1、门户界面解析 此网站的门户是由Lauren Gardner副教授领导的JHU系统科学及工程中心（CSSE）建立。简单地分析此门户可见前端主要由2部分组成：导航和相应的基于表单和地图的动态面板（Dashboard）。通过检查浏览器加载的JavaScript模块，很清晰的可以看出此门户的后端是基于Node.JS（Java Script实现的后端服务），使用React前后端接口框架来实现的。用户通过前端导航互动可以触发后端生成不同的Dashboard并动态加载到前端。作为数据展现的核心，Dashboard是以iframe方式外挂源于ArcGIS的网页应用，详见下图： {width=”4.99911198600175in” height=”2.144385389326334in”} 那么这个ArcGIS又是什么呢？简单讲， 它是ESRI公司提供的基于地理信息系统（GIS）的数据-地图关联及分析核心系统，其他类似系统包括Maptitude， MapInfo， Google Maps API， QGIS等等。ESRI公司全称是美国环境系统研究所公司（Environmental Systems Research Institute, Inc.）。 空间信息（如GIS）的管理一般有2大类选择：外包（Managed）或自助（Self managed），ArcGIS及其他主流商用系统都属于外包类，提供较为完善的周边支撑，例如ArcGIS提供完整的客户端或云（web）应用开发平台，稳定完善的接口及辅助应用。从学校的教学辅助信息看，JHU大学与ESRI有着长期稳定的合作，可能也是选择ArcGIS的一个因素。目前看这个项目反过来对ESRI也是起到了极大的宣传作用，作为标杆列入其公司首页。 下面我们将着重分析构建在ArcGIS上的核心动态面板模块。 2、基于ArcGIS的动态面板 通过浏览器导航交互可以动态加载不同的Dashboard，下面以世界地图（World Map）面板为例进行解析。世界地图对应的动态面板链接是https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6。 通过类似的解析，可以看到各ArcGIS面板是基于Dojo前端框架（JavaScript工具集）实现的的动态页面。为便于理解ArcGIS网页应用，请参考下面逻辑框架： {width=”2.5989304461942258in” height=”2.1795428696412946in”} 2.1、前端界面 ArcGIS web应用的前端界面基于Dojo JS工具集及ArcGIS API for JavaScript，包含了非常完善的界面布局，数据图形化元素（图，表等）以及开发，分析工具，技术细节可以参考Dojo以及ArcGIS开发者平台文档，并不复杂，这里就不再赘述了。作为类比，ArcGIS API之于GIS数据展示相当于Kibana之于Elastic Search，并非不可替代但是原厂工具比较可靠和完备，同时锁定了后台的GIS数据提供商（收费服务）。 2.2、功能层 这里面的功能层是衔接界面展示和原始数据的桥梁，用以筛选有价值的数据并赋予它们便于人理解的意义，工程上我们一般称之为视图（View）或逻辑模型（Model）。COVID-19 Dashboard的功能层数据模型对世界地图和美国地图所含的表项略有不同，但主要项目一致： Province/State: (Text) Country Province or State Name (Level 2 Key) Country/Region: (Text) Country or Region Name (Level 1 Key) Last Update: (Datetime) Last data update Date/Time in UTC Latitude: (Float) Geographic Latitude in Decimal Degrees (WGS1984) Longitude: (Float) Geographic Longitude in Decimal Degrees (WGS1984) Confirmed: (Long) Best collected count of Confirmed Cases reported by geography Recovered: (Long) Not Currently in Use, JHU is looking for a source Deaths: (Long) Best collected count for Case Deaths reported by geography County: (Text) US County Name (Level 3 Key) ArcGIS开发平台一个亮点是在没有前端界面的前提下，只要有数据并定义了功能层，在平台上就可以看到跟地图关联的显示，非常方便前端开发与数据专家解耦的开发模式。 2.3、数据面 数据源（美国及全球）最初是用Google表格来维护的， 但是随着数据量及更新频率的压力，目前保存在Github。更新频率降到每天跟新一次，采用CSV格式，提供单日及时间序列数据。以下分别是单日数据及时间序列数据的例子： {width=”6.5in” height=”1.9770833333333333in”} {width=”6.5in” height=”1.4319444444444445in”} 可以看到原始数据都是结构化数据（Structured），简单清洗后一般SQL数据库都可以使用。 3、技术小结 通过上面的解析，可以初步总结JHU大学的 COVID-19项目如下： a) 这是一个含前后端的动态网站，通过浏览器访问，但非常容易转化为原生应用； b) 数据驱动，项目架构采用典型MVC模型； c) 疫情数据源来自多个公开渠道，JHU 团队的主要贡献是将数据整合，共享维护一个单一的数据集； d) 使用ArcGIS的GIS服务将疫情数据中的经纬度地理信息于地图显示结合起来，技术上有较多其他选择； e) 其他图表也通过ArcGIS API 实现，技术上也有较多选择且无GIS约束。 基本上是两大块，原始数据整理维护部分是主要贡献，Web应用部分借助ArcGIS的Web AppBuilder 框架实现，需要了解一些ArcGIS API但主体就是一个基于的NodeJS的网站服务。 非技术层面，我们认为JHU的这个项目最大的贡献就是借针对COVID-19全球性的关注，用简单的数据可视化工具让成千上万的普通大众直观地意识到大数据价值，可以预见类似的大数据应用开发会更多的面向非专业受众。 &lt;The end&gt; 注：以上信息都来自于网络上的公开信息。" />
+<meta property="og:description" content="内容摘要 本文首先分析了约翰霍普金斯大学（JHU）新冠病例跟踪网站的背景及原理（第1-2章），随后在第3章指出其在生产，管理领域的潜在应用并在第4章提出了基于开放框架的实现方案。文章最后附上对JHU新冠病例跟踪网站技术实现的分析。 目录 {#目录 .TOC-Heading} 内容摘要 1 1、背景 3 2、实现原理及分析 4 2.1、目标及成功因素分析 4 2.2、动态网站 4 2.3、GIS集成及开发运行平台 7 2.4、整合的数据面 7 3、潜在应用价值 8 4、开发框架方案 9 附录 11 1、背景 {width=”6.5in” height=”2.892361111111111in”} 2019年12月31日，世界卫生组织收到通报，人口达1千1百万的中国第七大城市湖北省武汉市爆发”不明肺炎”。2020年1月13日，泰国报告首例中国境外病例。截止到2020年1月23日，全球累计确诊病例已经超过800例，涵盖20多个国家和地区。面对这一快速演进的公共健康危机，为了更好地监视及跟踪全球各地报告的病例，约翰霍普金斯大学（JHU）Lauren Gardner副教授团队（博士生Ensheng Dong和Hongru Du）在ESRI公司的协助下于2020年1月24日发布了跟踪全球及美国各州COVID-19新冠病例的实时动态网站[1]。该网站通过一个基于ESRI公司ArcGIS地理信息平台开发的网页面板（Web Dashboard）来展示各国家，地区确诊，死亡及康复病例的数量和位置。自发布以来，以其与地图系统相结合的图形化，直观，实时的数据呈现形式快速地获得了全球性关注，迄今访问量已接近10亿次（987,359,014，截止04/30/2020），成为研究人员，公共卫生机构以及普通大众都易于使用的新冠大流行主流跟踪工具。 下面, 我们将基于互联网公开信息，分析该网站的实现原理及价值，最后给出一种基于开放架构的动态实时信息面板的实现方案。 2、实现原理及分析 2.1、目标及成功因素分析 以终为始，首先，我们先大概梳理一下JHU新冠病例跟踪网站的设计目标以便后续更好地理解其设计并予以评估。 从Lauren团队博客[2]及发表在Lancet的文章[3]可以了解到这个网站具有以下目标： 实时地跟踪疫情爆发情况 受众是研究人员，医疗卫生机构以及普通民众 良好的用户友好性 另外，由于疫情发展的紧迫性，显然快速上线也是该网站的目标之一 时势造英雄，不难看出该网站的广泛成功与其目标的合理设定密不可分。 随着疫情的快速发展和人们对其传播手段，危害程度认知的不断增加，无论是普通民众，卫生医疗机构还是政府决策机构都意识到这场疫情的严重程度和广泛程度都将是史无前例的。人们迫切地需要了解周边，亲友社区疫情的发展状况；政府，医疗系统迫切地需要掌握疫情的传播态势以便合理调配有限的资源；研究，决策机构迫切地需要掌握宏观数据以支撑政策调整，这些都需要准确，有效的信息。通过目标1，4的实现，该网站及时地抓住了目标受众的关注点，吸引了大量的流量；通过目标3的实现，该网站能在最短的时间内吸引住使用者并通过地图实现空间关联，通过走势图实现时间关联，形成强烈的带入感和有效的信息传递；另外，由于整合了不同数据源的异构数据，在各类受众及时获取相关信息的同时，这个工具还起到了协调研究，统一认识，公开透明，降低恐慌的作用，与各自为政的源数据发布机构以及其他类似网站，应用相比，该网站以其数据统一，界面直观脱颖而出也就顺理成章了。 但同时，正所谓成也萧何，败也萧何，由于目标4的约束，该团队在没有前期准备的前提下只能就地取材，导致技术选择空间有常狭窄（详见附录技术分析），造成了它一定程度的先天不足，后面平台分析部分会进一步阐述并在第4章提出一种开放的优化设计方案。 下面结合其设计目标就其实现原理进行分析。 2.2、动态网站 现代网站设计可以简单分为静态和动态两大类，但并不是如字面理解以显示是否动态作为区分的原则，静态页面也能在客户界面形成动态效果。静态网站是指所有用户可见的页面及内容都是预先生成的静态文件，用户的交互仅仅用于控制不同的静态页面及内容的加载，也就是说其内容和形式都是死的，所有用户看到的页面都是源自同一页面集，适合于单向的具有广播性质的信息传递。而动态网站最大的特点是在传统静态页面的基础上，还可以根据用户的交互动态地生成新的页面，把网站的部分设计能力提供给了使用者，使其可以按照时间，空间及其他属性对所需信息进行筛选并定制合适的页面呈现形式（布局，图，表控制等）。动态网站既具有桌面应用以使用者意图为核心的特点，同时又具备网站的实时远程更新能力，真正做到千人千面，各取所需，非常适于面向使用者的个性化数据呈现，整合及分析。 那么动态网站是如何实现其交互式自定义特性的呢？ 首先，所有网站都包含前端（用户浏览器端执行和显示的内容）和后端（服务器或云端用户不可见的支撑性服务）。对于静态网站，后端仅仅是按前端请求发送一系列静态网页文件，如html文件，css页面风格文件，JavaScript前端脚本文件及图片等。而动态网站的后端还包含用户不直接可见的本地代码及数据，前端的用户交互以及后端数据面的改变都可以触发后端本地代码的执行并将执行结果通过前端界面体现给使用者。所以后端代码的执行实现了动态网站的自定义特性。注意后端代码因为是在服务器端执行，不是必须使用浏览器支持的Web语言如JavaScript，可以按照功能，性能以及掌握程度选择任何编程语言甚至组合，如C/C++， Java， PHP，Go Lang等。JHU新冠病例跟踪网站团队选择了基于JavaScript的后端实现，应该还是出于目标4对于上线时间要求。 复杂的软件必须有清晰合理的架构，否则无法开发和维护。该网站的后端软件架构采取了较为常见的模型-视图-控制（MVC）软件架构模式，快速而简洁地实现了前后端交互式自定义特性，见下图： {width=”3.2391951006124233in” height=”2.080213254593176in”} 用户进入浏览器看到后端提供的初始视图（对网站而言就是页面） 用户通过鼠标点选与后端控制器交互，控制器完成业务逻辑后要求模型进行相应的状态改变 模型完成状态改变后生成新的视图 用户在浏览器里看到动态更新的视图，完成本次交互式自定义 JHU的这个新冠病例跟踪网站采用动态网站的形式很好地满足了设计目标1和3的要求。进入网站，用户首先看到的就是全球累计病例的热点地图以及确诊，死亡，测试病例的当前国家排名列表和历史时间线图。使用者无论点击地图热点还是列表项都可以逐步缩小关注范围（例如点选美国，进而选择德州，直至Collin县），可以看到页面上其他图，表都同步进行了对应的更新。这种牵一发而动全身的联动能力充分体现了动态网站的用户驱动数据筛选的特点。 {width=”6.410942694663167in” height=”2.1390365266841647in”} 另外，动态网站这种通过点击筛选视图并逐层下探（Drill Down）的能力使关注不同信息的使用者都可以快速定位到感兴趣的信息层次及范围，极大地提高了信息对用户的相关度和准确性。 {width=”4.80748687664042in” height=”2.488490813648294in”} 该动态网站的详细技术实现分析请见附录，总结如下： 通过与地理信息系统（GIS）的协同提供了基于地图的空间信息呈现 通过模型-视图-控制（MVC）软件架构模式实现了使用者意图驱动的页面定制能力 前后端开发语言统一使用了目前较为主流的Java Script，可以集成大量的第三方工具，极大地缩短了开发周期 2.3、GIS集成及开发运行平台 通过对JHU新冠病例跟踪网站的技术分析（见附件）可以看到该项目选择了美国ESRI（环境系统研究）公司的商用ArcGIS服务作为其地理信息系统（GIS）服务伙伴。同时开发及运行平台也采用了该公司的网站应用平台。约翰霍普金斯大学与ESRI公司有着长期的合作关系，在较多项目里都有应用，对该公司的系统有比较丰富的经验，这应该是新冠病例跟踪网站团队为在最短时间内上线而作出上述选择的主要原因。事实上，无论是GIS服务还是动态网站开发，运行平台都有较多选择，包括不少获得广泛使用的免费，开源方案。选择ArcGIS地理信息服务本身没有大的问题，无非是费用问题，但是选择其相应的网站开发运行平台是这个项目最大的败笔。ESRI公司的开发，运行平台是一个收费，闭源的私有环境，尽管其技术核心是基于NodeJS，React等开源工具，但是通过接口封装等捆绑手段使得在这一平台上开发的系统失去了开放性和可迁移性。第三方想参与开发，贡献代码都必须使用同一平台；开源社区常见的基于开放平台的二次开发，增强也完全不可能。这种封闭性极大的限制了开源社区的参与和共同开发，严重影响了它功能的进一步丰富以及数据量增大后性能的改善，其后果从近期该网站的活跃度及影响力的下降略见一斑（访问量增速持续降低）。鉴于该网站对于ESRI的网站开发运行环境并无核心技术依赖，采用一种开放的直接基于常用开源工具的开发运行方案将更加有利于其长期发展和应用场景的拓展。本文将在第4章对这一方案进一步加以说明。 2.4、整合的数据面 前面在目标及成功因素分析部分谈到了数据的重要性。JHU新冠病例跟踪网站成功的一个重要因素就是其对原始数据进行的清洗及整合。由于近几年保守的国家主义思潮对国际化合作的强负面影响，我们面对的是来自数十个近乎孤立，具有不同可信度数据源的，大量的无统一规范的原始数据。这一问题极大地影响了对这些宝贵数据的及时理解和利用，一定程度上造成了早期大众的恐慌和政策的混乱。JHU新冠病例跟踪网站团队的一个核心贡献是把源自多个公开渠道的疫情数据进行清洗，整合并公开发布。统一后的数据源使得研究人员的工作获得了简化并使其研究成果具有可比性，提高了可信度和使用价值；基于统一数据源的多角度定制化呈现推动了大众，医疗系统和政策制定者认知的统一，减少了混乱，提高了抗疫效果。可以说数据整合的工作奠定了这个项目成功的基础。 3、潜在应用价值 通过前面对该网站的原理分析，不难看到将业务数据与时间，空间信息结合并以动态，自定义的图形化方式呈现给用户可以极大地加强使用者的参与度，提升数据的有效价值，使宝贵的数据财富走出IT，成为企事业，政府各个部门创造价值的利器。 下面抛砖引玉，就企业场景列举一些可能的应用以资参考： 资产管理：区域统计，投入/损耗趋势，定位等 绩效跟踪：时间线，分类统计，团队趋势分析等 市场，客户分析：技术热点，趋势预测等 场所管理 风险管理 故障热点分析 供应链监控，分析 运维效率 通过上面列举的一些应用，不难看出在数据为王的IT，CT以及OT大融合的趋势下，数据的价值发掘将成为企业降低成本，提高效率，创造价值的核心能力，其影响范围将远远超出传统IT的范畴，深度融入到企业各职能部门的日常运作中去。然而，为实现这一愿景我们必需解决一个核心问题：数据的管理者和使用者通常是各职能部门，他们理解，维护并使用这些数据，可是他们不具备IT编程的能力或资源；反之，IT部门掌握IT系统编程的能力及资源，但是并不理解数据及其如何被使用。传统的企业应用严重依赖于IT人员与各职能部门联合开发，不但成本高，周期长，而且维护困难，最重要的是难以量体裁衣，满足快速变化的数据源及使用方式的需求。JHU新冠病例跟踪网站展示了一定的动态定制化能力，但是由于其数据类型相对单纯及封闭平台的限制，远远不能满足以上实际应用场景。结合上述核心问题并参考JHU新冠网站设计原则，下面我们将针对这类应用场景，提出一种更加完善的，基于开放框架和数据/系统解耦开发的实现方案。 4、开发框架方案 本设计方案含三大组成部分： 通用数据服务框架，实现动态网站或网站应用前端及后端主体，由IT开发维护 数据模型仓库，使能数据服务框架对数据的理解和操作以形成业务逻辑，由数据使用者通过数据服务框架界面定义 数据仓库，保存原始及整合后数据 方案目标： 通用数据服务框架 a. 通用性，提供框架服务和工具集，与业务逻辑设计解耦 b. 基于成熟开源工具以利用社区资源，减少重复开发，降低开发周期 c. 友好，直观有效的时间，空间关联的多维度信息呈现 d. 提供深度定制化能力，在呈现界面（视图）定制能力的基础上提供无编程的数据模型定义，关联能力（模型），实现IT与业务功能开发的解耦 e. 基于用户定义数据模型的自动数据导入，处理及呈现 f. 前端封装支持动态网站和移动端原生应用 开发运维平台 a. 数据服务框架代码放于GitHub项目仓库，适当时机开源 b. 数据服务框架开发环境通过Docker Compose灵活部署在PC，虚机或公有云 c. 数据服务框架运维平台通过Docker Compose灵活部署在园区，私有云或公有云 d. 非IT人员通过数据服务框架运行平台进行非程序化数据模型定义，并可导入导出 e. 原始数据加密保存或部署在安全的数据仓库 使用本方案，任何公司或部门都可以从开源仓库下载通用数据服务框架并将之部署到内网服务器，私有云或公有云。部署后各职能部门可以配置独立或共享的数据源以使能数据服务框架接收或导入原始数据，之后可视化地定义不同的数据模型以指导数据服务框架理解，处理和呈现数据。这一方案将充分地实现业务逻辑设计与应用系统设计的解耦，通过高度的定制化能力使各部门发挥所长，分工合作，实现信息融合，创造数据价值。 参考文献： Johns Hopkins University COVID-19 Dashboard https://coronavirus.jhu.edu/map.html Lauren Gardner Mapping2019-nCoV博客 https://coronavirus.jhu.edu/map.html Ensheng Dong， Hongru Du，Lauren Gardner An interactive web-based dashboard to track COVID-19 in real time https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30120-1/fulltext []{#_Toc39301165 .anchor}附录 Johns Hopkins University COVID-19 Dashboard 技术分析 {width=”6.5in” height=”2.892361111111111in”} 1、门户界面解析 此网站的门户是由Lauren Gardner副教授领导的JHU系统科学及工程中心（CSSE）建立。简单地分析此门户可见前端主要由2部分组成：导航和相应的基于表单和地图的动态面板（Dashboard）。通过检查浏览器加载的JavaScript模块，很清晰的可以看出此门户的后端是基于Node.JS（Java Script实现的后端服务），使用React前后端接口框架来实现的。用户通过前端导航互动可以触发后端生成不同的Dashboard并动态加载到前端。作为数据展现的核心，Dashboard是以iframe方式外挂源于ArcGIS的网页应用，详见下图： {width=”4.99911198600175in” height=”2.144385389326334in”} 那么这个ArcGIS又是什么呢？简单讲， 它是ESRI公司提供的基于地理信息系统（GIS）的数据-地图关联及分析核心系统，其他类似系统包括Maptitude， MapInfo， Google Maps API， QGIS等等。ESRI公司全称是美国环境系统研究所公司（Environmental Systems Research Institute, Inc.）。 空间信息（如GIS）的管理一般有2大类选择：外包（Managed）或自助（Self managed），ArcGIS及其他主流商用系统都属于外包类，提供较为完善的周边支撑，例如ArcGIS提供完整的客户端或云（web）应用开发平台，稳定完善的接口及辅助应用。从学校的教学辅助信息看，JHU大学与ESRI有着长期稳定的合作，可能也是选择ArcGIS的一个因素。目前看这个项目反过来对ESRI也是起到了极大的宣传作用，作为标杆列入其公司首页。 下面我们将着重分析构建在ArcGIS上的核心动态面板模块。 2、基于ArcGIS的动态面板 通过浏览器导航交互可以动态加载不同的Dashboard，下面以世界地图（World Map）面板为例进行解析。世界地图对应的动态面板链接是https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6。 通过类似的解析，可以看到各ArcGIS面板是基于Dojo前端框架（JavaScript工具集）实现的的动态页面。为便于理解ArcGIS网页应用，请参考下面逻辑框架： {width=”2.5989304461942258in” height=”2.1795428696412946in”} 2.1、前端界面 ArcGIS web应用的前端界面基于Dojo JS工具集及ArcGIS API for JavaScript，包含了非常完善的界面布局，数据图形化元素（图，表等）以及开发，分析工具，技术细节可以参考Dojo以及ArcGIS开发者平台文档，并不复杂，这里就不再赘述了。作为类比，ArcGIS API之于GIS数据展示相当于Kibana之于Elastic Search，并非不可替代但是原厂工具比较可靠和完备，同时锁定了后台的GIS数据提供商（收费服务）。 2.2、功能层 这里面的功能层是衔接界面展示和原始数据的桥梁，用以筛选有价值的数据并赋予它们便于人理解的意义，工程上我们一般称之为视图（View）或逻辑模型（Model）。COVID-19 Dashboard的功能层数据模型对世界地图和美国地图所含的表项略有不同，但主要项目一致： Province/State: (Text) Country Province or State Name (Level 2 Key) Country/Region: (Text) Country or Region Name (Level 1 Key) Last Update: (Datetime) Last data update Date/Time in UTC Latitude: (Float) Geographic Latitude in Decimal Degrees (WGS1984) Longitude: (Float) Geographic Longitude in Decimal Degrees (WGS1984) Confirmed: (Long) Best collected count of Confirmed Cases reported by geography Recovered: (Long) Not Currently in Use, JHU is looking for a source Deaths: (Long) Best collected count for Case Deaths reported by geography County: (Text) US County Name (Level 3 Key) ArcGIS开发平台一个亮点是在没有前端界面的前提下，只要有数据并定义了功能层，在平台上就可以看到跟地图关联的显示，非常方便前端开发与数据专家解耦的开发模式。 2.3、数据面 数据源（美国及全球）最初是用Google表格来维护的， 但是随着数据量及更新频率的压力，目前保存在Github。更新频率降到每天跟新一次，采用CSV格式，提供单日及时间序列数据。以下分别是单日数据及时间序列数据的例子： {width=”6.5in” height=”1.9770833333333333in”} {width=”6.5in” height=”1.4319444444444445in”} 可以看到原始数据都是结构化数据（Structured），简单清洗后一般SQL数据库都可以使用。 3、技术小结 通过上面的解析，可以初步总结JHU大学的 COVID-19项目如下： a) 这是一个含前后端的动态网站，通过浏览器访问，但非常容易转化为原生应用； b) 数据驱动，项目架构采用典型MVC模型； c) 疫情数据源来自多个公开渠道，JHU 团队的主要贡献是将数据整合，共享维护一个单一的数据集； d) 使用ArcGIS的GIS服务将疫情数据中的经纬度地理信息于地图显示结合起来，技术上有较多其他选择； e) 其他图表也通过ArcGIS API 实现，技术上也有较多选择且无GIS约束。 基本上是两大块，原始数据整理维护部分是主要贡献，Web应用部分借助ArcGIS的Web AppBuilder 框架实现，需要了解一些ArcGIS API但主体就是一个基于的NodeJS的网站服务。 非技术层面，我们认为JHU的这个项目最大的贡献就是借针对COVID-19全球性的关注，用简单的数据可视化工具让成千上万的普通大众直观地意识到大数据价值，可以预见类似的大数据应用开发会更多的面向非专业受众。 &lt;The end&gt; 注：以上信息都来自于网络上的公开信息。" />
+<link rel="canonical" href="http://0.0.0.0:4000/knowledge%20graph/2020/05/27/JHU-Covid19-Study.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/knowledge%20graph/2020/05/27/JHU-Covid19-Study.html" />
+<meta property="og:site_name" content="BLog" />
+<meta property="og:image" content="http://0.0.0.0:4000/assets/img/software.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-27T00:00:00+00:00" />
+<script type="application/ld+json">
+{"image":"http://0.0.0.0:4000/assets/img/software.jpg","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://0.0.0.0:4000/assets/img/logo.png"},"name":"Bin Liang"},"headline":"JHU Covid19 Tracking Site Study","dateModified":"2020-05-27T00:00:00+00:00","datePublished":"2020-05-27T00:00:00+00:00","author":{"@type":"Person","name":"Bin Liang"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/knowledge%20graph/2020/05/27/JHU-Covid19-Study.html"},"url":"http://0.0.0.0:4000/knowledge%20graph/2020/05/27/JHU-Covid19-Study.html","description":"内容摘要 本文首先分析了约翰霍普金斯大学（JHU）新冠病例跟踪网站的背景及原理（第1-2章），随后在第3章指出其在生产，管理领域的潜在应用并在第4章提出了基于开放框架的实现方案。文章最后附上对JHU新冠病例跟踪网站技术实现的分析。 目录 {#目录 .TOC-Heading} 内容摘要 1 1、背景 3 2、实现原理及分析 4 2.1、目标及成功因素分析 4 2.2、动态网站 4 2.3、GIS集成及开发运行平台 7 2.4、整合的数据面 7 3、潜在应用价值 8 4、开发框架方案 9 附录 11 1、背景 {width=”6.5in” height=”2.892361111111111in”} 2019年12月31日，世界卫生组织收到通报，人口达1千1百万的中国第七大城市湖北省武汉市爆发”不明肺炎”。2020年1月13日，泰国报告首例中国境外病例。截止到2020年1月23日，全球累计确诊病例已经超过800例，涵盖20多个国家和地区。面对这一快速演进的公共健康危机，为了更好地监视及跟踪全球各地报告的病例，约翰霍普金斯大学（JHU）Lauren Gardner副教授团队（博士生Ensheng Dong和Hongru Du）在ESRI公司的协助下于2020年1月24日发布了跟踪全球及美国各州COVID-19新冠病例的实时动态网站[1]。该网站通过一个基于ESRI公司ArcGIS地理信息平台开发的网页面板（Web Dashboard）来展示各国家，地区确诊，死亡及康复病例的数量和位置。自发布以来，以其与地图系统相结合的图形化，直观，实时的数据呈现形式快速地获得了全球性关注，迄今访问量已接近10亿次（987,359,014，截止04/30/2020），成为研究人员，公共卫生机构以及普通大众都易于使用的新冠大流行主流跟踪工具。 下面, 我们将基于互联网公开信息，分析该网站的实现原理及价值，最后给出一种基于开放架构的动态实时信息面板的实现方案。 2、实现原理及分析 2.1、目标及成功因素分析 以终为始，首先，我们先大概梳理一下JHU新冠病例跟踪网站的设计目标以便后续更好地理解其设计并予以评估。 从Lauren团队博客[2]及发表在Lancet的文章[3]可以了解到这个网站具有以下目标： 实时地跟踪疫情爆发情况 受众是研究人员，医疗卫生机构以及普通民众 良好的用户友好性 另外，由于疫情发展的紧迫性，显然快速上线也是该网站的目标之一 时势造英雄，不难看出该网站的广泛成功与其目标的合理设定密不可分。 随着疫情的快速发展和人们对其传播手段，危害程度认知的不断增加，无论是普通民众，卫生医疗机构还是政府决策机构都意识到这场疫情的严重程度和广泛程度都将是史无前例的。人们迫切地需要了解周边，亲友社区疫情的发展状况；政府，医疗系统迫切地需要掌握疫情的传播态势以便合理调配有限的资源；研究，决策机构迫切地需要掌握宏观数据以支撑政策调整，这些都需要准确，有效的信息。通过目标1，4的实现，该网站及时地抓住了目标受众的关注点，吸引了大量的流量；通过目标3的实现，该网站能在最短的时间内吸引住使用者并通过地图实现空间关联，通过走势图实现时间关联，形成强烈的带入感和有效的信息传递；另外，由于整合了不同数据源的异构数据，在各类受众及时获取相关信息的同时，这个工具还起到了协调研究，统一认识，公开透明，降低恐慌的作用，与各自为政的源数据发布机构以及其他类似网站，应用相比，该网站以其数据统一，界面直观脱颖而出也就顺理成章了。 但同时，正所谓成也萧何，败也萧何，由于目标4的约束，该团队在没有前期准备的前提下只能就地取材，导致技术选择空间有常狭窄（详见附录技术分析），造成了它一定程度的先天不足，后面平台分析部分会进一步阐述并在第4章提出一种开放的优化设计方案。 下面结合其设计目标就其实现原理进行分析。 2.2、动态网站 现代网站设计可以简单分为静态和动态两大类，但并不是如字面理解以显示是否动态作为区分的原则，静态页面也能在客户界面形成动态效果。静态网站是指所有用户可见的页面及内容都是预先生成的静态文件，用户的交互仅仅用于控制不同的静态页面及内容的加载，也就是说其内容和形式都是死的，所有用户看到的页面都是源自同一页面集，适合于单向的具有广播性质的信息传递。而动态网站最大的特点是在传统静态页面的基础上，还可以根据用户的交互动态地生成新的页面，把网站的部分设计能力提供给了使用者，使其可以按照时间，空间及其他属性对所需信息进行筛选并定制合适的页面呈现形式（布局，图，表控制等）。动态网站既具有桌面应用以使用者意图为核心的特点，同时又具备网站的实时远程更新能力，真正做到千人千面，各取所需，非常适于面向使用者的个性化数据呈现，整合及分析。 那么动态网站是如何实现其交互式自定义特性的呢？ 首先，所有网站都包含前端（用户浏览器端执行和显示的内容）和后端（服务器或云端用户不可见的支撑性服务）。对于静态网站，后端仅仅是按前端请求发送一系列静态网页文件，如html文件，css页面风格文件，JavaScript前端脚本文件及图片等。而动态网站的后端还包含用户不直接可见的本地代码及数据，前端的用户交互以及后端数据面的改变都可以触发后端本地代码的执行并将执行结果通过前端界面体现给使用者。所以后端代码的执行实现了动态网站的自定义特性。注意后端代码因为是在服务器端执行，不是必须使用浏览器支持的Web语言如JavaScript，可以按照功能，性能以及掌握程度选择任何编程语言甚至组合，如C/C++， Java， PHP，Go Lang等。JHU新冠病例跟踪网站团队选择了基于JavaScript的后端实现，应该还是出于目标4对于上线时间要求。 复杂的软件必须有清晰合理的架构，否则无法开发和维护。该网站的后端软件架构采取了较为常见的模型-视图-控制（MVC）软件架构模式，快速而简洁地实现了前后端交互式自定义特性，见下图： {width=”3.2391951006124233in” height=”2.080213254593176in”} 用户进入浏览器看到后端提供的初始视图（对网站而言就是页面） 用户通过鼠标点选与后端控制器交互，控制器完成业务逻辑后要求模型进行相应的状态改变 模型完成状态改变后生成新的视图 用户在浏览器里看到动态更新的视图，完成本次交互式自定义 JHU的这个新冠病例跟踪网站采用动态网站的形式很好地满足了设计目标1和3的要求。进入网站，用户首先看到的就是全球累计病例的热点地图以及确诊，死亡，测试病例的当前国家排名列表和历史时间线图。使用者无论点击地图热点还是列表项都可以逐步缩小关注范围（例如点选美国，进而选择德州，直至Collin县），可以看到页面上其他图，表都同步进行了对应的更新。这种牵一发而动全身的联动能力充分体现了动态网站的用户驱动数据筛选的特点。 {width=”6.410942694663167in” height=”2.1390365266841647in”} 另外，动态网站这种通过点击筛选视图并逐层下探（Drill Down）的能力使关注不同信息的使用者都可以快速定位到感兴趣的信息层次及范围，极大地提高了信息对用户的相关度和准确性。 {width=”4.80748687664042in” height=”2.488490813648294in”} 该动态网站的详细技术实现分析请见附录，总结如下： 通过与地理信息系统（GIS）的协同提供了基于地图的空间信息呈现 通过模型-视图-控制（MVC）软件架构模式实现了使用者意图驱动的页面定制能力 前后端开发语言统一使用了目前较为主流的Java Script，可以集成大量的第三方工具，极大地缩短了开发周期 2.3、GIS集成及开发运行平台 通过对JHU新冠病例跟踪网站的技术分析（见附件）可以看到该项目选择了美国ESRI（环境系统研究）公司的商用ArcGIS服务作为其地理信息系统（GIS）服务伙伴。同时开发及运行平台也采用了该公司的网站应用平台。约翰霍普金斯大学与ESRI公司有着长期的合作关系，在较多项目里都有应用，对该公司的系统有比较丰富的经验，这应该是新冠病例跟踪网站团队为在最短时间内上线而作出上述选择的主要原因。事实上，无论是GIS服务还是动态网站开发，运行平台都有较多选择，包括不少获得广泛使用的免费，开源方案。选择ArcGIS地理信息服务本身没有大的问题，无非是费用问题，但是选择其相应的网站开发运行平台是这个项目最大的败笔。ESRI公司的开发，运行平台是一个收费，闭源的私有环境，尽管其技术核心是基于NodeJS，React等开源工具，但是通过接口封装等捆绑手段使得在这一平台上开发的系统失去了开放性和可迁移性。第三方想参与开发，贡献代码都必须使用同一平台；开源社区常见的基于开放平台的二次开发，增强也完全不可能。这种封闭性极大的限制了开源社区的参与和共同开发，严重影响了它功能的进一步丰富以及数据量增大后性能的改善，其后果从近期该网站的活跃度及影响力的下降略见一斑（访问量增速持续降低）。鉴于该网站对于ESRI的网站开发运行环境并无核心技术依赖，采用一种开放的直接基于常用开源工具的开发运行方案将更加有利于其长期发展和应用场景的拓展。本文将在第4章对这一方案进一步加以说明。 2.4、整合的数据面 前面在目标及成功因素分析部分谈到了数据的重要性。JHU新冠病例跟踪网站成功的一个重要因素就是其对原始数据进行的清洗及整合。由于近几年保守的国家主义思潮对国际化合作的强负面影响，我们面对的是来自数十个近乎孤立，具有不同可信度数据源的，大量的无统一规范的原始数据。这一问题极大地影响了对这些宝贵数据的及时理解和利用，一定程度上造成了早期大众的恐慌和政策的混乱。JHU新冠病例跟踪网站团队的一个核心贡献是把源自多个公开渠道的疫情数据进行清洗，整合并公开发布。统一后的数据源使得研究人员的工作获得了简化并使其研究成果具有可比性，提高了可信度和使用价值；基于统一数据源的多角度定制化呈现推动了大众，医疗系统和政策制定者认知的统一，减少了混乱，提高了抗疫效果。可以说数据整合的工作奠定了这个项目成功的基础。 3、潜在应用价值 通过前面对该网站的原理分析，不难看到将业务数据与时间，空间信息结合并以动态，自定义的图形化方式呈现给用户可以极大地加强使用者的参与度，提升数据的有效价值，使宝贵的数据财富走出IT，成为企事业，政府各个部门创造价值的利器。 下面抛砖引玉，就企业场景列举一些可能的应用以资参考： 资产管理：区域统计，投入/损耗趋势，定位等 绩效跟踪：时间线，分类统计，团队趋势分析等 市场，客户分析：技术热点，趋势预测等 场所管理 风险管理 故障热点分析 供应链监控，分析 运维效率 通过上面列举的一些应用，不难看出在数据为王的IT，CT以及OT大融合的趋势下，数据的价值发掘将成为企业降低成本，提高效率，创造价值的核心能力，其影响范围将远远超出传统IT的范畴，深度融入到企业各职能部门的日常运作中去。然而，为实现这一愿景我们必需解决一个核心问题：数据的管理者和使用者通常是各职能部门，他们理解，维护并使用这些数据，可是他们不具备IT编程的能力或资源；反之，IT部门掌握IT系统编程的能力及资源，但是并不理解数据及其如何被使用。传统的企业应用严重依赖于IT人员与各职能部门联合开发，不但成本高，周期长，而且维护困难，最重要的是难以量体裁衣，满足快速变化的数据源及使用方式的需求。JHU新冠病例跟踪网站展示了一定的动态定制化能力，但是由于其数据类型相对单纯及封闭平台的限制，远远不能满足以上实际应用场景。结合上述核心问题并参考JHU新冠网站设计原则，下面我们将针对这类应用场景，提出一种更加完善的，基于开放框架和数据/系统解耦开发的实现方案。 4、开发框架方案 本设计方案含三大组成部分： 通用数据服务框架，实现动态网站或网站应用前端及后端主体，由IT开发维护 数据模型仓库，使能数据服务框架对数据的理解和操作以形成业务逻辑，由数据使用者通过数据服务框架界面定义 数据仓库，保存原始及整合后数据 方案目标： 通用数据服务框架 a. 通用性，提供框架服务和工具集，与业务逻辑设计解耦 b. 基于成熟开源工具以利用社区资源，减少重复开发，降低开发周期 c. 友好，直观有效的时间，空间关联的多维度信息呈现 d. 提供深度定制化能力，在呈现界面（视图）定制能力的基础上提供无编程的数据模型定义，关联能力（模型），实现IT与业务功能开发的解耦 e. 基于用户定义数据模型的自动数据导入，处理及呈现 f. 前端封装支持动态网站和移动端原生应用 开发运维平台 a. 数据服务框架代码放于GitHub项目仓库，适当时机开源 b. 数据服务框架开发环境通过Docker Compose灵活部署在PC，虚机或公有云 c. 数据服务框架运维平台通过Docker Compose灵活部署在园区，私有云或公有云 d. 非IT人员通过数据服务框架运行平台进行非程序化数据模型定义，并可导入导出 e. 原始数据加密保存或部署在安全的数据仓库 使用本方案，任何公司或部门都可以从开源仓库下载通用数据服务框架并将之部署到内网服务器，私有云或公有云。部署后各职能部门可以配置独立或共享的数据源以使能数据服务框架接收或导入原始数据，之后可视化地定义不同的数据模型以指导数据服务框架理解，处理和呈现数据。这一方案将充分地实现业务逻辑设计与应用系统设计的解耦，通过高度的定制化能力使各部门发挥所长，分工合作，实现信息融合，创造数据价值。 参考文献： Johns Hopkins University COVID-19 Dashboard https://coronavirus.jhu.edu/map.html Lauren Gardner Mapping2019-nCoV博客 https://coronavirus.jhu.edu/map.html Ensheng Dong， Hongru Du，Lauren Gardner An interactive web-based dashboard to track COVID-19 in real time https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30120-1/fulltext []{#_Toc39301165 .anchor}附录 Johns Hopkins University COVID-19 Dashboard 技术分析 {width=”6.5in” height=”2.892361111111111in”} 1、门户界面解析 此网站的门户是由Lauren Gardner副教授领导的JHU系统科学及工程中心（CSSE）建立。简单地分析此门户可见前端主要由2部分组成：导航和相应的基于表单和地图的动态面板（Dashboard）。通过检查浏览器加载的JavaScript模块，很清晰的可以看出此门户的后端是基于Node.JS（Java Script实现的后端服务），使用React前后端接口框架来实现的。用户通过前端导航互动可以触发后端生成不同的Dashboard并动态加载到前端。作为数据展现的核心，Dashboard是以iframe方式外挂源于ArcGIS的网页应用，详见下图： {width=”4.99911198600175in” height=”2.144385389326334in”} 那么这个ArcGIS又是什么呢？简单讲， 它是ESRI公司提供的基于地理信息系统（GIS）的数据-地图关联及分析核心系统，其他类似系统包括Maptitude， MapInfo， Google Maps API， QGIS等等。ESRI公司全称是美国环境系统研究所公司（Environmental Systems Research Institute, Inc.）。 空间信息（如GIS）的管理一般有2大类选择：外包（Managed）或自助（Self managed），ArcGIS及其他主流商用系统都属于外包类，提供较为完善的周边支撑，例如ArcGIS提供完整的客户端或云（web）应用开发平台，稳定完善的接口及辅助应用。从学校的教学辅助信息看，JHU大学与ESRI有着长期稳定的合作，可能也是选择ArcGIS的一个因素。目前看这个项目反过来对ESRI也是起到了极大的宣传作用，作为标杆列入其公司首页。 下面我们将着重分析构建在ArcGIS上的核心动态面板模块。 2、基于ArcGIS的动态面板 通过浏览器导航交互可以动态加载不同的Dashboard，下面以世界地图（World Map）面板为例进行解析。世界地图对应的动态面板链接是https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6。 通过类似的解析，可以看到各ArcGIS面板是基于Dojo前端框架（JavaScript工具集）实现的的动态页面。为便于理解ArcGIS网页应用，请参考下面逻辑框架： {width=”2.5989304461942258in” height=”2.1795428696412946in”} 2.1、前端界面 ArcGIS web应用的前端界面基于Dojo JS工具集及ArcGIS API for JavaScript，包含了非常完善的界面布局，数据图形化元素（图，表等）以及开发，分析工具，技术细节可以参考Dojo以及ArcGIS开发者平台文档，并不复杂，这里就不再赘述了。作为类比，ArcGIS API之于GIS数据展示相当于Kibana之于Elastic Search，并非不可替代但是原厂工具比较可靠和完备，同时锁定了后台的GIS数据提供商（收费服务）。 2.2、功能层 这里面的功能层是衔接界面展示和原始数据的桥梁，用以筛选有价值的数据并赋予它们便于人理解的意义，工程上我们一般称之为视图（View）或逻辑模型（Model）。COVID-19 Dashboard的功能层数据模型对世界地图和美国地图所含的表项略有不同，但主要项目一致： Province/State: (Text) Country Province or State Name (Level 2 Key) Country/Region: (Text) Country or Region Name (Level 1 Key) Last Update: (Datetime) Last data update Date/Time in UTC Latitude: (Float) Geographic Latitude in Decimal Degrees (WGS1984) Longitude: (Float) Geographic Longitude in Decimal Degrees (WGS1984) Confirmed: (Long) Best collected count of Confirmed Cases reported by geography Recovered: (Long) Not Currently in Use, JHU is looking for a source Deaths: (Long) Best collected count for Case Deaths reported by geography County: (Text) US County Name (Level 3 Key) ArcGIS开发平台一个亮点是在没有前端界面的前提下，只要有数据并定义了功能层，在平台上就可以看到跟地图关联的显示，非常方便前端开发与数据专家解耦的开发模式。 2.3、数据面 数据源（美国及全球）最初是用Google表格来维护的， 但是随着数据量及更新频率的压力，目前保存在Github。更新频率降到每天跟新一次，采用CSV格式，提供单日及时间序列数据。以下分别是单日数据及时间序列数据的例子： {width=”6.5in” height=”1.9770833333333333in”} {width=”6.5in” height=”1.4319444444444445in”} 可以看到原始数据都是结构化数据（Structured），简单清洗后一般SQL数据库都可以使用。 3、技术小结 通过上面的解析，可以初步总结JHU大学的 COVID-19项目如下： a) 这是一个含前后端的动态网站，通过浏览器访问，但非常容易转化为原生应用； b) 数据驱动，项目架构采用典型MVC模型； c) 疫情数据源来自多个公开渠道，JHU 团队的主要贡献是将数据整合，共享维护一个单一的数据集； d) 使用ArcGIS的GIS服务将疫情数据中的经纬度地理信息于地图显示结合起来，技术上有较多其他选择； e) 其他图表也通过ArcGIS API 实现，技术上也有较多选择且无GIS约束。 基本上是两大块，原始数据整理维护部分是主要贡献，Web应用部分借助ArcGIS的Web AppBuilder 框架实现，需要了解一些ArcGIS API但主体就是一个基于的NodeJS的网站服务。 非技术层面，我们认为JHU的这个项目最大的贡献就是借针对COVID-19全球性的关注，用简单的数据可视化工具让成千上万的普通大众直观地意识到大数据价值，可以预见类似的大数据应用开发会更多的面向非专业受众。 &lt;The end&gt; 注：以上信息都来自于网络上的公开信息。","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<!-- jekyll-feed to add metadata for ATOM style RSS feed -->
+<link type="application/atom+xml" rel="alternate" href="http://0.0.0.0:4000/feed.xml" title="BLog" />
+
+<!-- Manual seo tags -->
+<!--
+<title>JHU Covid19 Tracking Site Study | BLog</title>
+<meta name="description" content="内容摘要本文首先分析了约翰霍普金斯大学（JHU）新冠病例跟踪网站的背景及原理（第1-2章），随后在第3章指出其在生产，管理领域的潜在应用并在第4章提出了基于开放框架的实现方案。文章最后附上对JHU新冠病例跟踪网站技术实现的分析。目录 {#目录 .TOC-Heading}内容摘要 11、背景 32、实现原理及分析 ...">
+-->
+
+  </head>
+  
+  <body>
+    <header class="site-header">
+    <!-- Logo, title & hamburger button -->
+    <a class="brand" aria-label="BLog" href="/">
+        
+        <img alt="logo img" class="logo" src="/assets/img/logo.png" />
+        
+        <h1 class="site-title">BLog</h1>
+    </a>
+
+    <!-- Hamburger button on the top right corner for mobile display -->
+    <!--   Checkbox with label for mobile screen to implement drawer menu -->
+    <label for="drop" class="toggle hamburger">&#9776</label>
+    <input type="checkbox" id="drop" />
+
+    <!-- Menu bar -->
+    <ul class="menu">
+        <!-- Build menu recursively -->
+        <!-- assign variables at page scope ONCE to avoid assign conflict in recursive include snippet -->
+        
+        <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page3/ menu_id: 0.0 Parent Anchor: 0  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Home" title="Home" href="/">
+            <i class="fa fa-home menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Home</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li class="dropdown">
+        <!--   Link for dropdown li in bigger screen to implement hover menu-->
+        <a aria-label="Blogs" title="Blogs" href="#">
+            <i class="fa fa-newspaper-o menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Blogs</span>
+        </a>
+
+        <!--   Checkbox with label for dropdown li in mobile screen to implement drawer menu -->
+        <!--     Put input before label in case CSS needs to style label based on input events -->
+        <input type="checkbox" id="drop-Blogs"/>
+        <label for="drop-Blogs" class="toggle">Blogs</label>
+
+        <!-- dropdown-menu sub menu follows immediately -->
+        <ul class="dropdown-menu">
+            <!-- Build sub-menu recursively -->
+            <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0.1 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page3/ menu_id: 0.0 Parent Anchor: 0.1  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.1  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Categories" title="Categories" href="/categories/">
+            <i class="fa fa-list menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Categories</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Tags" title="Tags" href="/tags/">
+            <i class="fa fa-tags menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Tags</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+
+        </ul>
+    </li>
+    
+
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li class="dropdown">
+        <!--   Link for dropdown li in bigger screen to implement hover menu-->
+        <a aria-label="Portfolio" title="Portfolio" href="#">
+            <i class="fa fa-th menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Portfolio</span>
+        </a>
+
+        <!--   Checkbox with label for dropdown li in mobile screen to implement drawer menu -->
+        <!--     Put input before label in case CSS needs to style label based on input events -->
+        <input type="checkbox" id="drop-Portfolio"/>
+        <label for="drop-Portfolio" class="toggle">Portfolio</label>
+
+        <!-- dropdown-menu sub menu follows immediately -->
+        <ul class="dropdown-menu">
+            <!-- Build sub-menu recursively -->
+            <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0.2 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page3/ menu_id: 0.0 Parent Anchor: 0.2  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.2  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li class="dropdown">
+        <!--   Link for dropdown li in bigger screen to implement hover menu-->
+        <a aria-label="Collection 1" title="Collection 1" href="#">
+            <i class="fa fa-code-branch menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Collection 1</span>
+        </a>
+
+        <!--   Checkbox with label for dropdown li in mobile screen to implement drawer menu -->
+        <!--     Put input before label in case CSS needs to style label based on input events -->
+        <input type="checkbox" id="drop-Collection 1"/>
+        <label for="drop-Collection 1" class="toggle">Collection 1</label>
+
+        <!-- dropdown-menu sub menu follows immediately -->
+        <ul class="dropdown-menu">
+            <!-- Build sub-menu recursively -->
+            <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0.2.0 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page3/ menu_id: 0.0 Parent Anchor: 0.2.0  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.2.0  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Sub Collection" title="Sub Collection" href="/pages/sub-collection.html">
+            <i class="fa fa-code-branch menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Sub Collection</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+
+        </ul>
+    </li>
+    
+
+    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Gallery" title="Gallery" href="/pages/gallery.html">
+            <i class="fa fa-images menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Gallery</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+
+        </ul>
+    </li>
+    
+
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Search" title="Search" href="/search/">
+            <i class="fa fa-search menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Search</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="About" title="About" href="/about/">
+            <i class="fa fa-user menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">About</span>
+        </a>
+    </li>
+    
+
+
+    </ul>
+</header>
+
+    
+<aside class="sidebar">
+    <header>
+      <div class="about">
+        <div class="cover-author-image">
+          <a href="/"><img src="/assets/img/potrait.jpg" alt="liangbin"></a>
+        </div>
+        <div class="author-name">Bin Liang</div>
+        <p>I am a network architect with full stack development experience.  My current research focuses include DCN, global meta data plane  and in general NCS: Networked Compute & Storage archsitecture.</p>
+      </div>
+    </header> <!-- End Header -->
+    
+   	<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+	<div class="addthis_inline_share_toolbox"> <p><strong>Sharing:</strong></p></div>
+
+    <footer>
+      <section class="contact">
+        <h3 class="contact-title">Follow me</h3>
+        <ul>
+          
+          
+          
+          
+          
+            <li class="github"><a href="http://github.com/liangbin-pub" target="_blank"><i class="fa fa-github"></i></a></li>
+          
+          
+            <li class="linkedin"><a href="https://in.linkedin.com/in/liangbin888" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+          
+          
+            <li class="email"><a href="mailto:fw.liangb@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+          
+          
+            <li class="rss"><a href="/feed.xml"><i class="fa fa-rss"></i></a></li>
+          
+        </ul>
+      </section> <!-- End Section Contact -->
+      <div class="copyright">
+        <p>2020 &copy; Bin Liang</p>
+      </div>
+    </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+
+    <div class="content content-box clearfix">
+      <div class="article">
+        
+
+<meta property="og:url"          content="/knowledge%20graph/2020/05/27/JHU-Covid19-Study.html" />
+<meta property="og:type"         content="article" />
+<meta property="og:title"        content="JHU Covid19 Tracking Site Study" />
+<meta property="og:description"  content="内容摘要
+
+本文首先分析了约翰霍普金斯大学（JHU）新冠病例跟踪网站的背景及原理（第1-2章），随后在第3章指出其在生产，管理领域的潜在应用并在第4章提出了基于开放框架的实现方案。文章最后附上对JHU新冠病例跟踪网站技术实现的分析。
+
+目录 {#目录 .TOC-Heading}
+
+内容摘要 1
+
+1、背景 3
+
+2、实现原理及分析 4
+
+2.1、目标及成功因素分析 4
+
+2.2、动态网站 4
+
+2.3、GIS集成及开发运行平台 7
+
+2.4、整合的数据面 7
+
+3、潜在应用价值 8
+
+4、..." />
+<meta property="og:image"        content="assets/img/software.jpg" />
+
+
+<!-- Page Feature Image and Title as Header -->
+<header id="main" style="background-repeat:no-repeat;background-image: url('/assets/img/software.jpg')">
+  
+    <h1 id="JHU+Covid19+Tracking+Site+Study" class="title">JHU Covid19 Tracking Site Study</h1>
+      
+      
+        
+
+
+<div class="post-info"><a href="https://github.com/liangbin-pub" target="_blank">
+      <img src="/assets/img/myAvatar.svg">
+    
+    <p class="meta">
+      Bin Liang - May 27, 2020
+    </p></a></div>
+
+      
+  
+</header>
+
+<!-- Article content -->
+<section class="post-content">
+  
+  <h1 id="内容摘要"><strong>内容摘要</strong></h1>
+
+<p>本文首先分析了约翰霍普金斯大学（JHU）新冠病例跟踪网站的背景及原理（第1-2章），随后在第3章指出其在生产，管理领域的潜在应用并在第4章提出了基于开放框架的实现方案。文章最后附上对JHU新冠病例跟踪网站技术实现的分析。</p>
+
+<h1 id="目录-目录-toc-heading">目录 {#目录 .TOC-Heading}</h1>
+
+<p><a href="#内容摘要">内容摘要 1</a></p>
+
+<p><a href="#背景">1、背景 3</a></p>
+
+<p><a href="#实现原理及分析">2、实现原理及分析 4</a></p>
+
+<p><a href="#目标及成功因素分析"><strong>2.1、目标及成功因素分析</strong> 4</a></p>
+
+<p><a href="#动态网站"><strong>2.2、动态网站</strong> 4</a></p>
+
+<p><a href="#gis集成及开发运行平台"><strong>2.3、GIS集成及开发运行平台</strong> 7</a></p>
+
+<p><a href="#整合的数据面"><strong>2.4、整合的数据面</strong> 7</a></p>
+
+<p><a href="#潜在应用价值">3、潜在应用价值 8</a></p>
+
+<p><a href="#开发框架方案">4、开发框架方案 9</a></p>
+
+<p><a href="#_Toc39301165">附录 11</a></p>
+
+<h1 id="1背景"><strong>1、背景</strong></h1>
+
+<p><img src="/assets/img/jhu_image1.png" alt="" />{width=”6.5in”
+height=”2.892361111111111in”}</p>
+
+<p>2019年12月31日，世界卫生组织收到通报，人口达1千1百万的中国第七大城市湖北省武汉市爆发”不明肺炎”。2020年1月13日，泰国报告首例中国境外病例。截止到2020年1月23日，全球累计确诊病例已经超过800例，涵盖20多个国家和地区。面对这一快速演进的公共健康危机，为了更好地监视及跟踪全球各地报告的病例，约翰霍普金斯大学（JHU）Lauren
+Gardner副教授团队（博士生Ensheng Dong和Hongru
+Du）在ESRI公司的协助下于2020年1月24日发布了跟踪全球及美国各州COVID-19新冠病例的实时动态网站[1]。该网站通过一个基于ESRI公司ArcGIS地理信息平台开发的网页面板（Web
+Dashboard）来展示各国家，地区确诊，死亡及康复病例的数量和位置。自发布以来，以其与地图系统相结合的图形化，直观，实时的数据呈现形式快速地获得了全球性关注，迄今访问量已接近10亿次（987,359,014，截止04/30/2020），成为研究人员，公共卫生机构以及普通大众都易于使用的新冠大流行主流跟踪工具。</p>
+
+<p>下面,
+我们将基于互联网公开信息，分析该网站的实现原理及价值，最后给出一种基于开放架构的动态实时信息面板的实现方案。</p>
+
+<h1 id="2实现原理及分析"><strong>2、实现原理及分析</strong></h1>
+
+<h2 id="21目标及成功因素分析"><strong>2.1、目标及成功因素分析</strong></h2>
+
+<p>以终为始，首先，我们先大概梳理一下JHU新冠病例跟踪网站的设计目标以便后续更好地理解其设计并予以评估。</p>
+
+<p>从Lauren团队博客[2]及发表在Lancet的文章[3]可以了解到这个网站具有以下目标：</p>
+
+<ol>
+  <li>
+    <p>实时地跟踪疫情爆发情况</p>
+  </li>
+  <li>
+    <p>受众是研究人员，医疗卫生机构以及普通民众</p>
+  </li>
+  <li>
+    <p>良好的用户友好性</p>
+  </li>
+  <li>
+    <p>另外，由于疫情发展的紧迫性，显然快速上线也是该网站的目标之一</p>
+  </li>
+</ol>
+
+<p>时势造英雄，不难看出该网站的广泛成功与其目标的合理设定密不可分。</p>
+
+<p>随着疫情的快速发展和人们对其传播手段，危害程度认知的不断增加，无论是普通民众，卫生医疗机构还是政府决策机构都意识到这场疫情的严重程度和广泛程度都将是史无前例的。人们迫切地需要了解周边，亲友社区疫情的发展状况；政府，医疗系统迫切地需要掌握疫情的传播态势以便合理调配有限的资源；研究，决策机构迫切地需要掌握宏观数据以支撑政策调整，这些都需要准确，有效的信息。通过目标1，4的实现，该网站及时地抓住了目标受众的关注点，吸引了大量的流量；通过目标3的实现，该网站能在最短的时间内吸引住使用者并通过地图实现空间关联，通过走势图实现时间关联，形成强烈的带入感和有效的信息传递；另外，由于整合了不同数据源的异构数据，在各类受众及时获取相关信息的同时，这个工具还起到了协调研究，统一认识，公开透明，降低恐慌的作用，与各自为政的源数据发布机构以及其他类似网站，应用相比，该网站以其数据统一，界面直观脱颖而出也就顺理成章了。</p>
+
+<p>但同时，正所谓成也萧何，败也萧何，由于目标4的约束，该团队在没有前期准备的前提下只能就地取材，导致技术选择空间有常狭窄（详见附录技术分析），造成了它一定程度的先天不足，后面平台分析部分会进一步阐述并在第4章提出一种开放的优化设计方案。</p>
+
+<p>下面结合其设计目标就其实现原理进行分析。</p>
+
+<h2 id="22动态网站"><strong>2.2、动态网站</strong></h2>
+
+<p>现代网站设计可以简单分为静态和动态两大类，但并不是如字面理解以显示是否动态作为区分的原则，静态页面也能在客户界面形成动态效果。静态网站是指所有用户可见的页面及内容都是预先生成的静态文件，用户的交互仅仅用于控制不同的静态页面及内容的加载，也就是说其内容和形式都是死的，所有用户看到的页面都是源自同一页面集，适合于单向的具有广播性质的信息传递。而动态网站最大的特点是在传统静态页面的基础上，还可以根据用户的交互动态地生成新的页面，把网站的部分设计能力提供给了使用者，使其可以按照时间，空间及其他属性对所需信息进行筛选并定制合适的页面呈现形式（布局，图，表控制等）。动态网站既具有桌面应用以使用者意图为核心的特点，同时又具备网站的实时远程更新能力，真正做到千人千面，各取所需，非常适于面向使用者的个性化数据呈现，整合及分析。</p>
+
+<p>那么动态网站是如何实现其交互式自定义特性的呢？</p>
+
+<p>首先，所有网站都包含前端（用户浏览器端执行和显示的内容）和后端（服务器或云端用户不可见的支撑性服务）。对于静态网站，后端仅仅是按前端请求发送一系列静态网页文件，如html文件，css页面风格文件，JavaScript前端脚本文件及图片等。而动态网站的后端还包含用户不直接可见的本地代码及数据，前端的用户交互以及后端数据面的改变都可以触发后端本地代码的执行并将执行结果通过前端界面体现给使用者。所以后端代码的执行实现了动态网站的自定义特性。注意后端代码因为是在服务器端执行，不是必须使用浏览器支持的Web语言如JavaScript，可以按照功能，性能以及掌握程度选择任何编程语言甚至组合，如C/C++，
+Java， PHP，Go
+Lang等。JHU新冠病例跟踪网站团队选择了基于JavaScript的后端实现，应该还是出于目标4对于上线时间要求。</p>
+
+<p>复杂的软件必须有清晰合理的架构，否则无法开发和维护。该网站的后端软件架构采取了较为常见的模型-视图-控制（MVC）软件架构模式，快速而简洁地实现了前后端交互式自定义特性，见下图：</p>
+
+<p><img src="/assets/img/jhu_image2.png" alt="" />{width=”3.2391951006124233in”
+height=”2.080213254593176in”}</p>
+
+<ol>
+  <li>
+    <p>用户进入浏览器看到后端提供的初始视图（对网站而言就是页面）</p>
+  </li>
+  <li>
+    <p>用户通过鼠标点选与后端控制器交互，控制器完成业务逻辑后要求模型进行相应的状态改变</p>
+  </li>
+  <li>
+    <p>模型完成状态改变后生成新的视图</p>
+  </li>
+  <li>
+    <p>用户在浏览器里看到动态更新的视图，完成本次交互式自定义</p>
+  </li>
+</ol>
+
+<p>JHU的这个新冠病例跟踪网站采用动态网站的形式很好地满足了设计目标1和3的要求。进入网站，用户首先看到的就是全球累计病例的热点地图以及确诊，死亡，测试病例的当前国家排名列表和历史时间线图。使用者无论点击地图热点还是列表项都可以逐步缩小关注范围（例如点选美国，进而选择德州，直至Collin县），可以看到页面上其他图，表都同步进行了对应的更新。这种牵一发而动全身的联动能力充分体现了动态网站的用户驱动数据筛选的特点。</p>
+
+<p><img src="/assets/img/jhu_image3.png" alt="" />{width=”6.410942694663167in”
+height=”2.1390365266841647in”}</p>
+
+<p>另外，动态网站这种通过点击筛选视图并逐层下探（Drill
+Down）的能力使关注不同信息的使用者都可以快速定位到感兴趣的信息层次及范围，极大地提高了信息对用户的相关度和准确性。</p>
+
+<p><img src="/assets/img/jhu_image4.jpg" alt="" />{width=”4.80748687664042in”
+height=”2.488490813648294in”}</p>
+
+<p>该动态网站的详细技术实现分析请见附录，总结如下：</p>
+
+<ul>
+  <li>
+    <p>通过与地理信息系统（GIS）的协同提供了基于地图的空间信息呈现</p>
+  </li>
+  <li>
+    <p>通过模型-视图-控制（MVC）软件架构模式实现了使用者意图驱动的页面定制能力</p>
+  </li>
+  <li>
+    <p>前后端开发语言统一使用了目前较为主流的Java
+Script，可以集成大量的第三方工具，极大地缩短了开发周期</p>
+  </li>
+</ul>
+
+<h2 id="23gis集成及开发运行平台"><strong>2.3、GIS集成及开发运行平台</strong></h2>
+
+<p>通过对JHU新冠病例跟踪网站的技术分析（见附件）可以看到该项目选择了美国ESRI（环境系统研究）公司的商用ArcGIS服务作为其地理信息系统（GIS）服务伙伴。同时开发及运行平台也采用了该公司的网站应用平台。约翰霍普金斯大学与ESRI公司有着长期的合作关系，在较多项目里都有应用，对该公司的系统有比较丰富的经验，这应该是新冠病例跟踪网站团队为在最短时间内上线而作出上述选择的主要原因。事实上，无论是GIS服务还是动态网站开发，运行平台都有较多选择，包括不少获得广泛使用的免费，开源方案。选择ArcGIS地理信息服务本身没有大的问题，无非是费用问题，但是选择其相应的网站开发运行平台是这个项目最大的败笔。ESRI公司的开发，运行平台是一个收费，闭源的私有环境，尽管其技术核心是基于NodeJS，React等开源工具，但是通过接口封装等捆绑手段使得在这一平台上开发的系统失去了开放性和可迁移性。第三方想参与开发，贡献代码都必须使用同一平台；开源社区常见的基于开放平台的二次开发，增强也完全不可能。这种封闭性极大的限制了开源社区的参与和共同开发，严重影响了它功能的进一步丰富以及数据量增大后性能的改善，其后果从近期该网站的活跃度及影响力的下降略见一斑（访问量增速持续降低）。鉴于该网站对于ESRI的网站开发运行环境并无核心技术依赖，采用一种开放的直接基于常用开源工具的开发运行方案将更加有利于其长期发展和应用场景的拓展。本文将在第4章对这一方案进一步加以说明。</p>
+
+<h2 id="24整合的数据面"><strong>2.4、整合的数据面</strong></h2>
+
+<p>前面在目标及成功因素分析部分谈到了数据的重要性。JHU新冠病例跟踪网站成功的一个重要因素就是其对原始数据进行的清洗及整合。由于近几年保守的国家主义思潮对国际化合作的强负面影响，我们面对的是来自数十个近乎孤立，具有不同可信度数据源的，大量的无统一规范的原始数据。这一问题极大地影响了对这些宝贵数据的及时理解和利用，一定程度上造成了早期大众的恐慌和政策的混乱。JHU新冠病例跟踪网站团队的一个核心贡献是把源自多个公开渠道的疫情数据进行清洗，整合并公开发布。统一后的数据源使得研究人员的工作获得了简化并使其研究成果具有可比性，提高了可信度和使用价值；基于统一数据源的多角度定制化呈现推动了大众，医疗系统和政策制定者认知的统一，减少了混乱，提高了抗疫效果。可以说数据整合的工作奠定了这个项目成功的基础。</p>
+
+<h1 id="3潜在应用价值"><strong>3、潜在应用价值</strong></h1>
+
+<p>通过前面对该网站的原理分析，不难看到将业务数据与时间，空间信息结合并以动态，自定义的图形化方式呈现给用户可以极大地加强使用者的参与度，提升数据的有效价值，使宝贵的数据财富走出IT，成为企事业，政府各个部门创造价值的利器。</p>
+
+<p>下面抛砖引玉，就企业场景列举一些可能的应用以资参考：</p>
+
+<ul>
+  <li>
+    <p>资产管理：区域统计，投入/损耗趋势，定位等</p>
+  </li>
+  <li>
+    <p>绩效跟踪：时间线，分类统计，团队趋势分析等</p>
+  </li>
+  <li>
+    <p>市场，客户分析：技术热点，趋势预测等</p>
+  </li>
+  <li>
+    <p>场所管理</p>
+  </li>
+  <li>
+    <p>风险管理</p>
+  </li>
+  <li>
+    <p>故障热点分析</p>
+  </li>
+  <li>
+    <p>供应链监控，分析</p>
+  </li>
+  <li>
+    <p>运维效率</p>
+  </li>
+</ul>
+
+<p>通过上面列举的一些应用，不难看出在数据为王的IT，CT以及OT大融合的趋势下，数据的价值发掘将成为企业降低成本，提高效率，创造价值的核心能力，其影响范围将远远超出传统IT的范畴，深度融入到企业各职能部门的日常运作中去。然而，为实现这一愿景我们必需解决一个核心问题：数据的管理者和使用者通常是各职能部门，他们理解，维护并使用这些数据，可是他们不具备IT编程的能力或资源；反之，IT部门掌握IT系统编程的能力及资源，但是并不理解数据及其如何被使用。传统的企业应用严重依赖于IT人员与各职能部门联合开发，不但成本高，周期长，而且维护困难，最重要的是难以量体裁衣，满足快速变化的数据源及使用方式的需求。JHU新冠病例跟踪网站展示了一定的动态定制化能力，但是由于其数据类型相对单纯及封闭平台的限制，远远不能满足以上实际应用场景。结合上述核心问题并参考JHU新冠网站设计原则，下面我们将针对这类应用场景，提出一种更加完善的，基于开放框架和数据/系统解耦开发的实现方案。</p>
+
+<h1 id="4开发框架方案"><strong>4、开发框架方案</strong></h1>
+
+<p>本设计方案含三大组成部分：</p>
+
+<ol>
+  <li>
+    <p>通用数据服务框架，实现动态网站或网站应用前端及后端主体，由IT开发维护</p>
+  </li>
+  <li>
+    <p>数据模型仓库，使能数据服务框架对数据的理解和操作以形成业务逻辑，由数据使用者通过数据服务框架界面定义</p>
+  </li>
+  <li>
+    <p>数据仓库，保存原始及整合后数据</p>
+  </li>
+</ol>
+
+<p>方案目标：</p>
+
+<ol>
+  <li>
+    <p>通用数据服务框架</p>
+
+    <p>a.  通用性，提供框架服务和工具集，与业务逻辑设计解耦</p>
+
+    <p>b.  基于成熟开源工具以利用社区资源，减少重复开发，降低开发周期</p>
+
+    <p>c.  友好，直观有效的时间，空间关联的多维度信息呈现</p>
+
+    <p>d.  提供深度定制化能力，在呈现界面（视图）定制能力的基础上提供无编程的数据模型定义，关联能力（模型），实现IT与业务功能开发的解耦</p>
+
+    <p>e.  基于用户定义数据模型的自动数据导入，处理及呈现</p>
+
+    <p>f.  前端封装支持动态网站和移动端原生应用</p>
+  </li>
+  <li>
+    <p>开发运维平台</p>
+
+    <p>a.  数据服务框架代码放于GitHub项目仓库，适当时机开源</p>
+
+    <p>b.  数据服务框架开发环境通过Docker Compose灵活部署在PC，虚机或公有云</p>
+
+    <p>c.  数据服务框架运维平台通过Docker
+    Compose灵活部署在园区，私有云或公有云</p>
+
+    <p>d.  非IT人员通过数据服务框架运行平台进行非程序化数据模型定义，并可导入导出</p>
+
+    <p>e.  原始数据加密保存或部署在安全的数据仓库</p>
+  </li>
+</ol>
+
+<p>使用本方案，任何公司或部门都可以从开源仓库下载通用数据服务框架并将之部署到内网服务器，私有云或公有云。部署后各职能部门可以配置独立或共享的数据源以使能数据服务框架接收或导入原始数据，之后可视化地定义不同的数据模型以指导数据服务框架理解，处理和呈现数据。这一方案将充分地实现业务逻辑设计与应用系统设计的解耦，通过高度的定制化能力使各部门发挥所长，分工合作，实现信息融合，创造数据价值。</p>
+
+<p>参考文献：</p>
+
+<ol>
+  <li>
+    <p>Johns Hopkins University COVID-19 Dashboard
+<a href="https://coronavirus.jhu.edu/map.html"><em>https://coronavirus.jhu.edu/map.html</em></a></p>
+  </li>
+  <li>
+    <p>Lauren Gardner Mapping2019-nCoV博客
+<a href="https://coronavirus.jhu.edu/map.html"><em>https://coronavirus.jhu.edu/map.html</em></a></p>
+  </li>
+  <li>
+    <p>Ensheng Dong， <a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30120-1/fulltext">Hongru
+Du</a>，<a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30120-1/fulltext">Lauren
+Gardner</a>
+An interactive web-based dashboard to track COVID-19 in real time
+<a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30120-1/fulltext">https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30120-1/fulltext</a></p>
+  </li>
+</ol>
+
+<p>[]{#_Toc39301165 .anchor}<strong>附录</strong></p>
+
+<p><strong>Johns Hopkins University</strong></p>
+
+<p><strong>COVID-19 Dashboard 技术分析</strong></p>
+
+<p><img src="/assets/img/jhu_image1.png" alt="" />{width=”6.5in”
+height=”2.892361111111111in”}</p>
+
+<h1 id="1门户界面解析"><strong>1、门户界面解析</strong></h1>
+
+<p>此网站的门户是由Lauren
+Gardner副教授领导的JHU系统科学及工程中心（CSSE）建立。简单地分析此门户可见前端主要由2部分组成：导航和相应的基于表单和地图的动态面板（Dashboard）。通过检查浏览器加载的JavaScript模块，很清晰的可以看出此门户的后端是基于Node.JS（Java
+Script实现的后端服务），使用React前后端接口框架来实现的。用户通过前端导航互动可以触发后端生成不同的Dashboard并动态加载到前端。作为数据展现的核心，Dashboard是以iframe方式外挂源于ArcGIS的网页应用，详见下图：</p>
+
+<p><img src="/assets/img/jhu_image5.png" alt="" />{width=”4.99911198600175in”
+height=”2.144385389326334in”}</p>
+
+<p>那么这个ArcGIS又是什么呢？简单讲，
+它是ESRI公司提供的基于地理信息系统（GIS）的数据-地图关联及分析核心系统，其他类似系统包括Maptitude，
+MapInfo， Google Maps API，
+QGIS等等。ESRI公司全称是美国环境系统研究所公司（Environmental Systems
+Research Institute, Inc.）。</p>
+
+<p>空间信息（如GIS）的管理一般有2大类选择：外包（Managed）或自助（Self
+managed），ArcGIS及其他主流商用系统都属于外包类，提供较为完善的周边支撑，例如ArcGIS提供完整的客户端或云（web）应用开发平台，稳定完善的接口及辅助应用。从学校的教学辅助信息看，JHU大学与ESRI有着长期稳定的合作，可能也是选择ArcGIS的一个因素。目前看这个项目反过来对ESRI也是起到了极大的宣传作用，作为标杆列入其公司首页。</p>
+
+<p>下面我们将着重分析构建在ArcGIS上的核心动态面板模块。</p>
+
+<h1 id="2基于arcgis的动态面板"><strong>2、基于ArcGIS的动态面板</strong></h1>
+
+<p>通过浏览器导航交互可以动态加载不同的Dashboard，下面以世界地图（World
+Map）面板为例进行解析。世界地图对应的动态面板链接是<a href="https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6">https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6</a>。</p>
+
+<p>通过类似的解析，可以看到各ArcGIS面板是基于Dojo前端框架（JavaScript工具集）实现的的动态页面。为便于理解ArcGIS网页应用，请参考下面逻辑框架：</p>
+
+<p><img src="/assets/img/jhu_image6.png" alt="" />{width=”2.5989304461942258in”
+height=”2.1795428696412946in”}</p>
+
+<h2 id="21前端界面"><strong>2.1、前端界面</strong></h2>
+
+<p>ArcGIS web应用的前端界面基于Dojo JS工具集及ArcGIS API for
+JavaScript，包含了非常完善的界面布局，数据图形化元素（图，表等）以及开发，分析工具，技术细节可以参考<a href="https://dojotoolkit.org/">Dojo</a>以及<a href="https://developers.arcgis.com/javascript/">ArcGIS开发者平台</a>文档，并不复杂，这里就不再赘述了。作为类比，ArcGIS
+API之于GIS数据展示相当于Kibana之于Elastic
+Search，并非不可替代但是原厂工具比较可靠和完备，同时锁定了后台的GIS数据提供商（收费服务）。</p>
+
+<h2 id="22功能层"><strong>2.2、功能层</strong></h2>
+
+<p>这里面的功能层是衔接界面展示和原始数据的桥梁，用以筛选有价值的数据并赋予它们便于人理解的意义，工程上我们一般称之为视图（View）或逻辑模型（Model）。COVID-19
+Dashboard的功能层数据模型对世界地图和美国地图所含的表项略有不同，但主要项目一致：</p>
+
+<ul>
+  <li>
+    <p><strong>Province/State:</strong> (Text) Country Province or State Name (Level 2
+Key)</p>
+  </li>
+  <li>
+    <p><strong>Country/Region:</strong> (Text) Country or Region Name (Level 1 Key)</p>
+  </li>
+  <li>
+    <p><strong>Last Update:</strong> (Datetime) Last data update Date/Time in UTC</p>
+  </li>
+  <li>
+    <p><strong>Latitude:</strong> (Float) Geographic Latitude in Decimal Degrees
+(WGS1984)</p>
+  </li>
+  <li>
+    <p><strong>Longitude:</strong> (Float) Geographic Longitude in Decimal Degrees
+(WGS1984)</p>
+  </li>
+  <li>
+    <p><strong>Confirmed:</strong> (Long) Best collected count of Confirmed Cases
+reported by geography</p>
+  </li>
+  <li>
+    <p><strong>Recovered:</strong> (Long) <strong>Not Currently in Use</strong>, JHU is looking for a
+source</p>
+  </li>
+  <li>
+    <p><strong>Deaths:</strong> (Long) Best collected count for Case Deaths reported by
+geography</p>
+  </li>
+  <li>
+    <p><strong>County:</strong> (Text) US County Name (Level 3 Key)</p>
+  </li>
+</ul>
+
+<p>ArcGIS开发平台一个亮点是在没有前端界面的前提下，只要有数据并定义了功能层，在平台上就可以看到跟地图关联的显示，非常方便前端开发与数据专家解耦的开发模式。</p>
+
+<h2 id="23数据面"><strong>2.3、数据面</strong></h2>
+
+<p>数据源（美国及全球）最初是用Google表格来维护的，
+但是随着数据量及更新频率的压力，目前保存在<a href="https://github.com/CSSEGISandData/COVID-19">Github</a>。更新频率降到每天跟新一次，采用CSV格式，提供单日及时间序列数据。以下分别是单日数据及时间序列数据的例子：</p>
+
+<p><img src="/assets/img/jhu_image7.png" alt="" />{width=”6.5in”
+height=”1.9770833333333333in”}</p>
+
+<p><img src="/assets/img/jhu_image8.png" alt="" />{width=”6.5in”
+height=”1.4319444444444445in”}</p>
+
+<p>可以看到原始数据都是结构化数据（Structured），简单清洗后一般SQL数据库都可以使用。</p>
+
+<h1 id="3技术小结"><strong>3、技术小结</strong></h1>
+
+<p>通过上面的解析，可以初步总结JHU大学的 COVID-19项目如下：</p>
+
+<p>a)  这是一个含前后端的动态网站，通过浏览器访问，但非常容易转化为原生应用；</p>
+
+<p>b)  数据驱动，项目架构采用典型MVC模型；</p>
+
+<p>c)  疫情数据源来自多个公开渠道，JHU
+    团队的主要贡献是将数据整合，共享维护一个单一的数据集；</p>
+
+<p>d)  使用ArcGIS的GIS服务将疫情数据中的经纬度地理信息于地图显示结合起来，技术上有较多其他选择；</p>
+
+<p>e)  其他图表也通过ArcGIS API 实现，技术上也有较多选择且无GIS约束。</p>
+
+<p>基本上是两大块，原始数据整理维护部分是主要贡献，Web应用部分借助ArcGIS的Web
+AppBuilder 框架实现，需要了解一些ArcGIS
+API但主体就是一个基于的NodeJS的网站服务。</p>
+
+<p>非技术层面，我们认为JHU的这个项目最大的贡献就是借针对COVID-19全球性的关注，用简单的数据可视化工具让成千上万的普通大众直观地意识到大数据价值，可以预见类似的大数据应用开发会更多的面向非专业受众。</p>
+
+<p>&lt;The end&gt;</p>
+
+<p>注：以上信息都来自于网络上的公开信息。</p>
+
+  
+</section>
+
+<!-- Article reference in same series, sort by set_order -->
+
+
+<!-- Article Tag list -->
+
+
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/tags#Insight">
+      <p><i class="fa fa-tag fa-fw"></i> Insight</p>
+    </a>
+    
+    <a class="button" href="/tags#Solution">
+      <p><i class="fa fa-tag fa-fw"></i> Solution</p>
+    </a>
+    
+    <a class="button" href="/tags#Technology">
+      <p><i class="fa fa-tag fa-fw"></i> Technology</p>
+    </a>
+    
+  </div>
+</footer>
+
+
+<!-- For post only -->
+
+  <!-- List related posts below Tags, limit 5 -->
+  <p><strong>Related posts :</strong></p>
+  <ul>
+    
+    
+      
+        
+          <li><a href="/networked%20compute%20and%20storage/2020/06/25/Fugaku-TofuD-Interconnect-Study.html">Fugaku TofuD Interconnect Study</a></li>
+          
+          
+      
+    
+      
+        
+          <li><a href="/networked%20compute%20and%20storage/2020/06/23/Fugaku-Is-The-New-King.html">Fugaku is the new King</a></li>
+          
+          
+      
+    
+      
+        
+          <li><a href="/networked%20compute%20and%20storage/2020/06/11/Reflection-On-Network-Intelligence.html">Reflection on Network Intelligence</a></li>
+          
+          
+      
+    
+      
+        
+          <li><a href="/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html">Reflection on OSI Model</a></li>
+          
+          
+      
+    
+      
+        
+      
+        
+      
+        
+      
+      
+    
+      
+        
+          <li><a href="/networked%20compute%20and%20storage/2020/05/11/NCS-Readme.html">NCS Category readme</a></li>
+          
+          
+      
+        
+  </ul>
+
+  <!-- List Social media sharing buttons --
+  
+
+<div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fknowledge%2520graph%2F2020%2F05%2F27%2FJHU-Covid19-Study.html" target="_blank" title=" Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=JHU+Covid19+Tracking+Site+Study%20http%3A%2F%2F0.0.0.0%3A4000%2Fknowledge%2520graph%2F2020%2F05%2F27%2FJHU-Covid19-Study.html" target="_blank" title="">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://0.0.0.0:4000/knowledge%20graph/2020/05/27/JHU-Covid19-Study.html&title=JHU+Covid19+Tracking+Site+Study%20%7C%20BLog" target="_blank" title=" Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=JHU+Covid19+Tracking+Site+Study%20%7C%20BLog&body=:%20http://0.0.0.0:4000/knowledge%20graph/2020/05/27/JHU-Covid19-Study.html" target="_blank" title="">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+  -->
+  
+  <!-- Disqus comments -->
+  
+    <div class="comments">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'liangbin-pub-github-io';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view comments.</noscript>
+
+    </div>
+  
+
+  <!-- Post navigation -->
+  
+    <div id="post-nav">
+    
+    <div id="previous-post">
+        <a alt="Reflection on OSI Model" href="/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html">
+            <p>Previous post</p>
+            Reflection on OSI Model
+        </a>
+    </div>
+    
+
+    
+    <div id="next-post">
+        <a alt="NCS Category readme" href="/networked%20compute%20and%20storage/2020/05/11/NCS-Readme.html">
+            <p>Next post</p>
+            NCS Category readme
+        </a>
+    </div>
+    
+</div>
+
+  
+
+
+
+      </div>
+      <footer class="site-footer">
+    <p class="text">
+        Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/">Gitgub Pages</a>
+</p>
+        <!--            
+            <div class="footer-icons">
+                <ul>
+                !-- Social icons from Font Awesome, if enabled --
+                
+<li>
+    <a feed.xml href="http://0.0.0.0:4000/" title="Follow RSS feed">
+    <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a href="https://github.com/sylhare" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+        -->
+</footer>
+
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+<script defer=true src="/assets/js/main.min.js"></script>
+
+<!-- CSS --> 
+<link rel="stylesheet" href="/assets/css/main.css">
+<!--Favicon-->
+<link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+<!-- Canonical -->
+<link rel="canonical" href="http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/06/11/Reflection-On-Network-Intelligence.html">
+<!-- RSS -->
+<link rel="alternate" type="application/atom+xml" title="BLog" href="http://0.0.0.0:4000/feed.xml"/>
+
+
+<!-- KaTeX 0.8.3 -->
+<!-- if you have any issue check https://github.com/KaTeX/KaTeX -->
+
+<script src="/assets/js/vendor/katex.min.js"></script>
+
+<!-- Go to www.addthis.com/dashboard to customize sharing tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e83809c0faa0389"></script>
+
+<!-- Google Analytics -->
+
+<!-- Global site tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161813252-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-161813252-1');
+</script>
+
+<!-- Page analysis (analytics.js) -->
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-161813252-1', 'auto');
+  ga('send', 'pageview');
+</script>
+ <!-- End Google Analytics -->
+<!-- jekyll-seo-tag to add metadata tags for search engines and social networks -->
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Reflection on Network Intelligence | BLog</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Reflection on Network Intelligence" />
+<meta name="author" content="Bin Liang" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Reflection on Network Intelligence Remember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelligence should be implemented. Microsoft at the time dominated the PC market and was pushing network features at end-point such as security, acceleration, QoS etc. Network vendors led by Cisco on the other hand wanted to weave most if not all network intelligence into network itself. As we know up till now, similar fights have never ended, just with player and battle fields changes. Unfortunately, this left us some confusing products and terms we still have to deal with up till now, such as UTM devices in the network but truly not a networking device, and over-kill TCP/IP stack deployed among end-points to accommodate worst network scenario where they are actually communicate in a close proximity LAN environment. Arguments from either sides are valid to certain extent and I’m not making any judgement here. It just suddenly stuck me when I trying to solve a networking issue seemingly unsolvable with conflicting constrains. That is the starting point of my long journey of rethinking some of the basics in the networking industry. For such a long time we have isolate networking from other information technologies such as compute, storage. We define some protocols and implement some network infrastructures based on very OLD assumptions that we networking guys are only responsible to deliver data from A to B fast, reliable and effectively. The additional intelligence we want to baked into network are also for above purposes as well, such as TCP offload, in-network retransmit etc. We never question why we need to do that and unfortunately this holds true for other parts as well. About 9 years ago I started moving my knowledge stack up from embedded network design into software defined networking (SDN), Intent Based Networking (IBN) and then networked applications. The higher I goes up the stack, the bigger the scope I can see, both problems and solutions, from interface to network element, to site, to multi-site, to global. During the transition, I learnt that something used to be so important even critical at local becomes irrelevant when looked at from a much bigger picture, such as pursuing zero drop rate at interface level, which has very little impact to application, our ultimate goal. Along this line of thinking, I would argue that even if all parts are optimal, the combination may not be optimal. Why? It’s also strongly depends on how we partitioned the original problem, in other words, how parts are divided and their responsibility defined. We know know we need to optimize networking End-to-End to satisfy application needs rather than focus on some intermediate segment. What we also need to know is that there is NO fixed boundary among compute, storage and networking within an application. As I mentioned in the 1st post in NCS-Reflection series, rather than shipping data between compute and storage or between compute units, compute instructions can be shipped or triggered remotely instead under certain circumstance, totally changes the request and requirement for networking part. To summarize, I think we should not talk about intelligence or optimization in an isolate matter, either just a network segment or network as a whole alone. Intelligence and optimization all must serve the benefit of application hence must be considered as a whole at application level before dividing into networking or computing portions. There is no need for network to exist if it doesn’t serve the compute and storage, on the other hand, if compute and storage treat networking part of interconnection, like ALU to Registers, CPU Core to memory and I/O systems, the world will just like a super big computer, with interconnection among compute nodes and storage nodes. If applications within a computer can be made agnostic (largely) to computer configuration, we sure can make them fly in this globally abstracted supper computer. This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!" />
+<meta property="og:description" content="Reflection on Network Intelligence Remember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelligence should be implemented. Microsoft at the time dominated the PC market and was pushing network features at end-point such as security, acceleration, QoS etc. Network vendors led by Cisco on the other hand wanted to weave most if not all network intelligence into network itself. As we know up till now, similar fights have never ended, just with player and battle fields changes. Unfortunately, this left us some confusing products and terms we still have to deal with up till now, such as UTM devices in the network but truly not a networking device, and over-kill TCP/IP stack deployed among end-points to accommodate worst network scenario where they are actually communicate in a close proximity LAN environment. Arguments from either sides are valid to certain extent and I’m not making any judgement here. It just suddenly stuck me when I trying to solve a networking issue seemingly unsolvable with conflicting constrains. That is the starting point of my long journey of rethinking some of the basics in the networking industry. For such a long time we have isolate networking from other information technologies such as compute, storage. We define some protocols and implement some network infrastructures based on very OLD assumptions that we networking guys are only responsible to deliver data from A to B fast, reliable and effectively. The additional intelligence we want to baked into network are also for above purposes as well, such as TCP offload, in-network retransmit etc. We never question why we need to do that and unfortunately this holds true for other parts as well. About 9 years ago I started moving my knowledge stack up from embedded network design into software defined networking (SDN), Intent Based Networking (IBN) and then networked applications. The higher I goes up the stack, the bigger the scope I can see, both problems and solutions, from interface to network element, to site, to multi-site, to global. During the transition, I learnt that something used to be so important even critical at local becomes irrelevant when looked at from a much bigger picture, such as pursuing zero drop rate at interface level, which has very little impact to application, our ultimate goal. Along this line of thinking, I would argue that even if all parts are optimal, the combination may not be optimal. Why? It’s also strongly depends on how we partitioned the original problem, in other words, how parts are divided and their responsibility defined. We know know we need to optimize networking End-to-End to satisfy application needs rather than focus on some intermediate segment. What we also need to know is that there is NO fixed boundary among compute, storage and networking within an application. As I mentioned in the 1st post in NCS-Reflection series, rather than shipping data between compute and storage or between compute units, compute instructions can be shipped or triggered remotely instead under certain circumstance, totally changes the request and requirement for networking part. To summarize, I think we should not talk about intelligence or optimization in an isolate matter, either just a network segment or network as a whole alone. Intelligence and optimization all must serve the benefit of application hence must be considered as a whole at application level before dividing into networking or computing portions. There is no need for network to exist if it doesn’t serve the compute and storage, on the other hand, if compute and storage treat networking part of interconnection, like ALU to Registers, CPU Core to memory and I/O systems, the world will just like a super big computer, with interconnection among compute nodes and storage nodes. If applications within a computer can be made agnostic (largely) to computer configuration, we sure can make them fly in this globally abstracted supper computer. This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!" />
+<link rel="canonical" href="http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/06/11/Reflection-On-Network-Intelligence.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/06/11/Reflection-On-Network-Intelligence.html" />
+<meta property="og:site_name" content="BLog" />
+<meta property="og:image" content="http://0.0.0.0:4000/assets/img/software.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-11T00:00:00+00:00" />
+<script type="application/ld+json">
+{"image":"http://0.0.0.0:4000/assets/img/software.jpg","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://0.0.0.0:4000/assets/img/logo.png"},"name":"Bin Liang"},"headline":"Reflection on Network Intelligence","dateModified":"2020-06-11T00:00:00+00:00","datePublished":"2020-06-11T00:00:00+00:00","author":{"@type":"Person","name":"Bin Liang"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/06/11/Reflection-On-Network-Intelligence.html"},"url":"http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/06/11/Reflection-On-Network-Intelligence.html","description":"Reflection on Network Intelligence Remember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelligence should be implemented. Microsoft at the time dominated the PC market and was pushing network features at end-point such as security, acceleration, QoS etc. Network vendors led by Cisco on the other hand wanted to weave most if not all network intelligence into network itself. As we know up till now, similar fights have never ended, just with player and battle fields changes. Unfortunately, this left us some confusing products and terms we still have to deal with up till now, such as UTM devices in the network but truly not a networking device, and over-kill TCP/IP stack deployed among end-points to accommodate worst network scenario where they are actually communicate in a close proximity LAN environment. Arguments from either sides are valid to certain extent and I’m not making any judgement here. It just suddenly stuck me when I trying to solve a networking issue seemingly unsolvable with conflicting constrains. That is the starting point of my long journey of rethinking some of the basics in the networking industry. For such a long time we have isolate networking from other information technologies such as compute, storage. We define some protocols and implement some network infrastructures based on very OLD assumptions that we networking guys are only responsible to deliver data from A to B fast, reliable and effectively. The additional intelligence we want to baked into network are also for above purposes as well, such as TCP offload, in-network retransmit etc. We never question why we need to do that and unfortunately this holds true for other parts as well. About 9 years ago I started moving my knowledge stack up from embedded network design into software defined networking (SDN), Intent Based Networking (IBN) and then networked applications. The higher I goes up the stack, the bigger the scope I can see, both problems and solutions, from interface to network element, to site, to multi-site, to global. During the transition, I learnt that something used to be so important even critical at local becomes irrelevant when looked at from a much bigger picture, such as pursuing zero drop rate at interface level, which has very little impact to application, our ultimate goal. Along this line of thinking, I would argue that even if all parts are optimal, the combination may not be optimal. Why? It’s also strongly depends on how we partitioned the original problem, in other words, how parts are divided and their responsibility defined. We know know we need to optimize networking End-to-End to satisfy application needs rather than focus on some intermediate segment. What we also need to know is that there is NO fixed boundary among compute, storage and networking within an application. As I mentioned in the 1st post in NCS-Reflection series, rather than shipping data between compute and storage or between compute units, compute instructions can be shipped or triggered remotely instead under certain circumstance, totally changes the request and requirement for networking part. To summarize, I think we should not talk about intelligence or optimization in an isolate matter, either just a network segment or network as a whole alone. Intelligence and optimization all must serve the benefit of application hence must be considered as a whole at application level before dividing into networking or computing portions. There is no need for network to exist if it doesn’t serve the compute and storage, on the other hand, if compute and storage treat networking part of interconnection, like ALU to Registers, CPU Core to memory and I/O systems, the world will just like a super big computer, with interconnection among compute nodes and storage nodes. If applications within a computer can be made agnostic (largely) to computer configuration, we sure can make them fly in this globally abstracted supper computer. This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<!-- jekyll-feed to add metadata for ATOM style RSS feed -->
+<link type="application/atom+xml" rel="alternate" href="http://0.0.0.0:4000/feed.xml" title="BLog" />
+
+<!-- Manual seo tags -->
+<!--
+<title>Reflection on Network Intelligence | BLog</title>
+<meta name="description" content="Reflection on Network IntelligenceRemember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelli...">
+-->
+
+  </head>
+  
+  <body>
+    <header class="site-header">
+    <!-- Logo, title & hamburger button -->
+    <a class="brand" aria-label="BLog" href="/">
+        
+        <img alt="logo img" class="logo" src="/assets/img/logo.png" />
+        
+        <h1 class="site-title">BLog</h1>
+    </a>
+
+    <!-- Hamburger button on the top right corner for mobile display -->
+    <!--   Checkbox with label for mobile screen to implement drawer menu -->
+    <label for="drop" class="toggle hamburger">&#9776</label>
+    <input type="checkbox" id="drop" />
+
+    <!-- Menu bar -->
+    <ul class="menu">
+        <!-- Build menu recursively -->
+        <!-- assign variables at page scope ONCE to avoid assign conflict in recursive include snippet -->
+        
+        <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page3/ menu_id: 0.0 Parent Anchor: 0  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Home" title="Home" href="/">
+            <i class="fa fa-home menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Home</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li class="dropdown">
+        <!--   Link for dropdown li in bigger screen to implement hover menu-->
+        <a aria-label="Blogs" title="Blogs" href="#">
+            <i class="fa fa-newspaper-o menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Blogs</span>
+        </a>
+
+        <!--   Checkbox with label for dropdown li in mobile screen to implement drawer menu -->
+        <!--     Put input before label in case CSS needs to style label based on input events -->
+        <input type="checkbox" id="drop-Blogs"/>
+        <label for="drop-Blogs" class="toggle">Blogs</label>
+
+        <!-- dropdown-menu sub menu follows immediately -->
+        <ul class="dropdown-menu">
+            <!-- Build sub-menu recursively -->
+            <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0.1 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page3/ menu_id: 0.0 Parent Anchor: 0.1  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.1  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Categories" title="Categories" href="/categories/">
+            <i class="fa fa-list menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Categories</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Tags" title="Tags" href="/tags/">
+            <i class="fa fa-tags menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Tags</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.1  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+
+        </ul>
+    </li>
+    
+
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li class="dropdown">
+        <!--   Link for dropdown li in bigger screen to implement hover menu-->
+        <a aria-label="Portfolio" title="Portfolio" href="#">
+            <i class="fa fa-th menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Portfolio</span>
+        </a>
+
+        <!--   Checkbox with label for dropdown li in mobile screen to implement drawer menu -->
+        <!--     Put input before label in case CSS needs to style label based on input events -->
+        <input type="checkbox" id="drop-Portfolio"/>
+        <label for="drop-Portfolio" class="toggle">Portfolio</label>
+
+        <!-- dropdown-menu sub menu follows immediately -->
+        <ul class="dropdown-menu">
+            <!-- Build sub-menu recursively -->
+            <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0.2 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page3/ menu_id: 0.0 Parent Anchor: 0.2  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.2  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li class="dropdown">
+        <!--   Link for dropdown li in bigger screen to implement hover menu-->
+        <a aria-label="Collection 1" title="Collection 1" href="#">
+            <i class="fa fa-code-branch menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Collection 1</span>
+        </a>
+
+        <!--   Checkbox with label for dropdown li in mobile screen to implement drawer menu -->
+        <!--     Put input before label in case CSS needs to style label based on input events -->
+        <input type="checkbox" id="drop-Collection 1"/>
+        <label for="drop-Collection 1" class="toggle">Collection 1</label>
+
+        <!-- dropdown-menu sub menu follows immediately -->
+        <ul class="dropdown-menu">
+            <!-- Build sub-menu recursively -->
+            <!-- Build nested menu list recursively from page front matter -->
+<!-- Caller controls outer ul style, parameter: 0.2.0 - parent menu_id as relationship anchor, start with 0 -->
+
+    <!-- Iterate page: /blog/page3/ menu_id: 0.0 Parent Anchor: 0.2.0  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.2.0  -->
+    
+    <!--     Filter out - page don't want to be listed -->
+        
+    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Sub Collection" title="Sub Collection" href="/pages/sub-collection.html">
+            <i class="fa fa-code-branch menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Sub Collection</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.2.0  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+
+        </ul>
+    </li>
+    
+
+    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Gallery" title="Gallery" href="/pages/gallery.html">
+            <i class="fa fa-images menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Gallery</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.2  -->
+    
+
+     
+
+    
+    
+     
+    <!--     Filter out - page is not descendant of parent anchor -->
+    
+
+        </ul>
+    </li>
+    
+
+    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+     
+    <!--     Filter out - page is not immediate child of parent anchor -->
+    
+    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="Search" title="Search" href="/search/">
+            <i class="fa fa-search menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">Search</span>
+        </a>
+    </li>
+    
+
+    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0  -->
+    
+
+     
+
+    
+    
+    
+
+    
+    
+
+    <li class="separator"> | </li>
+
+    
+    <li>
+        <!--   Link for regular li in any screen size-->
+        <a aria-label="About" title="About" href="/about/">
+            <i class="fa fa-user menu-icon" aria-hidden="true"></i>
+            <span class="menu-title">About</span>
+        </a>
+    </li>
+    
+
+
+    </ul>
+</header>
+
+    
+<aside class="sidebar">
+    <header>
+      <div class="about">
+        <div class="cover-author-image">
+          <a href="/"><img src="/assets/img/potrait.jpg" alt="liangbin"></a>
+        </div>
+        <div class="author-name">Bin Liang</div>
+        <p>I am a network architect with full stack development experience.  My current research focuses include DCN, global meta data plane  and in general NCS: Networked Compute & Storage archsitecture.</p>
+      </div>
+    </header> <!-- End Header -->
+    
+   	<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+	<div class="addthis_inline_share_toolbox"> <p><strong>Sharing:</strong></p></div>
+
+    <footer>
+      <section class="contact">
+        <h3 class="contact-title">Follow me</h3>
+        <ul>
+          
+          
+          
+          
+          
+            <li class="github"><a href="http://github.com/liangbin-pub" target="_blank"><i class="fa fa-github"></i></a></li>
+          
+          
+            <li class="linkedin"><a href="https://in.linkedin.com/in/liangbin888" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+          
+          
+            <li class="email"><a href="mailto:fw.liangb@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+          
+          
+            <li class="rss"><a href="/feed.xml"><i class="fa fa-rss"></i></a></li>
+          
+        </ul>
+      </section> <!-- End Section Contact -->
+      <div class="copyright">
+        <p>2020 &copy; Bin Liang</p>
+      </div>
+    </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+
+    <div class="content content-box clearfix">
+      <div class="article">
+        
+
+<meta property="og:url"          content="/networked%20compute%20and%20storage/2020/06/11/Reflection-On-Network-Intelligence.html" />
+<meta property="og:type"         content="article" />
+<meta property="og:title"        content="Reflection on Network Intelligence" />
+<meta property="og:description"  content="Reflection on Network Intelligence
+
+Remember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelligence should be implemented. Microsoft at the time dominated the PC market and was pushi..." />
+<meta property="og:image"        content="assets/img/software.jpg" />
+
+
+<!-- Page Feature Image and Title as Header -->
+<header id="main" style="background-repeat:no-repeat;background-image: url('/assets/img/software.jpg')">
+  
+    <h1 id="Reflection+on+Network+Intelligence" class="title">Reflection on Network Intelligence</h1>
+      
+      
+        
+
+
+<div class="post-info"><a href="https://github.com/liangbin-pub" target="_blank">
+      <img src="/assets/img/myAvatar.svg">
+    
+    <p class="meta">
+      Bin Liang - June 11, 2020
+    </p></a></div>
+
+      
+  
+</header>
+
+<!-- Article content -->
+<section class="post-content">
+  
+  <h2 id="reflection-on-network-intelligence">Reflection on Network Intelligence</h2>
+
+<p>Remember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelligence should be implemented. Microsoft at the time dominated the PC market and was pushing network features at end-point such as security, acceleration, QoS etc. Network vendors led by Cisco on the other hand wanted to weave most if not all network intelligence into network itself. As we know up till now, similar fights have never ended, just with player and battle fields changes. Unfortunately, this left us some confusing products and terms we still have to deal with up till now, such as UTM devices in the network but truly not a networking device, and over-kill TCP/IP stack deployed among end-points to accommodate worst network scenario where they are actually communicate in a close proximity LAN environment.</p>
+
+<p>Arguments from either sides are valid to certain extent and I’m not making any judgement here. It just suddenly stuck me when I trying to solve a networking issue seemingly unsolvable with conflicting constrains. That is the starting point of my long journey of rethinking some of the basics in the networking industry. For such a long time we have isolate networking from other information technologies such as compute, storage. We define some protocols and implement some network infrastructures based on very <strong>OLD</strong> assumptions that we networking guys are only responsible to deliver data from A to B fast, reliable and effectively. The additional intelligence we want to baked into network are also for above purposes as well, such as TCP offload, in-network retransmit etc. We never question why we need to do that and unfortunately this holds true for other parts as well.</p>
+
+<p>About 9 years ago I started moving my knowledge stack up from embedded network design into software defined networking (SDN), Intent Based Networking (IBN) and then networked applications. The higher I goes up the stack, the bigger the scope I can see, both problems and solutions, from interface to network element, to site, to multi-site, to global. During the transition, I learnt that something used to be so important even critical at local becomes irrelevant when looked at from a much bigger picture, such as pursuing zero drop rate at interface level, which has very little impact to application, our ultimate goal.</p>
+
+<p>Along this line of thinking, I would argue that even if all parts are optimal, the combination may not be optimal. Why? It’s also strongly depends on how we partitioned the original problem, in other words, how parts are divided and their responsibility defined. We know know we need to optimize networking End-to-End to satisfy application needs rather than focus on some intermediate segment. What we also need to know is that there is <strong>NO fixed boundary</strong> among compute, storage and networking within an application. As I mentioned in the 1st post in <a href="/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html">NCS-Reflection</a> series, rather than shipping data between compute and storage or between compute units, compute instructions can be shipped or triggered remotely instead under certain circumstance, totally changes the request and requirement for networking part.</p>
+
+<p>To summarize, I think we should not talk about intelligence or optimization in an isolate matter, either just a network segment or network as a whole alone. Intelligence and optimization all must serve the benefit of application hence must be considered as a whole at application level before dividing into networking or computing portions. There is no need for network to exist if it doesn’t serve the compute and storage, on the other hand, if compute and storage treat networking part of interconnection, like ALU to Registers, CPU Core to memory and I/O systems, the world will just like a super big computer, with interconnection among compute nodes and storage nodes. If applications within a computer can be made agnostic (largely) to computer configuration, we sure can make them fly in this globally abstracted supper computer.</p>
+
+<p>This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!</p>
+
+  
+</section>
+
+<!-- Article reference in same series, sort by set_order -->
+
+  <!-- site.sets are  -->
+  
+	
+	
+	<div class="article-series">
+		<h3>NCS Reflection - Series</h3>
+		<p>This series presents my reflection on basics in the field of Networking and in general - NCS</p>
+
+		<ul class="listing">
+	
+		<li >
+			<a href="/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html">
+				<article>
+					<div>
+						<h4>1. Reflection on OSI Model</h4>
+						<p class="description"></p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
+		<li class="active">
+			<a href="/networked%20compute%20and%20storage/2020/06/11/Reflection-On-Network-Intelligence.html">
+				<article>
+					<div>
+						<h4>2. Reflection on Network Intelligence</h4>
+						<p class="description"></p>
+					</div>
+				</article>
+			</a>
+		</li>
+	
+</ul>
+	</div>
+
+
+<!-- Article Tag list -->
+
+
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/tags#Insight">
+      <p><i class="fa fa-tag fa-fw"></i> Insight</p>
+    </a>
+    
+    <a class="button" href="/tags#Solution">
+      <p><i class="fa fa-tag fa-fw"></i> Solution</p>
+    </a>
+    
+    <a class="button" href="/tags#Technology">
+      <p><i class="fa fa-tag fa-fw"></i> Technology</p>
+    </a>
+    
+  </div>
+</footer>
+
+
+<!-- For post only -->
+
+  <!-- List related posts below Tags, limit 5 -->
+  <p><strong>Related posts :</strong></p>
+  <ul>
+    
+    
+      
+        
+          <li><a href="/networked%20compute%20and%20storage/2020/06/25/Fugaku-TofuD-Interconnect-Study.html">Fugaku TofuD Interconnect Study</a></li>
+          
+          
+      
+    
+      
+        
+          <li><a href="/networked%20compute%20and%20storage/2020/06/23/Fugaku-Is-The-New-King.html">Fugaku is the new King</a></li>
+          
+          
+      
+    
+      
+        
+      
+        
+      
+        
+      
+      
+    
+      
+        
+          <li><a href="/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html">Reflection on OSI Model</a></li>
+          
+          
+      
+    
+      
+        
+          <li><a href="/knowledge%20graph/2020/05/27/JHU-Covid19-Study.html">JHU Covid19 Tracking Site Study</a></li>
+          
+          
+      
+    
+      
+        
+          <li><a href="/networked%20compute%20and%20storage/2020/05/11/NCS-Readme.html">NCS Category readme</a></li>
+          
+          
+      
+        
+  </ul>
+
+  <!-- List Social media sharing buttons --
+  
+
+<div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fnetworked%2520compute%2520and%2520storage%2F2020%2F06%2F11%2FReflection-On-Network-Intelligence.html" target="_blank" title=" Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=Reflection+on+Network+Intelligence%20http%3A%2F%2F0.0.0.0%3A4000%2Fnetworked%2520compute%2520and%2520storage%2F2020%2F06%2F11%2FReflection-On-Network-Intelligence.html" target="_blank" title="">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/06/11/Reflection-On-Network-Intelligence.html&title=Reflection+on+Network+Intelligence%20%7C%20BLog" target="_blank" title=" Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Reflection+on+Network+Intelligence%20%7C%20BLog&body=:%20http://0.0.0.0:4000/networked%20compute%20and%20storage/2020/06/11/Reflection-On-Network-Intelligence.html" target="_blank" title="">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+  -->
+  
+  <!-- Disqus comments -->
+  
+    <div class="comments">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'liangbin-pub-github-io';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view comments.</noscript>
+
+    </div>
+  
+
+  <!-- Post navigation -->
+  
+    <div id="post-nav">
+    
+    <div id="previous-post">
+        <a alt="Fugaku is the new King" href="/networked%20compute%20and%20storage/2020/06/23/Fugaku-Is-The-New-King.html">
+            <p>Previous post</p>
+            Fugaku is the new King
+        </a>
+    </div>
+    
+
+    
+    <div id="next-post">
+        <a alt="Reflection on OSI Model" href="/networked%20compute%20and%20storage/2020/05/31/Reflection-On-OSI-Model.html">
+            <p>Next post</p>
+            Reflection on OSI Model
+        </a>
+    </div>
+    
+</div>
+
+  
+
+
+
+      </div>
+      <footer class="site-footer">
+    <p class="text">
+        Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/">Gitgub Pages</a>
+</p>
+        <!--            
+            <div class="footer-icons">
+                <ul>
+                !-- Social icons from Font Awesome, if enabled --
+                
+<li>
+    <a feed.xml href="http://0.0.0.0:4000/" title="Follow RSS feed">
+    <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a href="https://github.com/sylhare" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+        -->
+</footer>
+
+
+
+    </div>
+  </body>
+</html>
