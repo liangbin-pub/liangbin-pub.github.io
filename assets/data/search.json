@@ -1,1087 +1,314 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
-<script defer=true src="/assets/js/main.min.js"></script>
-
-<!-- CSS --> 
-<link rel="stylesheet" href="/assets/css/main.css">
-<!--Favicon-->
-<link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
-<!-- Canonical -->
-<link rel="canonical" href="https://liangbin-pub.github.io/assets/data/search.json">
-<!-- RSS -->
-<link rel="alternate" type="application/atom+xml" title="BLog" href="https://liangbin-pub.github.io/feed.xml"/>
-
-
-<!-- KaTeX 0.8.3 -->
-<!-- if you have any issue check https://github.com/KaTeX/KaTeX -->
-
-<script src="/assets/js/vendor/katex.min.js"></script>
-
-<!-- Go to www.addthis.com/dashboard to customize sharing tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e83809c0faa0389"></script>
-
-<!-- Google Analytics -->
-
-<!-- Global site tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161813252-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-161813252-1');
-</script>
-
-<!-- Page analysis (analytics.js) -->
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-<script>
-  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-  ga('create', 'UA-161813252-1', 'auto');
-  ga('send', 'pageview');
-</script>
- <!-- End Google Analytics -->
-<!-- jekyll-seo-tag to add metadata tags for search engines and social networks -->
-<!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>BLog | Bin Liang’s Tech Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="BLog" />
-<meta name="author" content="Bin Liang" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Bin Liang’s Tech Blog" />
-<meta property="og:description" content="Bin Liang’s Tech Blog" />
-<link rel="canonical" href="https://liangbin-pub.github.io/assets/data/search.json" />
-<meta property="og:url" content="https://liangbin-pub.github.io/assets/data/search.json" />
-<meta property="og:site_name" content="BLog" />
-<meta property="og:image" content="https://liangbin-pub.github.io/assets/img/pexels/computer.jpeg" />
-<script type="application/ld+json">
-{"url":"https://liangbin-pub.github.io/assets/data/search.json","headline":"BLog","author":{"@type":"Person","name":"Bin Liang"},"description":"Bin Liang’s Tech Blog","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://liangbin-pub.github.io/assets/img/logo.png"},"name":"Bin Liang"},"@type":"WebPage","image":"https://liangbin-pub.github.io/assets/img/pexels/computer.jpeg","@context":"https://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
-
-<!-- jekyll-feed to add metadata for ATOM style RSS feed -->
-<link type="application/atom+xml" rel="alternate" href="https://liangbin-pub.github.io/feed.xml" title="BLog" />
-
-<!-- Manual seo tags -->
-<!--
-<title> BLog</title>
-<meta name="description" content="Bin Liang's Tech Blog">
--->
-
-  </head>
+[
   
-  <body>
-    <header class="site-header">
-    <!-- Logo, title & hamburger button -->
-    <a class="brand" aria-label="BLog" href="/">
-        
-        <img alt="logo img" class="logo" src="/assets/img/logo.png" />
-        
-        <h1 class="site-title">BLog</h1>
-    </a>
-
-    <!-- Hamburger button on the top right corner for mobile display -->
-    <!--   Checkbox with label for mobile screen to implement drawer menu -->
-    <label for="drop" class="toggle hamburger">&#9776</label>
-    <input type="checkbox" id="drop" />
-
-    <!-- Menu bar -->
-    <ul class="menu">
-        <!-- Build menu recursively -->
-        <!-- assign variables at page scope ONCE to avoid assign conflict in recursive include snippet -->
-        
-        <!-- Build nested menu list recursively from page front matter -->
-<!-- Caller controls outer ul style, parameter: 0 - parent menu_id as relationship anchor, start with 0 -->
-
-    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0  -->
-    
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0  -->
-    
-
-     
-
-    
-    
-    
-
-    
-    
-
-    <li class="separator"> | </li>
-
-    
-    <li>
-        <!--   Link for regular li in any screen size-->
-        <a aria-label="Home" title="Home" href="/">
-            <i class="fa fa-home menu-icon" aria-hidden="true"></i>
-            <span class="menu-title">Home</span>
-        </a>
-    </li>
-    
-
-    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0  -->
-    
-
-     
-
-    
-    
-    
-
-    
-    
-
-    <li class="separator"> | </li>
-
-    
-    <li class="dropdown">
-        <!--   Link for dropdown li in bigger screen to implement hover menu-->
-        <a aria-label="Blogs" title="Blogs" href="#">
-            <i class="fa fa-newspaper-o menu-icon" aria-hidden="true"></i>
-            <span class="menu-title">Blogs</span>
-        </a>
-
-        <!--   Checkbox with label for dropdown li in mobile screen to implement drawer menu -->
-        <!--     Put input before label in case CSS needs to style label based on input events -->
-        <input type="checkbox" id="drop-Blogs"/>
-        <label for="drop-Blogs" class="toggle">Blogs</label>
-
-        <!-- dropdown-menu sub menu follows immediately -->
-        <ul class="dropdown-menu">
-            <!-- Build sub-menu recursively -->
-            <!-- Build nested menu list recursively from page front matter -->
-<!-- Caller controls outer ul style, parameter: 0.1 - parent menu_id as relationship anchor, start with 0 -->
-
-    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.1  -->
-    
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.1  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.1  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.1  -->
-    
-
-     
-
-    
-    
-    
-
-    
-    
-
-    <li class="separator"> | </li>
-
-    
-    <li>
-        <!--   Link for regular li in any screen size-->
-        <a aria-label="Categories" title="Categories" href="/categories/">
-            <i class="fa fa-list menu-icon" aria-hidden="true"></i>
-            <span class="menu-title">Categories</span>
-        </a>
-    </li>
-    
-
-    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.1  -->
-    
-
-     
-
-    
-    
-    
-
-    
-    
-
-    <li class="separator"> | </li>
-
-    
-    <li>
-        <!--   Link for regular li in any screen size-->
-        <a aria-label="Tags" title="Tags" href="/tags/">
-            <i class="fa fa-tags menu-icon" aria-hidden="true"></i>
-            <span class="menu-title">Tags</span>
-        </a>
-    </li>
-    
-
-    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.1  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.1  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0.1  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.1  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.1  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.1  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-
-        </ul>
-    </li>
-    
-
-    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0  -->
-    
-
-     
-
-    
-    
-    
-
-    
-     
-    <!--     Filter out - page is not immediate child of parent anchor -->
-    
-    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0  -->
-    
-
-     
-
-    
-    
-    
-
-    
-     
-    <!--     Filter out - page is not immediate child of parent anchor -->
-    
-    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0  -->
-    
-
-     
-
-    
-    
-    
-
-    
-    
-
-    <li class="separator"> | </li>
-
-    
-    <li class="dropdown">
-        <!--   Link for dropdown li in bigger screen to implement hover menu-->
-        <a aria-label="Portfolio" title="Portfolio" href="#">
-            <i class="fa fa-th menu-icon" aria-hidden="true"></i>
-            <span class="menu-title">Portfolio</span>
-        </a>
-
-        <!--   Checkbox with label for dropdown li in mobile screen to implement drawer menu -->
-        <!--     Put input before label in case CSS needs to style label based on input events -->
-        <input type="checkbox" id="drop-Portfolio"/>
-        <label for="drop-Portfolio" class="toggle">Portfolio</label>
-
-        <!-- dropdown-menu sub menu follows immediately -->
-        <ul class="dropdown-menu">
-            <!-- Build sub-menu recursively -->
-            <!-- Build nested menu list recursively from page front matter -->
-<!-- Caller controls outer ul style, parameter: 0.2 - parent menu_id as relationship anchor, start with 0 -->
-
-    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.2  -->
-    
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.2  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.2  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.2  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.2  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.2  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.2  -->
-    
-
-     
-
-    
-    
-    
-
-    
-    
-
-    <li class="separator"> | </li>
-
-    
-    <li class="dropdown">
-        <!--   Link for dropdown li in bigger screen to implement hover menu-->
-        <a aria-label="Collection 1" title="Collection 1" href="#">
-            <i class="fa fa-code-branch menu-icon" aria-hidden="true"></i>
-            <span class="menu-title">Collection 1</span>
-        </a>
-
-        <!--   Checkbox with label for dropdown li in mobile screen to implement drawer menu -->
-        <!--     Put input before label in case CSS needs to style label based on input events -->
-        <input type="checkbox" id="drop-Collection 1"/>
-        <label for="drop-Collection 1" class="toggle">Collection 1</label>
-
-        <!-- dropdown-menu sub menu follows immediately -->
-        <ul class="dropdown-menu">
-            <!-- Build sub-menu recursively -->
-            <!-- Build nested menu list recursively from page front matter -->
-<!-- Caller controls outer ul style, parameter: 0.2.0 - parent menu_id as relationship anchor, start with 0 -->
-
-    <!-- Iterate page: /blog/page2/ menu_id: 0.0 Parent Anchor: 0.2.0  -->
-    
-    <!--     Filter out - page don't want to be listed -->
-        
-    <!-- Iterate page: / menu_id: 0.0 Parent Anchor: 0.2.0  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /blogs/ menu_id: 0.1 Parent Anchor: 0.2.0  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /categories/ menu_id: 0.1.0 Parent Anchor: 0.2.0  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /tags/ menu_id: 0.1.1 Parent Anchor: 0.2.0  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /portfolio/ menu_id: 0.2 Parent Anchor: 0.2.0  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0.2.0  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0.2.0  -->
-    
-
-     
-
-    
-    
-    
-
-    
-    
-
-    <li class="separator"> | </li>
-
-    
-    <li>
-        <!--   Link for regular li in any screen size-->
-        <a aria-label="Sub Collection" title="Sub Collection" href="/pages/sub-collection.html">
-            <i class="fa fa-code-branch menu-icon" aria-hidden="true"></i>
-            <span class="menu-title">Sub Collection</span>
-        </a>
-    </li>
-    
-
-    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.2.0  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.2.0  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.2.0  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-
-        </ul>
-    </li>
-    
-
-    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0.2  -->
-    
-
-     
-
-    
-    
-    
-
-    
-     
-    <!--     Filter out - page is not immediate child of parent anchor -->
-    
-    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0.2  -->
-    
-
-     
-
-    
-    
-    
-
-    
-    
-
-    <li class="separator"> | </li>
-
-    
-    <li>
-        <!--   Link for regular li in any screen size-->
-        <a aria-label="Gallery" title="Gallery" href="/pages/gallery.html">
-            <i class="fa fa-images menu-icon" aria-hidden="true"></i>
-            <span class="menu-title">Gallery</span>
-        </a>
-    </li>
-    
-
-    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0.2  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0.2  -->
-    
-
-     
-
-    
-    
-     
-    <!--     Filter out - page is not descendant of parent anchor -->
-    
-
-        </ul>
-    </li>
-    
-
-    <!-- Iterate page: /pages/collection1.html menu_id: 0.2.0 Parent Anchor: 0  -->
-    
-
-     
-
-    
-    
-    
-
-    
-     
-    <!--     Filter out - page is not immediate child of parent anchor -->
-    
-    <!-- Iterate page: /pages/sub-collection.html menu_id: 0.2.0.0 Parent Anchor: 0  -->
-    
-
-     
-
-    
-    
-    
-
-    
-     
-    <!--     Filter out - page is not immediate child of parent anchor -->
-    
-    <!-- Iterate page: /pages/gallery.html menu_id: 0.2.1 Parent Anchor: 0  -->
-    
-
-     
-
-    
-    
-    
-
-    
-     
-    <!--     Filter out - page is not immediate child of parent anchor -->
-    
-    <!-- Iterate page: /search/ menu_id: 0.3 Parent Anchor: 0  -->
-    
-
-     
-
-    
-    
-    
-
-    
-    
-
-    <li class="separator"> | </li>
-
-    
-    <li>
-        <!--   Link for regular li in any screen size-->
-        <a aria-label="Search" title="Search" href="/search/">
-            <i class="fa fa-search menu-icon" aria-hidden="true"></i>
-            <span class="menu-title">Search</span>
-        </a>
-    </li>
-    
-
-    <!-- Iterate page: /about/ menu_id: 0.4 Parent Anchor: 0  -->
-    
-
-     
-
-    
-    
-    
-
-    
-    
-
-    <li class="separator"> | </li>
-
-    
-    <li>
-        <!--   Link for regular li in any screen size-->
-        <a aria-label="About" title="About" href="/about/">
-            <i class="fa fa-user menu-icon" aria-hidden="true"></i>
-            <span class="menu-title">About</span>
-        </a>
-    </li>
-    
-
-
-    </ul>
-</header>
-
-    
-<aside class="sidebar">
-    <header>
-      <div class="about">
-        <div class="cover-author-image">
-          <a href="/"><img src="/assets/img/potrait.jpg" alt="liangbin"></a>
-        </div>
-        <div class="author-name">Bin Liang</div>
-        <p>I am a network architect with full stack development experience.  My current research focuses include DCN, global meta data plane  and in general: converged compute, storage and networking architecture.</p>
-      </div>
-    </header> <!-- End Header -->
-    
-   	<!-- Go to www.addthis.com/dashboard to customize your tools --> 
-	<div class="addthis_inline_share_toolbox"> <p><strong>Sharing:</strong></p></div>
-
-    <footer>
-      <section class="contact">
-        <h3 class="contact-title">Follow me</h3>
-        <ul>
-          
-          
-          
-          
-          
-            <li class="github"><a href="http://github.com/liangbin-pub" target="_blank"><i class="fa fa-github"></i></a></li>
-          
-          
-            <li class="linkedin"><a href="https://in.linkedin.com/in/liangbin888" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-          
-          
-            <li class="email"><a href="mailto:fw.liangb@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
-          
-          
-            <li class="rss"><a href="/feed.xml"><i class="fa fa-rss"></i></a></li>
-          
-        </ul>
-      </section> <!-- End Section Contact -->
-      <div class="copyright">
-        <p>2020 &copy; Bin Liang</p>
-      </div>
-    </footer> <!-- End Footer -->
-</aside> <!-- End Sidebar -->
-
-    <div class="content content-box clearfix">
-      <div class="article">
-        
-
-<meta property="og:url"          content="/assets/data/search.json" />
-<meta property="og:type"         content="article" />
-<meta property="og:title"        content="" />
-<meta property="og:description"  content="" />
-<meta property="og:image"        content="assets/img/pexels/computer.jpeg" />
-
-
-<!-- Page Feature Image and Title as Header -->
-<header id="main" style="background-repeat:no-repeat;background-image: url('/assets/img/pexels/computer.jpeg')">
   
-    <h1 id="" class="title"></h1>
-      
-      
-        
-
-
-<div class="post-info"><a href="https://github.com/liangbin-pub" target="_blank">
-      <img src="/assets/img/myAvatar.svg">
-    
-    <p class="meta">
-      Bin Liang - 
-    </p></a></div>
-
-      
   
-</header>
-
-<!-- Article content -->
-<section class="post-content">
   
-  [
+  
+  
+  
+  {
+    "title"    : "Ninja",
+    "category" : "",
+    "tags"     : " Lorem",
+    "url"      : "/portfolio/os_projects/ninja",
+    "date"     : "April 8, 2014",
+    "excerpt"  : "",
+    "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+  },
+  
+  
+  {
+    "title"    : "Creative",
+    "category" : "",
+    "tags"     : " Ipsum",
+    "url"      : "/portfolio/os_projects/safe",
+    "date"     : "August 16, 2014",
+    "excerpt"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia...",
+    "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?Use this area of the page to describe your project. The icon above is part of a free icon set by Flat Icons. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!"
+  },
+  
+  
+  {
+    "title"    : "Circus",
+    "category" : "",
+    "tags"     : " Ipsum",
+    "url"      : "/portfolio/os_projects/circus",
+    "date"     : "September 1, 2014",
+    "excerpt"  : "",
+    "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+  },
+  
+  
+  {
+    "title"    : "Tower of Hanoi",
+    "category" : "",
+    "tags"     : " ",
+    "url"      : "/portfolio/os_projects/hanoi",
+    "date"     : "September 1, 2014",
+    "excerpt"  : "",
+    "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+  },
+  
+  
+  {
+    "title"    : "Tic tac toe",
+    "category" : "",
+    "tags"     : " ",
+    "url"      : "/portfolio/os_projects/tictactoe",
+    "date"     : "September 1, 2014",
+    "excerpt"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia...",
+    "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+  },
+  
+  
+  {
+    "title"    : "Cake",
+    "category" : "",
+    "tags"     : " Lorem, Ipsum, Portfolio",
+    "url"      : "/portfolio/os_projects/cake",
+    "date"     : "September 27, 2015",
+    "excerpt"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia...",
+    "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?Use this area of the page to describe your project. The icon above is part of a free icon set by Flat Icons. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!"
+  },
+  
+  
+  {
+    "title"    : "Jekyll",
+    "category" : "",
+    "tags"     : " ",
+    "url"      : "/portfolio/os_projects/jekyllblog",
+    "date"     : "May 26, 2017",
+    "excerpt"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia...",
+    "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+  },
+  
+  
+  {
+    "title"    : "Lorem Ipsum",
+    "category" : "",
+    "tags"     : " ",
+    "url"      : "/portfolio/os_projects/submarine",
+    "date"     : "September 3, 2017",
+    "excerpt"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia...",
+    "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?Use this area of the page to describe your project. The icon above is part of a free icon set by Flat Icons. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!"
+  },
+  
+  
+  {
+    "title"    : "Github",
+    "category" : "",
+    "tags"     : " Lorem, Portfolio",
+    "url"      : "/portfolio/os_projects/gitlecture",
+    "date"     : "October 20, 2017",
+    "excerpt"  : "",
+    "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+  }
+  
+  
+  
+  
+  
+  ,
+  {
+    "title"    : "Fugaku TofuD Interconnect Study",
+    "category" : "Networked Compute and Storage",
+    "tags"     : " Insight, Technology, Solution",
+    "url"      : "/portfolio/posts/fugaku-tofud-interconnect-study",
+    "date"     : "June 25, 2020",
+    "excerpt"  : "Fugaku TofuD Interconnect StudyDraft – Coming soon!",
+    "content"  : "Fugaku TofuD Interconnect StudyDraft – Coming soon!"
+  },
+  
+  
+  {
+    "title"    : "Fugaku is the new King",
+    "category" : "Networked Compute and Storage",
+    "tags"     : " Insight, Technology, Solution",
+    "url"      : "/portfolio/posts/fugaku-is-the-new-king",
+    "date"     : "June 23, 2020",
+    "excerpt"  : "Fugaku is the new KingThe biggest GOOD news in IT industry this year must be the announcement of Fugaku supercomputer in earlier June, taking the top spot on the Top500 list, a ranking of the world’s fastest supercomputers. It also swept the other...",
+    "content"  : "Fugaku is the new KingThe biggest GOOD news in IT industry this year must be the announcement of Fugaku supercomputer in earlier June, taking the top spot on the Top500 list, a ranking of the world’s fastest supercomputers. It also swept the other rankings of supercomputer performance, taking first place on the HPCG, a ranking of supercomputers running real-world applications, HPL-AI, which ranks supercomputers based on their performance capabilities for tasks typically used in artificial intelligence applications, and Graph 500, which ranks systems based on data-intensive loads. This is the first time in history that the same supercomputer has become No.1 on Top500, HPCG, and Graph500 simultaneously.Why am I so excited about Fugaku and use this news as my opening post for a new HPC series?The concept of Fugaku is proposed 10 years ago and the project started around 2014. Its concept is not brand new but significant design and packaging improvements are applied over its predecessors. These changes and improvements reflected some of most heated debate/discussions in HPC industry and can serve very well as testimony in these topics.A few key differentiation factors of interest are:  ARM v8 SVE instruction set vs Fujitsu’s traditional SPARC solution vs Intel x86  48 low Freq/low power cores per CPU vs less core with higher Freq/power per CPU  HBM vs DDR4/GDDR6  6D Mesh/Torus interconnect topology vs Blue Gene’s 5D Torus vs Summit’s Fat-Tree  3D stacked memory vs integrated memory on chipWhy am I even interested about HPC/Supercomputer, as a networking (in macro way) guy?  Supercomputer/HPC is technology driver for computing industry, especially in packaging and interconnect.  Converged compute, storage and interconnect co-design is deep in its gene for supercomputer/HPC  Boundary between HPC and non-HPC applications has blurred in recent years, especially with AI and IoT applications, making HPC solutions very relevant to general purpose compute infrastructure like DC and edge.In the following posts in this series, I will dig deeper into above areas and reflect the knowledge into the more generic NCS discussions, stay tuned friends!"
+  },
+  
+  
+  {
+    "title"    : "Reflection on Data Fidelity",
+    "category" : "Networked Compute and Storage",
+    "tags"     : " Insight, Technology, Solution",
+    "url"      : "/portfolio/posts/reflection-on-data-fidelity",
+    "date"     : "June 20, 2020",
+    "excerpt"  : "  “To be, or not to be? That is the question”   ― William Shakespeare, HamletReflection on Data FidelityIs data communication or more specific, computer networking, science or art?Is the world analog or digital?Ever since computer started taking c...",
+    "content"  : "  “To be, or not to be? That is the question”   ― William Shakespeare, HamletReflection on Data FidelityIs data communication or more specific, computer networking, science or art?Is the world analog or digital?Ever since computer started taking charge of our life, everything started the transformation of digitization, sooner or later. It makes everything easier to quantify, measure, compute and transport and is truly the foundation for the information revolution.Many years of engineering training and over 20 years of professional practice in data communication industry, it has become my second nature to think and view things in 0s and 1s, black or white, right or wrong. Everything becomes easier and manageable this way and you can really feel the power to change the world. As we immersing deeper and deeper into this digital world we help created, I realized one day that something is not right, I started to get confused about the truth vs lie, fact vs fiction, and more importantly, purpose vs meaning.Rethinking what is the purpose of data communication, is it really just sending data from A to B accurately, efficiently and in an timely manner?I would say that’s mostly (will elaborate more later) true among digital computers, but surely not totally true for human beings.For human beings, digitalization is never by nature. Our brains doesn’t work like digital computer and our perception system is NOT in binary. Our sensing system works continuously within its functional spectrum, our intelligence system takes infinite inputs and everyone evolves into unique beautiful beings. One of my hobby is working on my HiFi system and one of lessons I learnt from it is that digital processing and amplification does create lots of fun and flexibility, it NEVER sounds as nature as an analog system. 0s and 1s does reduces ambiguity within the player/receiver/amp but it’s not the fidelity we human being want as listener. From this example, clearly we can see the digital data communication system we use today has three fundamental functions:  A/D and D/A transformation at input and output to inject the digital system into a naturally analog world  Digital processing, such as encapsulation, multiplexing, encoding etc  Recording or transportationTraditionally, data communication industry focuses on function 2 and 3 above and leaves function 1 to human-machine interface devices like computer and mobile devices. Taking the HiFi case as an example, function 1 decides the fidelity of music we hear out of the system no matter how well we do in function 2 and 3. As a matter of fact, regarding to fidelity, the best we can do in function 2 and 3 is to reduce the degradation to ZERO. Yeah, that is pathetic but it’s exactly the problem we have in this industry. For too long we have buried our head in sand building pipes, eventually we lost our sight for the purpose of communication. We struggle on pushing towards Shannon’s Theorem limit, building more and more, fatter and fatter data pipes, from deep sea to outer space but still, we see no future to meet the mounting demands.It’s time to drop the wrench and rethink hard on the purpose for communication, which fidelity we should be focusing on now. Here are a few questions worth asking ourselves:  Garbage in, garbage out - should we care A LOT on what to communicate, aka the input, in stead of just making sure transport “garbages” in high fidelity?  Do we communicate the **RIGHT” information, no more and no less, over the communication system? Instead of trying to beat the Shannon limit, shouldn’t we change the battle field rethinking what should be the “Information” we feed into the pipes as a better approach?  Can we make the RIGHT communication choice when communication system is peripheralized from the rest of information processing systems, namely compute and storage?Think of an interactive Holographic Telepresence scheme, which transports only 100s Mbps meta data in stead of 100-1000s Gbps encoded 3D data, that is 3-4 orders of magnitude reduction in both bandwidth and latency demand to the communication system, making it a much achievable goal.This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!"
+  },
+  
+  
+  {
+    "title"    : "Reflection on Network Intelligence",
+    "category" : "Networked Compute and Storage",
+    "tags"     : " Insight, Technology, Solution",
+    "url"      : "/portfolio/posts/reflection-on-network-intelligence",
+    "date"     : "June 11, 2020",
+    "excerpt"  : "Reflection on Network IntelligenceRemember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelligence should be implemented. Microsoft at the time dominated the PC market and was pushing...",
+    "content"  : "Reflection on Network IntelligenceRemember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelligence should be implemented. Microsoft at the time dominated the PC market and was pushing network features at end-point such as security, acceleration, QoS etc. Network vendors led by Cisco on the other hand wanted to weave most if not all network intelligence into network itself. As we know up till now, similar fights have never ended, just with player and battle fields changes. Unfortunately, this left us some confusing products and terms we still have to deal with up till now, such as UTM devices in the network but truly not a networking device, and over-kill TCP/IP stack deployed among end-points to accommodate worst network scenario where they are actually communicate in a close proximity LAN environment.Arguments from either sides are valid to certain extent and I’m not making any judgement here. It just suddenly stuck me when I trying to solve a networking issue seemingly unsolvable with conflicting constrains. That is the starting point of my long journey of rethinking some of the basics in the networking industry. For such a long time we have isolate networking from other information technologies such as compute, storage. We define some protocols and implement some network infrastructures based on very OLD assumptions that we networking guys are only responsible to deliver data from A to B fast, reliable and effectively. The additional intelligence we want to baked into network are also for above purposes as well, such as TCP offload, in-network retransmit etc. We never question why we need to do that and unfortunately this holds true for other parts as well.About 9 years ago I started moving my knowledge stack up from embedded network design into software defined networking (SDN), Intent Based Networking (IBN) and then networked applications. The higher I goes up the stack, the bigger the scope I can see, both problems and solutions, from interface to network element, to site, to multi-site, to global. During the transition, I learnt that something used to be so important even critical at local becomes irrelevant when looked at from a much bigger picture, such as pursuing zero drop rate at interface level, which has very little impact to application, our ultimate goal.Along this line of thinking, I would argue that even if all parts are optimal, the combination may not be optimal. Why? It’s also strongly depends on how we partitioned the original problem, in other words, how parts are divided and their responsibility defined. We know know we need to optimize networking End-to-End to satisfy application needs rather than focus on some intermediate segment. What we also need to know is that there is NO fixed boundary among compute, storage and networking within an application. As I mentioned in the 1st post in NCS-Reflection series, rather than shipping data between compute and storage or between compute units, compute instructions can be shipped or triggered remotely instead under certain circumstance, totally changes the request and requirement for networking part.To summarize, I think we should not talk about intelligence or optimization in an isolate matter, either just a network segment or network as a whole alone. Intelligence and optimization all must serve the benefit of application hence must be considered as a whole at application level before dividing into networking or computing portions. There is no need for network to exist if it doesn’t serve the compute and storage, on the other hand, if compute and storage treat networking part of interconnection, like ALU to Registers, CPU Core to memory and I/O systems, the world will just like a super big computer, with interconnection among compute nodes and storage nodes. If applications within a computer can be made agnostic (largely) to computer configuration, we sure can make them fly in this globally abstracted supper computer.This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!"
+  },
+  
+  
+  {
+    "title"    : "Reflection on OSI Model",
+    "category" : "Networked Compute and Storage",
+    "tags"     : " Insight, Technology, Solution",
+    "url"      : "/portfolio/posts/reflection-on-osi-model",
+    "date"     : "May 31, 2020",
+    "excerpt"  : "Reflection on OSI modelIn the world of inter-networking, the most popular standard has to be TCP/IP protocol, which forms the basis of the Internet connecting billions of computers and devices around the world. It’s so popular and vital to our dai...",
+    "content"  : "Reflection on OSI modelIn the world of inter-networking, the most popular standard has to be TCP/IP protocol, which forms the basis of the Internet connecting billions of computers and devices around the world. It’s so popular and vital to our daily life now a days that it’s used even when communication is local across compatible networks. For example, popular network file system NFS uses IP protocol even though it’s used mainly in homogenous ethernet LAN environment.The software standards like TCP/IP allowing reliable communication without demanding reliable networks is the key enabling technologies for inter-networking. Looking back the standard battle with ATM in 1990s, one key success factor is it’s decomposed layered hierarchy. Each layer taking responsibility for just a portion of the overall communication task. To avoid ambiguous in terms, Open System Interconnect (OSI) model is developed which describes networks as a series of layers:            Layer number      layer name      Main function      Example protocol                  7      Application      Application running over network      DNS, Web              6      Presentation      Translate between Application and network format                     5      Session      Session lifecycle management across network      RPC,named pipes              4      Transport      Additional connection below session layer      TCP              3      Network      Translate between logic address/name to physical address      IP              2      Data Link      Transform between packet and bits      Ethernet              1      Physical      TX/RX bit stream over physical media      IEEE 802      The key to protocol families following OSI model is that communication occurs logically at same level of the protocol between sender and receiver, while services from lower level implement it. Just like abstract data types which simplifies the programmer’s task by hiding the implementation details of the data type, offering services needed by upper layer at each protocol layer makes the standard easier to understand and implement with cross industry compatibility, especially for lower level protocol vendors.For 20 years since mid 1990s, Internet has enjoyed exponential growth thanks to the dominant position of TCP/IP. Network vendors like Cisco took lead and protocols are added and expanded with a bottom up approach to protect the investment in lower level infrastructures. It is until recent years we see some challenges and movements against long-standing TCP/IP stack and traditional network infrastructures (both topology and component levels), driven by OTT providers’ performance, scalability and fault tolerance demands.The analysis for the huge success of AWS, Azure, GCP and Ali cloud in the past 5-10 years deserves a dedicate study series but here is one important factor from technology point of view: they just need purposely built network for their intent business need, so they built proprietary homogeneous network infrastructure from scratch with optimized and simplified protocol stack, achieving cost, power consumption and networking efficiency.It is on the right track but start to show limitations facing challenges from:  Data volume and dispersal driven by AI and IoT  Dynamic business logic driven by tenant IT migrationSimply put, the “simplification” approach OTT providers have enjoyed for their past success is just not enough when facing these new challenges, which demands REAL application driven design, with Top Down principle.Back to OSI model, we have to abandon the assumption of TCP/IP, Ethernet, etc and go back to basic:  Layers are for separation of responsibilities in a hierarchical way  Upper layer should not aware or concern about lower layer  Lower layer is responsible of fulfilling or rejecting the requests from upper layerWhich means, instead of the bottom-up approach where upper layer operates based on what lower level offers, upper layer operates purely based on its own need and send only intent to lower layer, where lower layer has the flexibility to choose available and viable technology to fulfill or reject the request.Think of a future where we can have harmonized heterogeneous network clusters (devices, topologies or protocols) within data centers and extend into edge, campus even SoC, tailored for different compute-storage usage, totally transparent to applications layer; Think of a laptop where all bandwidth of wired and available WiFi band can be utilized simultaneously; Think of google-search-like information query from application; Think of instructions rather than data been networked to fulfill the request using remote data, etc.This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!"
+  },
+  
+  
+  {
+    "title"    : "NCS Category readme",
+    "category" : "Networked Compute and Storage",
+    "tags"     : " Insight, Technology, Solution",
+    "url"      : "/portfolio/posts/ncs-readme",
+    "date"     : "May 11, 2020",
+    "excerpt"  : "README for NCD CategoryNCS stands for Networked Compute and Storage, representing my interest in converged Compute, Data and networking infrastructure design.",
+    "content"  : "README for NCD CategoryNCS stands for Networked Compute and Storage, representing my interest in converged Compute, Data and networking infrastructure design."
+  },
+  
+  
+  {
+    "title"    : "Blog Categories and Tags",
+    "category" : "Exploration",
+    "tags"     : " Practice, Technology, Solution, Jekyll",
+    "url"      : "/portfolio/posts/blog-categories-tags",
+    "date"     : "May 10, 2020",
+    "excerpt"  : "After played with Jekyll for a while, I have decided on following structure to organize my blog posts for better navigation and grouping.CategoryCategories are used as top level classifier to seperate blog posts into main area of interests, at the...",
+    "content"  : "After played with Jekyll for a while, I have decided on following structure to organize my blog posts for better navigation and grouping.CategoryCategories are used as top level classifier to seperate blog posts into main area of interests, at the time of written, I’m using following categories:  NCS for Networked Compute &amp;amp; Storage  Knowledge Graph  Exploration serves as a kitchen sink for all study, hobby etc for nowTagTags are attributes helping to further filtering/grouping posts based on their characteristics. There is NO real differences between category and tag, I choose some as categories merely to group contents by my major areas of interest first.I split Tags into 4 dimensions:  To what extent:          Insight focus on Obervation, facts and impression      Forsight focus on deepening and broadening the analysis, forming opinion, prediction and design      Practice forcus on test, evalution and discovery        From which angle/perspective:          Market focus on market trend, customer demand      Industry focus on industry trend, solutions      Technology focus on fundamental acdamic research        Applicable to what sub-area:          Infrastructure      Solution      Application      Usecase        Keywords (Multiple)          Jekyll      Liquid      DCN      DCI      Edge      Campus      etc      As you can see tags within dimensions 1-3 are mutually exclusive by nature, so they are more like sub-categories. But with current jekyll limition, I will leave them as tags and explot other options like paginate v2 later."
+  },
+  
   
   {
     "title"    : "Markdown and HTML",
-    "category" : "",
-    "tags"     : " Test, Markdown",
-    "url"      : "/2020/04/05/markdown-and-html.html",
+    "category" : "Exploration",
+    "tags"     : " Practice, Technology, Solution, Jekyll",
+    "url"      : "/portfolio/posts/markdown-and-html",
     "date"     : "April 5, 2020",
-    "excerpt"  : "Jekyll supports the use of Markdown with inline HTML tags which makes it easier to quickly write posts with Jekyll, without having to worry too much about text formatting. A sample of the formatting follows.\n\nTables have also been extended from Ma...",
-  "content"  : "Jekyll supports the use of Markdown with inline HTML tags which makes it easier to quickly write posts with Jekyll, without having to worry too much about text formatting. A sample of the formatting follows.\n\nTables have also been extended from Markdown:\n\n\n  \n    \n      First Header\n      Second Header\n    \n  \n  \n    \n      Content Cell\n      Content Cell\n    \n    \n      Content Cell\n      Content Cell\n    \n  \n\n\nHere’s an example of an image, which is included using Markdown:\n\n\n\nHighlighting for code in Jekyll is done using Base16 or Rouge. This theme makes use of Rouge by default.\n\n// count to ten\nfor (var i = 1; i &amp;lt;= 10; i++) {\n    console.log(i);\n}\n\n// count to twenty\nvar j = 0;\nwhile (j &amp;lt; 20) {\n    j++;\n    console.log(j);\n}\n\nType on Strap uses KaTeX to display maths. Equations such as  can be displayed inline.\n\nAlternatively, they can be shown on a new line:\n\n\n"
-} ,
+    "excerpt"  : "Jekyll supports the use of Markdown with inline HTML tags which makes it easier to quickly write posts with Jekyll, without having to worry too much about text formatting. A sample of the formatting follows.Tables have also been extended from Mark...",
+    "content"  : "Jekyll supports the use of Markdown with inline HTML tags which makes it easier to quickly write posts with Jekyll, without having to worry too much about text formatting. A sample of the formatting follows.Tables have also been extended from Markdown:            First Header      Second Header                  Content Cell      Content Cell              Content Cell      Content Cell      Here’s an example of an image, which is included using Markdown:Highlighting for code in Jekyll is done using Base16 or Rouge. This theme makes use of Rouge by default.// count to tenfor (var i = 1; i &amp;lt;= 10; i++) {    console.log(i);}// count to twentyvar j = 0;while (j &amp;lt; 20) {    j++;    console.log(j);}Type on Strap uses KaTeX to display maths. Equations such as \\(S_n = a \\times \\frac{1-r^n}{1-r}\\) can be displayed inline.Alternatively, they can be shown on a new line:\\[f(x) = \\int \\frac{2x^2+4x+6}{x-2}\\]"
+  },
+  
   
   {
     "title"    : "Color Post",
-    "category" : "",
-    "tags"     : " Test, Color, Markdown",
-    "url"      : "/2020/04/04/color-post.html",
+    "category" : "Exploration",
+    "tags"     : " Practice, Technology, Solution, Jekyll, Markdown",
+    "url"      : "/portfolio/posts/color-post",
     "date"     : "April 4, 2020",
-    "excerpt"  : "What a colorful post!\n\nThis is an idea that came from xukimseven/HardCandy-Jekyll \nlooking at this cheerful and colorful them, I wanted to enable something similar for mine.\n\nYou can go fork and star hers too! 😉\n\n\n\nHow does it work?\n\nBasically you...",
-  "content"  : "What a colorful post!\n\nThis is an idea that came from xukimseven/HardCandy-Jekyll \nlooking at this cheerful and colorful them, I wanted to enable something similar for mine.\n\nYou can go fork and star hers too! 😉\n\n\n\nHow does it work?\n\nBasically you need to add just one thing, the color:\n\n---\nlayout: post\ntitle: Color Post\ncolor: brown\n---\n\n\nIt can either be a html color like brown (which look like red to me). Or with the rgb:\n\n---\nlayout: post\ntitle: Color Post\ncolor: rgb(165,42,42)\n---\n\n\nThe background used is lineart.png from xukimseven you can edit it in the config file. \nIf you want another one, put it in /assets/img as well.\n\n  ⚠️ It’s a bit hacking the css in the post.html\n\n"
-} ,
+    "excerpt"  : "What a colorful post!This is an idea that came from xukimseven/HardCandy-Jekyll looking at this cheerful and colorful them, I wanted to enable something similar for mine.You can go fork and star hers too! 😉",
+    "content"  : "What a colorful post!This is an idea that came from xukimseven/HardCandy-Jekyll looking at this cheerful and colorful them, I wanted to enable something similar for mine.You can go fork and star hers too! 😉How does it work?Basically you need to add just one thing, the color:---layout: posttitle: Color Postcolor: brown---It can either be a html color like brown (which look like red to me). Or with the rgb:---layout: posttitle: Color Postcolor: rgb(165,42,42)---The background used is lineart.png from xukimseven you can edit it in the config file. If you want another one, put it in /assets/img as well.  ⚠️ It’s a bit hacking the css in the post.html"
+  },
+  
   
   {
     "title"    : "Feature images",
-    "category" : "",
-    "tags"     : " Test, Lorem",
-    "url"      : "/2020/04/03/feature-images.html",
+    "category" : "Exploration",
+    "tags"     : " Practice, Technology, Solution, Jekyll",
+    "url"      : "/portfolio/posts/feature-images",
     "date"     : "April 3, 2020",
-    "excerpt"  : "This is an example of a post which includes a feature image specified in the front matter of the post. \nThe feature image spans the full-width of the page, and is shown with the title on permalink pages:\n\nimage: &quot;assets/img/pexels/desk-messy.jpeg&quot;...",
-  "content"  : "This is an example of a post which includes a feature image specified in the front matter of the post. \nThe feature image spans the full-width of the page, and is shown with the title on permalink pages:\n\nimage: &quot;assets/img/pexels/desk-messy.jpeg&quot;\n\n\n\n  \n    And now it is working\n  \n\n\nYou can also add images aligned in your post using the aligner include.\nMake sure to separate all of the image path from in a string separated with ,.\nIt by default look into assets/img/ so give the path from there, example:\n\n{% include aligner.html images=&quot;pexels/book-glass.jpeg,triangle.png&quot; %}\n\n\n    \n    \n        \n    \n    \n    \n        \n    \n    \n\n\nHere you have two images side by side, but you can set more and set the amount per columns \n(by specifying the number of columns or let it be automatic using &quot;auto&quot;):\n\n{% include aligner.html images=&quot;portfolio/cabin.png,portfolio/cake.png,portfolio/circus.png&quot; column=3 %}\n\n\n    \n    \n        \n    \n    \n    \n        \n    \n    \n    \n        \n    \n    \n\n\n"
-} ,
+    "excerpt"  : "This is an example of a post which includes a feature image specified in the front matter of the post. The feature image spans the full-width of the page, and is shown with the title on permalink pages:image: &quot;assets/img/pexels/desk-messy.jpeg&quot;   ...",
+    "content"  : "This is an example of a post which includes a feature image specified in the front matter of the post. The feature image spans the full-width of the page, and is shown with the title on permalink pages:image: &quot;assets/img/pexels/desk-messy.jpeg&quot;      And now it is working  You can also add images aligned in your post using the aligner include.Make sure to separate all of the image path forming a string separated with ,.By default aligner find images from assets/img/, so give the path from there, for example:{% include aligner.html images=&quot;pexels/book-glass.jpeg,pexels/desk-messy.jpeg&quot; %}                                            Here you have two images side by side, but you can add more and set the amount per columns (by specifying the number of columns or let it be automatic using &quot;auto&quot;):{% include aligner.html images=&quot;portfolio/cabin.png,portfolio/cake.png,portfolio/circus.png&quot; column=3 %}                                                                "
+  },
+  
   
   {
     "title"    : "Sample post",
-    "category" : "",
-    "tags"     : " A Tag, Test, Lorem, Ipsum",
-    "url"      : "/2020/03/30/sample-post.html",
+    "category" : "Exploration",
+    "tags"     : " Practice, Technology, Solution, Jekyll",
+    "url"      : "/portfolio/posts/sample-post",
     "date"     : "March 30, 2020",
-    "excerpt"  : "Consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. \nPraesent et diam eget libero egestas mattis sit amet vitae augue. Nam tinci...",
-  "content"  : "Consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. \nPraesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. \n\nDonec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem.\n\n\n  Consectetur adipiscing elit\n  Donec a diam lectus\n  Sed sit amet ipsum mauris\n\n\nUt turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.\n\nNunc diam velit, adipiscing ut tristique vitae, sagittis vel odio. Maecenas convallis ullamcorper ultricies. Curabitur ornare, ligula semper consectetur sagittis, nisi diam iaculis velit, id fringilla sem nunc vel mi. Nam dictum, odio nec pretium volutpat, arcu ante placerat erat, non tristique elit urna et turpis. Quisque mi metus, ornare sit amet fermentum et, tincidunt et orci. Fusce eget orci a orci congue vestibulum.\n\n\n\nUt dolor diam, elementum et vestibulum eu, porttitor vel elit. Curabitur venenatis pulvinar tellus gravida ornare. Sed et erat faucibus nunc euismod ultricies ut id justo. Nullam cursus suscipit nisi, et ultrices justo sodales nec. Fusce venenatis facilisis lectus ac semper. Aliquam at massa ipsum. Quisque bibendum purus convallis nulla ultrices ultricies. Nullam aliquam, mi eu aliquam tincidunt, purus velit laoreet tortor, viverra pretium nisi quam vitae mi. Fusce vel volutpat elit. Nam sagittis nisi dui.\n\n\n  Suspendisse lectus leo, consectetur in tempor sit amet, placerat quis neque\n\n\nEtiam luctus porttitor lorem, sed suscipit est rutrum non. Curabitur lobortis nisl a enim congue semper. Aenean commodo ultrices imperdiet. Vestibulum ut justo vel sapien venenatis tincidunt.\n\nPhasellus eget dolor sit amet ipsum dapibus condimentum vitae quis lectus. Aliquam ut massa in turpis dapibus convallis. Praesent elit lacus, vestibulum at malesuada et, ornare et est. Ut augue nunc, sodales ut euismod non, adipiscing vitae orci. Mauris ut placerat justo. Mauris in ultricies enim. Quisque nec est eleifend nulla ultrices egestas quis ut quam. Donec sollicitudin lectus a mauris pulvinar id aliquam urna cursus. Cras quis ligula sem, vel elementum mi. Phasellus non ullamcorper urna.\n"
-} ,
+    "excerpt"  : "Consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincid...",
+    "content"  : "Consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem.  Consectetur adipiscing elit  Donec a diam lectus  Sed sit amet ipsum maurisUt turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.Nunc diam velit, adipiscing ut tristique vitae, sagittis vel odio. Maecenas convallis ullamcorper ultricies. Curabitur ornare, ligula semper consectetur sagittis, nisi diam iaculis velit, id fringilla sem nunc vel mi. Nam dictum, odio nec pretium volutpat, arcu ante placerat erat, non tristique elit urna et turpis. Quisque mi metus, ornare sit amet fermentum et, tincidunt et orci. Fusce eget orci a orci congue vestibulum.Ut dolor diam, elementum et vestibulum eu, porttitor vel elit. Curabitur venenatis pulvinar tellus gravida ornare. Sed et erat faucibus nunc euismod ultricies ut id justo. Nullam cursus suscipit nisi, et ultrices justo sodales nec. Fusce venenatis facilisis lectus ac semper. Aliquam at massa ipsum. Quisque bibendum purus convallis nulla ultrices ultricies. Nullam aliquam, mi eu aliquam tincidunt, purus velit laoreet tortor, viverra pretium nisi quam vitae mi. Fusce vel volutpat elit. Nam sagittis nisi dui.  Suspendisse lectus leo, consectetur in tempor sit amet, placerat quis nequeEtiam luctus porttitor lorem, sed suscipit est rutrum non. Curabitur lobortis nisl a enim congue semper. Aenean commodo ultrices imperdiet. Vestibulum ut justo vel sapien venenatis tincidunt.Phasellus eget dolor sit amet ipsum dapibus condimentum vitae quis lectus. Aliquam ut massa in turpis dapibus convallis. Praesent elit lacus, vestibulum at malesuada et, ornare et est. Ut augue nunc, sodales ut euismod non, adipiscing vitae orci. Mauris ut placerat justo. Mauris in ultricies enim. Quisque nec est eleifend nulla ultrices egestas quis ut quam. Donec sollicitudin lectus a mauris pulvinar id aliquam urna cursus. Cras quis ligula sem, vel elementum mi. Phasellus non ullamcorper urna."
+  },
+  
   
   {
     "title"    : "What&#39;s your title",
-    "category" : "",
-    "tags"     : " Test, Lorem",
-    "url"      : "/2020/03/22/whats-your-title.html",
+    "category" : "Exploration",
+    "tags"     : " Practice, Technology, Solution, Jekyll",
+    "url"      : "/portfolio/posts/whats-your-title",
     "date"     : "March 22, 2020",
-    "excerpt"  : "This is an example of a post which includes a feature image that has a\ntext, where you don’t want to redisplay the title.\n\nWe cannot simply set the title to the empty string, as that would\nbreak pages that list this post, such as home and tags.\n\n",
-  "content"  : "This is an example of a post which includes a feature image that has a\ntext, where you don’t want to redisplay the title.\n\nWe cannot simply set the title to the empty string, as that would\nbreak pages that list this post, such as home and tags.\n\n"
-} ,
+    "excerpt"  : "This is an example of a post which includes a feature image that has atext, where you don’t want to redisplay the title.We cannot simply set the title to the empty string, as that wouldbreak pages that list this post, such as home and tags.",
+    "content"  : "This is an example of a post which includes a feature image that has atext, where you don’t want to redisplay the title.We cannot simply set the title to the empty string, as that wouldbreak pages that list this post, such as home and tags."
+  },
+  
   
   {
     "title"    : "Blogging with title",
-    "category" : "",
-    "tags"     : " Test, Ipsum, Markdown, Portfolio",
-    "url"      : "/2020/03/18/blogging-with-title.html",
+    "category" : "Exploration",
+    "tags"     : " Practice, Technology, Solution, Jekyll",
+    "url"      : "/portfolio/posts/blogging-with-title",
     "date"     : "March 18, 2020",
-    "excerpt"  : "I am a BIG title\n\nThis is a very tiny tiny post with less than 250 letters.\n\nSearch should be working even for complicated escape symbols\nsed -i &#39;s/\\&quot;hostname\\&quot;\\:.*$/\\&quot;hostname\\&quot;\\: \\&quot;&#39;$IPADDR&#39;\\&quot;\\,/g&#39; open-falcon/agent/config/cfg.json\n\n",
-  "content"  : "I am a BIG title\n\nThis is a very tiny tiny post with less than 250 letters.\n\nSearch should be working even for complicated escape symbols\nsed -i &#39;s/\\&quot;hostname\\&quot;\\:.*$/\\&quot;hostname\\&quot;\\: \\&quot;&#39;$IPADDR&#39;\\&quot;\\,/g&#39; open-falcon/agent/config/cfg.json\n\n"
-} ,
+    "excerpt"  : "I am a BIG titleThis is a very tiny tiny post with less than 250 letters.Search should be working even for complicated escape symbolssed -i &#39;s/\\&quot;hostname\\&quot;\\:.*$/\\&quot;hostname\\&quot;\\: \\&quot;&#39;$IPADDR&#39;\\&quot;\\,/g&#39; open-falcon/agent/config/cfg.json",
+    "content"  : "I am a BIG titleThis is a very tiny tiny post with less than 250 letters.Search should be working even for complicated escape symbolssed -i &#39;s/\\&quot;hostname\\&quot;\\:.*$/\\&quot;hostname\\&quot;\\: \\&quot;&#39;$IPADDR&#39;\\&quot;\\,/g&#39; open-falcon/agent/config/cfg.json"
+  },
+  
   
   {
     "title"    : "Generate a table of content",
-    "category" : "",
-    "tags"     : " toc.js, kramdown, Markdown, Customization",
-    "url"      : "/2020/03/18/Generate-a-table-of-content.html",
+    "category" : "Exploration",
+    "tags"     : " Practice, Technology, Solution, Jekyll",
+    "url"      : "/portfolio/posts/generate-a-table-of-content",
     "date"     : "March 18, 2020",
-    "excerpt"  : "Test article, get the source on github.\n\nUsing Kramdown GFM \n\n\n\n  Using Kramdown GFM     \n      Basic Usage\n    \n  \n  Using toc.js    \n      Customize with toc.js        \n          Use with this jekyll template\n        \n      \n      Basic Usage\n  ...",
-  "content"  : "Test article, get the source on github.\n\nUsing Kramdown GFM \n\n\n\n  Using Kramdown GFM     \n      Basic Usage\n    \n  \n  Using toc.js    \n      Customize with toc.js        \n          Use with this jekyll template\n        \n      \n      Basic Usage\n      How it would look like\n    \n  \n\n\nBasic Usage\n\nYou need to put this at the beginning of the page where you want the table of content to be displayed\n\n* TOC\n{:toc}\n\n\nIt will then render the markdown and html titles (lines that begins with # or using the &amp;lt;h1&amp;gt;&amp;lt;/h1&amp;gt; tages)\n\nUsing toc.js\n\nDemo display of jekyll-table-of-contents by ghiculescu.\n\n\n\n\nCustomize with toc.js\n\ntoc.js stands for table of content, it is a js plugin that generates automatically a table of content of a post.\n\nUse with this jekyll template\n\nIf you want to customize the theme it is up to you, you can add the toc.js file into the asset &amp;gt; js and add it into the page.html layout with:\n\n&amp;lt;script src=&quot;/assets/js/toc.js&quot; &amp;gt;&amp;lt;/script&amp;gt;\n\nThen you can use it as it is said on the repository.\n\nBasic Usage\n\nThe script requires jQuery. First, reference toc.js in templates where you would like to add the table of content. Then, create an HTML element wherever you want your table of contents to appear:\n\n&amp;lt;div id=&quot;toc&quot;&amp;gt;&amp;lt;/div&amp;gt;\n\n\nThen you put your post with titles and all like:\n\n## Title\n## Mid title 1\nThis is text on page one\n## Mid title 2\nThis is text for page two\n### Sub title 2.a\nSome more text\n\n\nThen at the end of your post, you call the .toc() function using:\n\n&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;\n$(document).ready(function() {\n    $(&#39;#toc&#39;).toc();\n});\n&amp;lt;/script&amp;gt;\n\n\nHow it would look like\n\n\n\n\n\n\n\n\n"
-} ,
+    "excerpt"  : "Test article, get the source on github.Using Kramdown GFM",
+    "content"  : "Test article, get the source on github.Using Kramdown GFM   Using Kramdown GFM           Basic Usage        Using toc.js          Customize with toc.js                  Use with this jekyll template                    Basic Usage      How it would look like      Basic UsageYou need to put this at the beginning of the page where you want the table of content to be displayed* TOC{:toc}It will then render the markdown and html titles (lines that begins with # or using the &amp;lt;h1&amp;gt;&amp;lt;/h1&amp;gt; tages)Using toc.jsDemo display of jekyll-table-of-contents by ghiculescu.Customize with toc.jstoc.js stands for table of content, it is a js plugin that generates automatically a table of content of a post.Use with this jekyll templateIf you want to customize the theme it is up to you, you can add the toc.js file into the asset &amp;gt; js and add it into the page.html layout with:&amp;lt;script src=&quot;/assets/js/toc.js&quot; &amp;gt;&amp;lt;/script&amp;gt;Then you can use it as it is said on the repository.Basic UsageThe script requires jQuery. First, reference toc.js in templates where you would like to add the table of content. Then, create an HTML element wherever you want your table of contents to appear:&amp;lt;div id=&quot;toc&quot;&amp;gt;&amp;lt;/div&amp;gt;Then you put your post with titles and all like:## Title## Mid title 1This is text on page one## Mid title 2This is text for page two### Sub title 2.aSome more textThen at the end of your post, you call the .toc() function using:&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;$(document).ready(function() {    $(&#39;#toc&#39;).toc();});&amp;lt;/script&amp;gt;How it would look like"
+  },
+  
   
   {
     "title"    : "Markup: Syntax Highlighting",
-    "category" : "",
-    "tags"     : " code",
-    "url"      : "/2020/03/08/Markup-Syntax-Highlighting.html",
+    "category" : "Exploration",
+    "tags"     : " Practice, Technology, Solution, Jekyll",
+    "url"      : "/portfolio/posts/markup-syntax-highlighting",
     "date"     : "March 8, 2020",
-    "excerpt"  : "From Michael’s Rose Minimal Mistakes.\nSyntax highlighting is a feature that displays source code, in different colors and fonts according to the category of terms. This feature facilitates writing in a structured language such as a programming lan...",
-  "content"  : "From Michael’s Rose Minimal Mistakes.\nSyntax highlighting is a feature that displays source code, in different colors and fonts according to the category of terms. This feature facilitates writing in a structured language such as a programming language or a markup language as both structures and syntax errors are visually distinct. Highlighting does not affect the meaning of the text itself; it is intended only for human readers.\n\nGFM Code Blocks\n\nGitHub Flavored Markdown fenced code blocks are supported. To modify styling and highlight colors edit /_sass/syntax.scss.\n\n#container {\n  float: left;\n  margin: 0 -240px 0 0;\n  width: 100%;\n}\n\n\n1\n2\n3\n4\n5\n6\n7\n.highlight {\n  margin: 0;\n  padding: 1em;\n  font-family: $monospace;\n  font-size: $type-size-7;\n  line-height: 1.8;\n}\n\n\n&amp;lt;nav class=&quot;pagination&quot; role=&quot;navigation&quot;&amp;gt;\n  {% if page.previous %}\n    &amp;lt;a href=&quot;{{ site.url }}{{ page.previous.url }}&quot; class=&quot;btn&quot; title=&quot;{{ page.previous.title }}&quot;&amp;gt;Previous article&amp;lt;/a&amp;gt;\n  {% endif %}\n  {% if page.next %}\n    &amp;lt;a href=&quot;{{ site.url }}{{ page.next.url }}&quot; class=&quot;btn&quot; title=&quot;{{ page.next.title }}&quot;&amp;gt;Next article&amp;lt;/a&amp;gt;\n  {% endif %}\n&amp;lt;/nav&amp;gt;&amp;lt;!-- /.pagination --&amp;gt;\n\n\nmodule Jekyll\n  class TagIndex &amp;lt; Page\n    def initialize(site, base, dir, tag)\n      @site = site\n      @base = base\n      @dir = dir\n      @name = &#39;index.html&#39;\n      self.process(@name)\n      self.read_yaml(File.join(base, &#39;_layouts&#39;), &#39;tag_index.html&#39;)\n      self.data[&#39;tag&#39;] = tag\n      tag_title_prefix = site.config[&#39;tag_title_prefix&#39;] || &#39;Tagged: &#39;\n      tag_title_suffix = site.config[&#39;tag_title_suffix&#39;] || &#39;&amp;amp;#8211;&#39;\n      self.data[&#39;title&#39;] = &quot;#{tag_title_prefix}#{tag}&quot;\n      self.data[&#39;description&#39;] = &quot;An archive of posts tagged #{tag}.&quot;\n    end\n  end\nend\n\n\nCode Blocks in Lists\n\nIndentation matters. Be sure the indent of the code block aligns with the first non-space character after the list item marker (e.g., 1.). Usually this will mean indenting 3 spaces instead of 4.\n\n\n  Do step 1.\n  \n    Now do this:\n\n    def print_hi(name)\n  puts &quot;Hi, #{name}&quot;\nend\nprint_hi(&#39;Tom&#39;)\n#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.\n    \n  \n  Now you can do this.\n\n\nGitHub Gist Embed\n\nAn example of a Gist embed below.\n\n\n\nSource\n\n"
-} 
+    "excerpt"  : "From Michael’s Rose Minimal Mistakes.Syntax highlighting is a feature that displays source code, in different colors and fonts according to the category of terms. This feature facilitates writing in a structured language such as a programming lang...",
+    "content"  : "From Michael’s Rose Minimal Mistakes.Syntax highlighting is a feature that displays source code, in different colors and fonts according to the category of terms. This feature facilitates writing in a structured language such as a programming language or a markup language as both structures and syntax errors are visually distinct. Highlighting does not affect the meaning of the text itself; it is intended only for human readers.GFM Code BlocksGitHub Flavored Markdown fenced code blocks are supported. To modify styling and highlight colors edit /_sass/syntax.scss.#container {  float: left;  margin: 0 -240px 0 0;  width: 100%;}1234567.highlight {  margin: 0;  padding: 1em;  font-family: $monospace;  font-size: $type-size-7;  line-height: 1.8;}&amp;lt;nav class=&quot;pagination&quot; role=&quot;navigation&quot;&amp;gt;  {% if page.previous %}    &amp;lt;a href=&quot;{{ site.url }}{{ page.previous.url }}&quot; class=&quot;btn&quot; title=&quot;{{ page.previous.title }}&quot;&amp;gt;Previous article&amp;lt;/a&amp;gt;  {% endif %}  {% if page.next %}    &amp;lt;a href=&quot;{{ site.url }}{{ page.next.url }}&quot; class=&quot;btn&quot; title=&quot;{{ page.next.title }}&quot;&amp;gt;Next article&amp;lt;/a&amp;gt;  {% endif %}&amp;lt;/nav&amp;gt;&amp;lt;!-- /.pagination --&amp;gt;module Jekyll  class TagIndex &amp;lt; Page    def initialize(site, base, dir, tag)      @site = site      @base = base      @dir = dir      @name = &#39;index.html&#39;      self.process(@name)      self.read_yaml(File.join(base, &#39;_layouts&#39;), &#39;tag_index.html&#39;)      self.data[&#39;tag&#39;] = tag      tag_title_prefix = site.config[&#39;tag_title_prefix&#39;] || &#39;Tagged: &#39;      tag_title_suffix = site.config[&#39;tag_title_suffix&#39;] || &#39;&amp;amp;#8211;&#39;      self.data[&#39;title&#39;] = &quot;#{tag_title_prefix}#{tag}&quot;      self.data[&#39;description&#39;] = &quot;An archive of posts tagged #{tag}.&quot;    end  endendCode Blocks in ListsIndentation matters. Be sure the indent of the code block aligns with the first non-space character after the list item marker (e.g., 1.). Usually this will mean indenting 3 spaces instead of 4.  Do step 1.      Now do this:    def print_hi(name)  puts &quot;Hi, #{name}&quot;endprint_hi(&#39;Tom&#39;)#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.        Now you can do this.GitHub Gist EmbedAn example of a Gist embed below.Source"
+  }
+  
+  
+  
+  
   
   ,
+  {
+    "title"    : "Github Pages Practice",
+    "category" : "",
+    "tags"     : " ",
+    "url"      : "/sets/Github-Pages-Practice",
+    "date"     : "July 22, 2020",
+    "excerpt"  : "",
+    "content"  : ""
+  },
+  
   
   {
+    "title"    : "HPC",
+    "category" : "",
+    "tags"     : " ",
+    "url"      : "/sets/HPC",
+    "date"     : "July 22, 2020",
+    "excerpt"  : "",
+    "content"  : ""
+  },
   
-  "title"    : "Ninja",
-  "category" : "",
-  "tags"     : " Lorem",
-  "url"      : "/portfolio/ninja",
-  "date"     : "April 8, 2014",
-  "excerpt"  : "\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem qu...",
-  "content"  : "\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\n\n"
-  
-} ,
-  
-  {
-  
-  "title"    : "Creative",
-  "category" : "",
-  "tags"     : " Ipsum",
-  "url"      : "/portfolio/safe",
-  "date"     : "August 16, 2014",
-  "excerpt"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia...",
-  "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\nUse this area of the page to describe your project. The icon above is part of a free icon set by Flat Icons. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!\n"
-  
-} ,
   
   {
+    "title"    : "NCS Reflection",
+    "category" : "",
+    "tags"     : " ",
+    "url"      : "/sets/NCS-Reflection",
+    "date"     : "July 22, 2020",
+    "excerpt"  : "",
+    "content"  : ""
+  }
   
-  "title"    : "Circus",
-  "category" : "",
-  "tags"     : " Ipsum",
-  "url"      : "/portfolio/circus",
-  "date"     : "September 1, 2014",
-  "excerpt"  : "\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem qu...",
-  "content"  : "\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\n\n"
-  
-} ,
-  
-  {
-  
-  "title"    : "Tower of Hanoi",
-  "category" : "",
-  "tags"     : " ",
-  "url"      : "/portfolio/hanoi",
-  "date"     : "September 1, 2014",
-  "excerpt"  : "\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem qu...",
-  "content"  : "\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\n\n"
-  
-} ,
-  
-  {
-  
-  "title"    : "Tic tac toe",
-  "category" : "",
-  "tags"     : " ",
-  "url"      : "/portfolio/tictactoe",
-  "date"     : "September 1, 2014",
-  "excerpt"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia...",
-  "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\n\n"
-  
-} ,
-  
-  {
-  
-  "title"    : "Cake",
-  "category" : "",
-  "tags"     : " Lorem, Ipsum, Portfolio",
-  "url"      : "/portfolio/cake",
-  "date"     : "September 27, 2015",
-  "excerpt"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia...",
-  "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\nUse this area of the page to describe your project. The icon above is part of a free icon set by Flat Icons. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!\n"
-  
-} ,
-  
-  {
-  
-  "title"    : "Jekyll",
-  "category" : "",
-  "tags"     : " ",
-  "url"      : "/portfolio/jekyllblog",
-  "date"     : "May 26, 2017",
-  "excerpt"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia...",
-  "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\n\n"
-  
-} ,
-  
-  {
-  
-  "title"    : "Lorem Ipsum",
-  "category" : "",
-  "tags"     : " ",
-  "url"      : "/portfolio/submarine",
-  "date"     : "September 3, 2017",
-  "excerpt"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia...",
-  "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\nUse this area of the page to describe your project. The icon above is part of a free icon set by Flat Icons. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!\n\n"
-  
-} ,
-  
-  {
-  
-  "title"    : "Github",
-  "category" : "",
-  "tags"     : " Lorem, Portfolio",
-  "url"      : "/portfolio/gitlecture",
-  "date"     : "October 20, 2017",
-  "excerpt"  : "\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem qu...",
-  "content"  : "\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\n\n"
-  
-} 
   
 ]
-
-  
-</section>
-
-<!-- Article Tag list -->
-
-
-
-
-<footer>
-  <div class="tag-list"></div>
-</footer>
-
-
-<!-- For post only -->
-
-
-      </div>
-      <footer class="site-footer">
-    <p class="text">
-        Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://github.com/">Gitgub Pages</a>
-</p>
-        <!--            
-            <div class="footer-icons">
-                <ul>
-                !-- Social icons from Font Awesome, if enabled --
-                
-<li>
-    <a feed.xml href="https://liangbin-pub.github.io/" title="Follow RSS feed">
-    <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<li>
-    <a href="https://github.com/sylhare" title="Follow on GitHub">
-		<span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </ul>
-            </div>
-        -->
-</footer>
-
-
-
-    </div>
-  </body>
-</html>

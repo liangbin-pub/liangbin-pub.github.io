@@ -11,7 +11,7 @@
 <!--Favicon-->
 <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
 <!-- Canonical -->
-<link rel="canonical" href="http://0.0.0.0:4000/">
+<link rel="canonical" href="http://0.0.0.0:4000/portfolio/posts/reflection-on-network-intelligence">
 <!-- RSS -->
 <link rel="alternate" type="application/atom+xml" title="BLog" href="http://0.0.0.0:4000/feed.xml"/>
 <!-- Font pairs-->
@@ -47,20 +47,21 @@
  <!-- End Google Analytics -->
 <!-- jekyll-seo-tag to add metadata tags for search engines and social networks -->
 <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Home | BLog</title>
+<title>Reflection on Network Intelligence | BLog</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Home" />
+<meta property="og:title" content="Reflection on Network Intelligence" />
 <meta name="author" content="Bin Liang" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="Bin Liang’s Tech Blog" />
-<meta property="og:description" content="Bin Liang’s Tech Blog" />
-<link rel="canonical" href="http://0.0.0.0:4000/" />
-<meta property="og:url" content="http://0.0.0.0:4000/" />
+<meta name="description" content="Reflection on Network Intelligence Remember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelligence should be implemented. Microsoft at the time dominated the PC market and was pushing network features at end-point such as security, acceleration, QoS etc. Network vendors led by Cisco on the other hand wanted to weave most if not all network intelligence into network itself. As we know up till now, similar fights have never ended, just with player and battle fields changes. Unfortunately, this left us some confusing products and terms we still have to deal with up till now, such as UTM devices in the network but truly not a networking device, and over-kill TCP/IP stack deployed among end-points to accommodate worst network scenario where they are actually communicate in a close proximity LAN environment. Arguments from either sides are valid to certain extent and I’m not making any judgement here. It just suddenly stuck me when I trying to solve a networking issue seemingly unsolvable with conflicting constrains. That is the starting point of my long journey of rethinking some of the basics in the networking industry. For such a long time we have isolate networking from other information technologies such as compute, storage. We define some protocols and implement some network infrastructures based on very OLD assumptions that we networking guys are only responsible to deliver data from A to B fast, reliable and effectively. The additional intelligence we want to baked into network are also for above purposes as well, such as TCP offload, in-network retransmit etc. We never question why we need to do that and unfortunately this holds true for other parts as well. About 9 years ago I started moving my knowledge stack up from embedded network design into software defined networking (SDN), Intent Based Networking (IBN) and then networked applications. The higher I goes up the stack, the bigger the scope I can see, both problems and solutions, from interface to network element, to site, to multi-site, to global. During the transition, I learnt that something used to be so important even critical at local becomes irrelevant when looked at from a much bigger picture, such as pursuing zero drop rate at interface level, which has very little impact to application, our ultimate goal. Along this line of thinking, I would argue that even if all parts are optimal, the combination may not be optimal. Why? It’s also strongly depends on how we partitioned the original problem, in other words, how parts are divided and their responsibility defined. We know know we need to optimize networking End-to-End to satisfy application needs rather than focus on some intermediate segment. What we also need to know is that there is NO fixed boundary among compute, storage and networking within an application. As I mentioned in the 1st post in NCS-Reflection series, rather than shipping data between compute and storage or between compute units, compute instructions can be shipped or triggered remotely instead under certain circumstance, totally changes the request and requirement for networking part. To summarize, I think we should not talk about intelligence or optimization in an isolate matter, either just a network segment or network as a whole alone. Intelligence and optimization all must serve the benefit of application hence must be considered as a whole at application level before dividing into networking or computing portions. There is no need for network to exist if it doesn’t serve the compute and storage, on the other hand, if compute and storage treat networking part of interconnection, like ALU to Registers, CPU Core to memory and I/O systems, the world will just like a super big computer, with interconnection among compute nodes and storage nodes. If applications within a computer can be made agnostic (largely) to computer configuration, we sure can make them fly in this globally abstracted supper computer. This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!" />
+<meta property="og:description" content="Reflection on Network Intelligence Remember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelligence should be implemented. Microsoft at the time dominated the PC market and was pushing network features at end-point such as security, acceleration, QoS etc. Network vendors led by Cisco on the other hand wanted to weave most if not all network intelligence into network itself. As we know up till now, similar fights have never ended, just with player and battle fields changes. Unfortunately, this left us some confusing products and terms we still have to deal with up till now, such as UTM devices in the network but truly not a networking device, and over-kill TCP/IP stack deployed among end-points to accommodate worst network scenario where they are actually communicate in a close proximity LAN environment. Arguments from either sides are valid to certain extent and I’m not making any judgement here. It just suddenly stuck me when I trying to solve a networking issue seemingly unsolvable with conflicting constrains. That is the starting point of my long journey of rethinking some of the basics in the networking industry. For such a long time we have isolate networking from other information technologies such as compute, storage. We define some protocols and implement some network infrastructures based on very OLD assumptions that we networking guys are only responsible to deliver data from A to B fast, reliable and effectively. The additional intelligence we want to baked into network are also for above purposes as well, such as TCP offload, in-network retransmit etc. We never question why we need to do that and unfortunately this holds true for other parts as well. About 9 years ago I started moving my knowledge stack up from embedded network design into software defined networking (SDN), Intent Based Networking (IBN) and then networked applications. The higher I goes up the stack, the bigger the scope I can see, both problems and solutions, from interface to network element, to site, to multi-site, to global. During the transition, I learnt that something used to be so important even critical at local becomes irrelevant when looked at from a much bigger picture, such as pursuing zero drop rate at interface level, which has very little impact to application, our ultimate goal. Along this line of thinking, I would argue that even if all parts are optimal, the combination may not be optimal. Why? It’s also strongly depends on how we partitioned the original problem, in other words, how parts are divided and their responsibility defined. We know know we need to optimize networking End-to-End to satisfy application needs rather than focus on some intermediate segment. What we also need to know is that there is NO fixed boundary among compute, storage and networking within an application. As I mentioned in the 1st post in NCS-Reflection series, rather than shipping data between compute and storage or between compute units, compute instructions can be shipped or triggered remotely instead under certain circumstance, totally changes the request and requirement for networking part. To summarize, I think we should not talk about intelligence or optimization in an isolate matter, either just a network segment or network as a whole alone. Intelligence and optimization all must serve the benefit of application hence must be considered as a whole at application level before dividing into networking or computing portions. There is no need for network to exist if it doesn’t serve the compute and storage, on the other hand, if compute and storage treat networking part of interconnection, like ALU to Registers, CPU Core to memory and I/O systems, the world will just like a super big computer, with interconnection among compute nodes and storage nodes. If applications within a computer can be made agnostic (largely) to computer configuration, we sure can make them fly in this globally abstracted supper computer. This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!" />
+<link rel="canonical" href="http://0.0.0.0:4000/portfolio/posts/reflection-on-network-intelligence" />
+<meta property="og:url" content="http://0.0.0.0:4000/portfolio/posts/reflection-on-network-intelligence" />
 <meta property="og:site_name" content="BLog" />
-<meta property="og:image" content="http://0.0.0.0:4000/assets/img/pexels/closeup-photo-of-blue-pen-tinted-spiral-notepad-placed.jpg" />
-<link rel="next" href="http://0.0.0.0:4000/homepage/page2" />
+<meta property="og:image" content="http://0.0.0.0:4000/assets/img/software.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-11T00:00:00+00:00" />
 <script type="application/ld+json">
-{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://0.0.0.0:4000/assets/img/logo.png"},"name":"Bin Liang"},"author":{"@type":"Person","name":"Bin Liang"},"headline":"Home","sameAs":["https://github.com/liangbin-pub","https://www.linkedin.com/in/liangbin888"],"url":"http://0.0.0.0:4000/","description":"Bin Liang’s Tech Blog","image":"http://0.0.0.0:4000/assets/img/pexels/closeup-photo-of-blue-pen-tinted-spiral-notepad-placed.jpg","name":"liangbin","@type":"WebSite","@context":"https://schema.org"}</script>
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://0.0.0.0:4000/assets/img/logo.png"},"name":"Bin Liang"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/portfolio/posts/reflection-on-network-intelligence"},"author":{"@type":"Person","name":"Bin Liang"},"headline":"Reflection on Network Intelligence","dateModified":"2020-06-11T00:00:00+00:00","datePublished":"2020-06-11T00:00:00+00:00","url":"http://0.0.0.0:4000/portfolio/posts/reflection-on-network-intelligence","description":"Reflection on Network Intelligence Remember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelligence should be implemented. Microsoft at the time dominated the PC market and was pushing network features at end-point such as security, acceleration, QoS etc. Network vendors led by Cisco on the other hand wanted to weave most if not all network intelligence into network itself. As we know up till now, similar fights have never ended, just with player and battle fields changes. Unfortunately, this left us some confusing products and terms we still have to deal with up till now, such as UTM devices in the network but truly not a networking device, and over-kill TCP/IP stack deployed among end-points to accommodate worst network scenario where they are actually communicate in a close proximity LAN environment. Arguments from either sides are valid to certain extent and I’m not making any judgement here. It just suddenly stuck me when I trying to solve a networking issue seemingly unsolvable with conflicting constrains. That is the starting point of my long journey of rethinking some of the basics in the networking industry. For such a long time we have isolate networking from other information technologies such as compute, storage. We define some protocols and implement some network infrastructures based on very OLD assumptions that we networking guys are only responsible to deliver data from A to B fast, reliable and effectively. The additional intelligence we want to baked into network are also for above purposes as well, such as TCP offload, in-network retransmit etc. We never question why we need to do that and unfortunately this holds true for other parts as well. About 9 years ago I started moving my knowledge stack up from embedded network design into software defined networking (SDN), Intent Based Networking (IBN) and then networked applications. The higher I goes up the stack, the bigger the scope I can see, both problems and solutions, from interface to network element, to site, to multi-site, to global. During the transition, I learnt that something used to be so important even critical at local becomes irrelevant when looked at from a much bigger picture, such as pursuing zero drop rate at interface level, which has very little impact to application, our ultimate goal. Along this line of thinking, I would argue that even if all parts are optimal, the combination may not be optimal. Why? It’s also strongly depends on how we partitioned the original problem, in other words, how parts are divided and their responsibility defined. We know know we need to optimize networking End-to-End to satisfy application needs rather than focus on some intermediate segment. What we also need to know is that there is NO fixed boundary among compute, storage and networking within an application. As I mentioned in the 1st post in NCS-Reflection series, rather than shipping data between compute and storage or between compute units, compute instructions can be shipped or triggered remotely instead under certain circumstance, totally changes the request and requirement for networking part. To summarize, I think we should not talk about intelligence or optimization in an isolate matter, either just a network segment or network as a whole alone. Intelligence and optimization all must serve the benefit of application hence must be considered as a whole at application level before dividing into networking or computing portions. There is no need for network to exist if it doesn’t serve the compute and storage, on the other hand, if compute and storage treat networking part of interconnection, like ALU to Registers, CPU Core to memory and I/O systems, the world will just like a super big computer, with interconnection among compute nodes and storage nodes. If applications within a computer can be made agnostic (largely) to computer configuration, we sure can make them fly in this globally abstracted supper computer. This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!","image":"http://0.0.0.0:4000/assets/img/software.jpg","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -69,8 +70,8 @@
 
 <!-- Manual seo tags -->
 <!--
-<title>Home | BLog</title>
-<meta name="description" content="Bin Liang's Tech Blog">
+<title>Reflection on Network Intelligence | BLog</title>
+<meta name="description" content="Reflection on Network IntelligenceRemember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelli...">
 -->
 
   </head>
@@ -972,21 +973,21 @@
     <div class="content">
       
 
-<meta property="og:url"          content="/" />
+<meta property="og:url"          content="/portfolio/posts/reflection-on-network-intelligence" />
 <meta property="og:type"         content="article" />
-<meta property="og:title"        content="Home" />
-<meta property="og:description"  content="" />
-<meta property="og:image"        content="assets/img/pexels/closeup-photo-of-blue-pen-tinted-spiral-notepad-placed.jpg" />
+<meta property="og:title"        content="Reflection on Network Intelligence" />
+<meta property="og:description"  content="Reflection on Network Intelligence
+
+Remember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelligence should be implemented. Microsoft at the time dominated the PC market and was pushi..." />
+<meta property="og:image"        content="assets/img/software.jpg" />
 
 
 
 <!-- Page Featured Image and Title as Header for SEO -->
-<header id="main" class="fi fi-ol-mid fi-darken" style="background-image: url('/assets/img/pexels/closeup-photo-of-blue-pen-tinted-spiral-notepad-placed.jpg')">
+<header id="main" class="fi fi-ol-mid fi-darken" style="background-image: url('/assets/img/software.jpg')">
   
   <div class="fi-tbox-mid">
-    <h1 id="Home" class="title">Home</h1>
-    
-      <h4 class="subtitle">Liangbin's Tech Blog Home</h2>
+    <h1 id="Reflection+on+Network+Intelligence" class="title">Reflection on Network Intelligence</h1>
     
   </div>
   
@@ -1026,13 +1027,22 @@
 
     <div class="contact-title">
       
-        <p>Updated on Jul 22, 2020</p>
+        <p>Published on Jun 11, 2020</p>
       
     </div>
     
 
     
-      <p class="about">I am a network architect with full stack development experience.  My current research focuses include DCN, global meta data plane  and in general NCS: Networked Compute & Storage architecture.</p>
+      
+      
+      <div class="sidebar-container toc-container">
+        <div class="side-toc">
+          <!-- hr class="hidden-sm hidden-xs"-->
+          <h5><a class="toc-toggle" href="#">Table of Content</a></h5>
+          <ul class="toc-list"></ul>
+        </div>
+      </div>
+      
     
   </div>
 
@@ -1044,216 +1054,224 @@
   
   <section class="post-content">
     
-    <div class="posts">
-  
-  <article class="post">
-    
-      <a class="post-thumbnail" style="background-image: url('/assets/img/software.jpg')" href="/portfolio/posts/fugaku-tofud-interconnect-study"></a>
-    
-    <div class="post-content">
-      <h2 class="post-title"><a href="/portfolio/posts/fugaku-tofud-interconnect-study">Fugaku TofuD Interconnect Study</a></h2>
-      
+    <h2 id="reflection-on-network-intelligence">Reflection on Network Intelligence</h2>
 
+<p>Remember in my early days in networking industry, Cisco used to fight against Microsoft regarding where the network intelligence should be implemented. Microsoft at the time dominated the PC market and was pushing network features at end-point such as security, acceleration, QoS etc. Network vendors led by Cisco on the other hand wanted to weave most if not all network intelligence into network itself. As we know up till now, similar fights have never ended, just with player and battle fields changes. Unfortunately, this left us some confusing products and terms we still have to deal with up till now, such as UTM devices in the network but truly not a networking device, and over-kill TCP/IP stack deployed among end-points to accommodate worst network scenario where they are actually communicate in a close proximity LAN environment.</p>
 
-<div class="post-info"><a href="https://github.com/liangbin-pub" target="_blank">
-      <img src="/assets/img/myAvatar.svg">
-    
-    <p class="meta">
-      Bin Liang - June 25, 2020
-    </p></a></div>
+<p>Arguments from either sides are valid to certain extent and I’m not making any judgement here. It just suddenly stuck me when I trying to solve a networking issue seemingly unsolvable with conflicting constrains. That is the starting point of my long journey of rethinking some of the basics in the networking industry. For such a long time we have isolate networking from other information technologies such as compute, storage. We define some protocols and implement some network infrastructures based on very <strong>OLD</strong> assumptions that we networking guys are only responsible to deliver data from A to B fast, reliable and effectively. The additional intelligence we want to baked into network are also for above purposes as well, such as TCP offload, in-network retransmit etc. We never question why we need to do that and unfortunately this holds true for other parts as well.</p>
 
+<p>About 9 years ago I started moving my knowledge stack up from embedded network design into software defined networking (SDN), Intent Based Networking (IBN) and then networked applications. The higher I goes up the stack, the bigger the scope I can see, both problems and solutions, from interface to network element, to site, to multi-site, to global. During the transition, I learnt that something used to be so important even critical at local becomes irrelevant when looked at from a much bigger picture, such as pursuing zero drop rate at interface level, which has very little impact to application, our ultimate goal.</p>
 
-      <p>
-        
-        Fugaku TofuD Interconnect Study
+<p>Along this line of thinking, I would argue that even if all parts are optimal, the combination may not be optimal. Why? It’s also strongly depends on how we partitioned the original problem, in other words, how parts are divided and their responsibility defined. We know know we need to optimize networking End-to-End to satisfy application needs rather than focus on some intermediate segment. What we also need to know is that there is <strong>NO fixed boundary</strong> among compute, storage and networking within an application. As I mentioned in the 1st post in <a href="/portfolio/posts/reflection-on-osi-model">NCS-Reflection</a> series, rather than shipping data between compute and storage or between compute units, compute instructions can be shipped or triggered remotely instead under certain circumstance, totally changes the request and requirement for networking part.</p>
 
-Draft – Coming soon!
+<p>To summarize, I think we should not talk about intelligence or optimization in an isolate matter, either just a network segment or network as a whole alone. Intelligence and optimization all must serve the benefit of application hence must be considered as a whole at application level before dividing into networking or computing portions. There is no need for network to exist if it doesn’t serve the compute and storage, on the other hand, if compute and storage treat networking part of interconnection, like ALU to Registers, CPU Core to memory and I/O systems, the world will just like a super big computer, with interconnection among compute nodes and storage nodes. If applications within a computer can be made agnostic (largely) to computer configuration, we sure can make them fly in this globally abstracted supper computer.</p>
 
-
-      </p>
-      <!-- span class="post-date">2020, Jun 25&nbsp;&nbsp;&nbsp;—&nbsp;</span -->
-
-      
-      
-      <span class="post-words">1 minute read</span>
-    </div>
-  </article>
-  
-  <article class="post">
-    
-      <a class="post-thumbnail" style="background-image: url('/assets/img/software.jpg')" href="/portfolio/posts/fugaku-is-the-new-king"></a>
-    
-    <div class="post-content">
-      <h2 class="post-title"><a href="/portfolio/posts/fugaku-is-the-new-king">Fugaku is the new King</a></h2>
-      
-
-
-<div class="post-info"><a href="https://github.com/liangbin-pub" target="_blank">
-      <img src="/assets/img/myAvatar.svg">
-    
-    <p class="meta">
-      Bin Liang - June 23, 2020
-    </p></a></div>
-
-
-      <p>
-        
-        Fugaku is the new King
-
-The biggest GOOD news in IT industry this year must be the announcement of Fugaku supercomput...
-      </p>
-      <!-- span class="post-date">2020, Jun 23&nbsp;&nbsp;&nbsp;—&nbsp;</span -->
-
-      
-      
-      <span class="post-words">2 minute read</span>
-    </div>
-  </article>
-  
-  <article class="post">
-    
-      <a class="post-thumbnail" style="background-image: url('/assets/img/software.jpg')" href="/portfolio/posts/reflection-on-data-fidelity"></a>
-    
-    <div class="post-content">
-      <h2 class="post-title"><a href="/portfolio/posts/reflection-on-data-fidelity">Reflection on Data Fidelity</a></h2>
-      
-
-
-<div class="post-info"><a href="https://github.com/liangbin-pub" target="_blank">
-      <img src="/assets/img/myAvatar.svg">
-    
-    <p class="meta">
-      Bin Liang - June 20, 2020
-    </p></a></div>
-
-
-      <p>
-        
-        
-  “To be, or not to be? That is the question”
-   ― William Shakespeare, Hamlet
-
-
-Reflection on Data Fidelity
-
-Is dat...
-      </p>
-      <!-- span class="post-date">2020, Jun 20&nbsp;&nbsp;&nbsp;—&nbsp;</span -->
-
-      
-      
-      <span class="post-words">4 minute read</span>
-    </div>
-  </article>
-  
-  <article class="post">
-    
-      <a class="post-thumbnail" style="background-image: url('/assets/img/software.jpg')" href="/portfolio/posts/reflection-on-network-intelligence"></a>
-    
-    <div class="post-content">
-      <h2 class="post-title"><a href="/portfolio/posts/reflection-on-network-intelligence">Reflection on Network Intelligence</a></h2>
-      
-
-
-<div class="post-info"><a href="https://github.com/liangbin-pub" target="_blank">
-      <img src="/assets/img/myAvatar.svg">
-    
-    <p class="meta">
-      Bin Liang - June 11, 2020
-    </p></a></div>
-
-
-      <p>
-        
-        Reflection on Network Intelligence
-
-Remember in my early days in networking industry, Cisco used to fight against Mic...
-      </p>
-      <!-- span class="post-date">2020, Jun 11&nbsp;&nbsp;&nbsp;—&nbsp;</span -->
-
-      
-      
-      <span class="post-words">4 minute read</span>
-    </div>
-  </article>
-  
-  <article class="post">
-    
-      <a class="post-thumbnail" style="background-image: url('/assets/img/software.jpg')" href="/portfolio/posts/reflection-on-osi-model"></a>
-    
-    <div class="post-content">
-      <h2 class="post-title"><a href="/portfolio/posts/reflection-on-osi-model">Reflection on OSI Model</a></h2>
-      
-
-
-<div class="post-info"><a href="https://github.com/liangbin-pub" target="_blank">
-      <img src="/assets/img/myAvatar.svg">
-    
-    <p class="meta">
-      Bin Liang - May 31, 2020
-    </p></a></div>
-
-
-      <p>
-        
-        Reflection on OSI model
-
-In the world of inter-networking, the most popular standard has to be TCP/IP protocol, which...
-      </p>
-      <!-- span class="post-date">2020, May 31&nbsp;&nbsp;&nbsp;—&nbsp;</span -->
-
-      
-      
-      <span class="post-words">4 minute read</span>
-    </div>
-  </article>
-  
-</div>
-
-
-<div class="pagination">
-    <div class="previous">
-        
-        
-        
-        <!-- < previous -->
-        <a aria-label="Prev" href=""
-           style="visibility:hidden" class="button">
-            <span><i class="fa fa-chevron-left"></i></span>
-            Prev
-        </a>
-    </div>
-
-    <div class="page_number">
-        1 / 3
-    </div>
-
-    <div class="next">
-        
-        <!-- next > -->
-        <a aria-label="Next" href="/homepage/page2"
-            class="button">
-            Next
-            <span><i class="fa fa-chevron-right"></i></span>
-        </a>
-
-        
-        <!-- >> -->
-        <a aria-label="Next"
-        href="/homepage/page3" class="button">
-            <span><i class="fa fa-angle-double-right"></i></span>
-        </a>
-        
-        
-    </div>
-</div>
-
-
+<p>This is a challenging time for networking, but it’s also a perfect time for breaking away: Welcome to an era of converged compute, storage and networking, friend!</p>
 
     
   </section>
 
   
+  
+    
+    
+      
+      
+      
+      
+      <div class="article-series">
+        <h3>NCS Reflection - Series</h3>
+        <p>This series presents my reflection on basics in the field of Networking and in general - NCS</p>
+
+        
+
+<ul class="listing">
+	
+		
+			
+
+
+<li >
+	<a href="/portfolio/posts/reflection-on-osi-model">
+		<article>
+				<h5>
+					1. 
+					<i class="fa fa-file-text-o" aria-hidden="true"></i>
+					Reflection on OSI Model
+					
+				</h5>
+				
+		</article>
+	</a>
+</li>
+
+		
+	
+		
+			
+
+
+<li class="active">
+	<a href="/portfolio/posts/reflection-on-network-intelligence">
+		<article>
+				<h5>
+					2. 
+					<i class="fa fa-file-text-o" aria-hidden="true"></i>
+					Reflection on Network Intelligence
+					
+				</h5>
+				
+		</article>
+	</a>
+</li>
+
+		
+	
+		
+			
+
+
+<li >
+	<a href="/portfolio/posts/reflection-on-data-fidelity">
+		<article>
+				<h5>
+					3. 
+					<i class="fa fa-file-text-o" aria-hidden="true"></i>
+					Reflection on Data Fidelity
+					
+				</h5>
+				
+		</article>
+	</a>
+</li>
+
+		
+	
+</ul>
+      </div>
+    
+
+    
+    
+    
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/tags#Insight">
+      <p><i class="fa fa-tag fa-fw"></i> Insight</p>
+    </a>
+    
+    <a class="button" href="/tags#Solution">
+      <p><i class="fa fa-tag fa-fw"></i> Solution</p>
+    </a>
+    
+    <a class="button" href="/tags#Technology">
+      <p><i class="fa fa-tag fa-fw"></i> Technology</p>
+    </a>
+    
+  </div>
+</footer>
+
+
+    
+    <p><strong>Related posts :</strong></p>
+    <ul>
+      
+      
+        
+          
+            <li><a href="/portfolio/posts/fugaku-tofud-interconnect-study">Fugaku TofuD Interconnect Study</a></li>
+            
+            
+        
+      
+        
+          
+            <li><a href="/portfolio/posts/fugaku-is-the-new-king">Fugaku is the new King</a></li>
+            
+            
+        
+      
+        
+          
+            <li><a href="/portfolio/posts/reflection-on-data-fidelity">Reflection on Data Fidelity</a></li>
+            
+            
+        
+      
+        
+          
+        
+          
+        
+          
+        
+        
+      
+        
+          
+            <li><a href="/portfolio/posts/reflection-on-osi-model">Reflection on OSI Model</a></li>
+            
+            
+        
+      
+        
+          
+            <li><a href="/portfolio/posts/ncs-readme">NCS Category readme</a></li>
+            
+            
+        
+          
+    </ul>
+
+    
+    
+    
+    
+      <div class="comments">
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'liangbin-pub-github-io';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view comments.</noscript>
+
+      </div>
+    
+
+    
+    
+      <div id="post-nav">
+    
+    <div id="previous-post">
+        <a alt="Reflection on Data Fidelity" href="/portfolio/posts/reflection-on-data-fidelity">
+            <p>Previous post</p>
+            Reflection on Data Fidelity
+        </a>
+    </div>
+    
+
+    
+    <div id="next-post">
+        <a alt="Reflection on OSI Model" href="/portfolio/posts/reflection-on-osi-model">
+            <p>Next post</p>
+            Reflection on OSI Model
+        </a>
+    </div>
+    
+</div>
+
+    
   
 </div>
 
