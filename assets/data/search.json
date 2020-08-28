@@ -110,6 +110,17 @@
   
   ,
   {
+    "title"    : "Gmail Aliasing",
+    "category" : "Exploration",
+    "tags"     : " Practice",
+    "url"      : "/portfolio/posts/gmail-aliasing",
+    "date"     : "August 28, 2020",
+    "excerpt"  : "Email aliasing is a good solution for online privacy and email organization without using multiple Email accounts.Yahoo mail alias can be configured directly in setup, but Gmail alias seems no where to be found.Here is a hidden feature I found whi...",
+    "content"  : "Email aliasing is a good solution for online privacy and email organization without using multiple Email accounts.Yahoo mail alias can be configured directly in setup, but Gmail alias seems no where to be found.Here is a hidden feature I found which realizes Gmail aliasing in an interesting way:Appending ANY suffix with “+” to your Gmail ID effectively creates an aliasFor example, assume my Gmail address is myname@gmail.com, then I can use following Gmail addresses as alias of my main account:  myname+notification@gmail.com  myname+vip@gmail.comTry it and enjoy!"
+  },
+  
+  
+  {
     "title"    : "Fugaku TofuD Interconnect Study",
     "category" : "Networked Compute and Storage",
     "tags"     : " Insight, Technology, Solution",
@@ -283,7 +294,7 @@
     "category" : "",
     "tags"     : " ",
     "url"      : "/sets/Github-Pages-Practice",
-    "date"     : "July 22, 2020",
+    "date"     : "August 28, 2020",
     "excerpt"  : "",
     "content"  : ""
   },
@@ -294,7 +305,7 @@
     "category" : "",
     "tags"     : " ",
     "url"      : "/sets/HPC",
-    "date"     : "July 22, 2020",
+    "date"     : "August 28, 2020",
     "excerpt"  : "",
     "content"  : ""
   },
@@ -305,7 +316,7 @@
     "category" : "",
     "tags"     : " ",
     "url"      : "/sets/NCS-Reflection",
-    "date"     : "July 22, 2020",
+    "date"     : "August 28, 2020",
     "excerpt"  : "",
     "content"  : ""
   }

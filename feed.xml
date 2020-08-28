@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2020-07-22T00:10:20+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">BLog</title><subtitle>Bin Liang's Tech Blog</subtitle><author><name>liangbin</name></author><entry xml:lang="en"><title type="html">Fugaku TofuD Interconnect Study</title><link href="http://0.0.0.0:4000/portfolio/posts/fugaku-tofud-interconnect-study" rel="alternate" type="text/html" title="Fugaku TofuD Interconnect Study" /><published>2020-06-25T00:00:00+00:00</published><updated>2020-06-25T00:00:00+00:00</updated><id>http://0.0.0.0:4000/portfolio/posts/Fugaku-TofuD-Interconnect-Study</id><content type="html" xml:base="http://0.0.0.0:4000/portfolio/posts/fugaku-tofud-interconnect-study">&lt;h2 id=&quot;fugaku-tofud-interconnect-study&quot;&gt;Fugaku TofuD Interconnect Study&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2020-08-28T15:08:33+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">BLog</title><subtitle>Bin Liang's Tech Blog</subtitle><author><name>liangbin</name></author><entry xml:lang="en"><title type="html">Gmail Aliasing</title><link href="http://0.0.0.0:4000/portfolio/posts/gmail-aliasing" rel="alternate" type="text/html" title="Gmail Aliasing" /><published>2020-08-28T00:00:00+00:00</published><updated>2020-08-28T00:00:00+00:00</updated><id>http://0.0.0.0:4000/portfolio/posts/Gmail-Aliasing</id><content type="html" xml:base="http://0.0.0.0:4000/portfolio/posts/gmail-aliasing">&lt;p&gt;Email aliasing is a good solution for online privacy and email organization without using multiple Email accounts.&lt;/p&gt;
+
+&lt;p&gt;Yahoo mail alias can be configured directly in setup, but Gmail alias seems no where to be found.&lt;/p&gt;
+
+&lt;p&gt;Here is a hidden feature I found which realizes Gmail aliasing in an interesting way:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Appending ANY suffix with “+” to your Gmail ID effectively creates an alias&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For example, assume my Gmail address is myname@gmail.com, then I can use following Gmail addresses as alias of my main account:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;myname+notification@gmail.com&lt;/li&gt;
+  &lt;li&gt;myname+vip@gmail.com&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Try it and enjoy!&lt;/p&gt;</content><author><name>Bin Liang</name><email>fw.liangb@gmail.com</email></author><category term="Exploration" /><category term="Practice" /><summary type="html">Email aliasing is a good solution for online privacy and email organization without using multiple Email accounts. Yahoo mail alias can be configured directly in setup, but Gmail alias seems no where to be found. Here is a hidden feature I found which realizes Gmail aliasing in an interesting way: Appending ANY suffix with “+” to your Gmail ID effectively creates an alias For example, assume my Gmail address is myname@gmail.com, then I can use following Gmail addresses as alias of my main account: myname+notification@gmail.com myname+vip@gmail.com Try it and enjoy!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://0.0.0.0:4000/assets/img/software.jpg" /><media:content medium="image" url="http://0.0.0.0:4000/assets/img/software.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry xml:lang="en"><title type="html">Fugaku TofuD Interconnect Study</title><link href="http://0.0.0.0:4000/portfolio/posts/fugaku-tofud-interconnect-study" rel="alternate" type="text/html" title="Fugaku TofuD Interconnect Study" /><published>2020-06-25T00:00:00+00:00</published><updated>2020-06-25T00:00:00+00:00</updated><id>http://0.0.0.0:4000/portfolio/posts/Fugaku-TofuD-Interconnect-Study</id><content type="html" xml:base="http://0.0.0.0:4000/portfolio/posts/fugaku-tofud-interconnect-study">&lt;h2 id=&quot;fugaku-tofud-interconnect-study&quot;&gt;Fugaku TofuD Interconnect Study&lt;/h2&gt;
 
 &lt;p&gt;Draft – Coming soon!&lt;/p&gt;</content><author><name>Bin Liang</name><email>fw.liangb@gmail.com</email></author><category term="Networked Compute and Storage" /><category term="Insight" /><category term="Technology" /><category term="Solution" /><summary type="html">Fugaku TofuD Interconnect Study Draft – Coming soon!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://0.0.0.0:4000/assets/img/software.jpg" /><media:content medium="image" url="http://0.0.0.0:4000/assets/img/software.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry xml:lang="en"><title type="html">Fugaku is the new King</title><link href="http://0.0.0.0:4000/portfolio/posts/fugaku-is-the-new-king" rel="alternate" type="text/html" title="Fugaku is the new King" /><published>2020-06-23T00:00:00+00:00</published><updated>2020-06-23T00:00:00+00:00</updated><id>http://0.0.0.0:4000/portfolio/posts/Fugaku-Is-The-New-King</id><content type="html" xml:base="http://0.0.0.0:4000/portfolio/posts/fugaku-is-the-new-king">&lt;h2 id=&quot;fugaku-is-the-new-king&quot;&gt;Fugaku is the new King&lt;/h2&gt;
 
@@ -293,53 +308,4 @@ looking at this cheerful and colorful them, I wanted to enable something similar
 If you want another one, put it in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/assets/img&lt;/code&gt; as well.&lt;/p&gt;
 &lt;blockquote&gt;
   &lt;p&gt;⚠️ It’s a bit hacking the css in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;post.html&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>Sylhare</name></author><category term="Exploration" /><category term="Practice" /><category term="Technology" /><category term="Solution" /><category term="Jekyll" /><category term="Markdown" /><summary type="html">What a colorful post! This is an idea that came from xukimseven/HardCandy-Jekyll looking at this cheerful and colorful them, I wanted to enable something similar for mine. You can go fork and star hers too! 😉</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://0.0.0.0:4000/assets/img/mac.jpg" /><media:content medium="image" url="http://0.0.0.0:4000/assets/img/mac.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry xml:lang="en"><title type="html">Feature images</title><link href="http://0.0.0.0:4000/portfolio/posts/feature-images" rel="alternate" type="text/html" title="Feature images" /><published>2020-04-03T00:00:00+00:00</published><updated>2020-04-03T00:00:00+00:00</updated><id>http://0.0.0.0:4000/portfolio/posts/feature-images</id><content type="html" xml:base="http://0.0.0.0:4000/portfolio/posts/feature-images">&lt;p&gt;This is an example of a post which includes a feature image specified in the front matter of the post. 
-The feature image spans the full-width of the page, and is shown with the title on permalink pages:&lt;/p&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;assets/img/pexels/desk-messy.jpeg&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;And now it is working&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;You can also add images aligned in your post using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aligner&lt;/code&gt; include.
-Make sure to separate all of the image path forming a string separated with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;,&lt;/code&gt;.
-By default &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aligner&lt;/code&gt; find images from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assets/img/&lt;/code&gt;, so give the path from there, for example:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;% include &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aligner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;pexels/book-glass.jpeg,pexels/desk-messy.jpeg&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;div class=&quot;row&quot;&gt;
-    
-    &lt;div class=&quot;column&quot; style=&quot;flex: %&quot;&gt;
-        &lt;img src=&quot;/assets/img/pexels/book-glass.jpeg&quot; alt=&quot;book-glass.jpeg&quot; /&gt;
-    &lt;/div&gt;
-    
-    &lt;div class=&quot;column&quot; style=&quot;flex: %&quot;&gt;
-        &lt;img src=&quot;/assets/img/pexels/desk-messy.jpeg&quot; alt=&quot;desk-messy.jpeg&quot; /&gt;
-    &lt;/div&gt;
-    
-&lt;/div&gt;
-
-&lt;p&gt;Here you have two images side by side, but you can add more and set the amount per columns 
-(by specifying the number of columns or let it be automatic using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;auto&quot;&lt;/code&gt;):&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;% include &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aligner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;portfolio/cabin.png,portfolio/cake.png,portfolio/circus.png&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;column&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;div class=&quot;row&quot;&gt;
-    
-    &lt;div style=&quot;flex: 33.333333333333336%&quot;&gt;
-        &lt;img src=&quot;/assets/img/portfolio/cabin.png&quot; alt=&quot;cabin.png&quot; /&gt;
-    &lt;/div&gt;
-    
-    &lt;div style=&quot;flex: 33.333333333333336%&quot;&gt;
-        &lt;img src=&quot;/assets/img/portfolio/cake.png&quot; alt=&quot;cake.png&quot; /&gt;
-    &lt;/div&gt;
-    
-    &lt;div style=&quot;flex: 33.333333333333336%&quot;&gt;
-        &lt;img src=&quot;/assets/img/portfolio/circus.png&quot; alt=&quot;circus.png&quot; /&gt;
-    &lt;/div&gt;
-    
-&lt;/div&gt;</content><author><name>Sylhare</name></author><category term="Exploration" /><category term="Practice" /><category term="Technology" /><category term="Solution" /><category term="Jekyll" /><summary type="html">This is an example of a post which includes a feature image specified in the front matter of the post. The feature image spans the full-width of the page, and is shown with the title on permalink pages: image: &quot;assets/img/pexels/desk-messy.jpeg&quot; And now it is working You can also add images aligned in your post using the aligner include. Make sure to separate all of the image path forming a string separated with ,. By default aligner find images from assets/img/, so give the path from there, for example: {% include aligner.html images=&quot;pexels/book-glass.jpeg,pexels/desk-messy.jpeg&quot; %} Here you have two images side by side, but you can add more and set the amount per columns (by specifying the number of columns or let it be automatic using &quot;auto&quot;): {% include aligner.html images=&quot;portfolio/cabin.png,portfolio/cake.png,portfolio/circus.png&quot; column=3 %}</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://0.0.0.0:4000/assets/img/pexels/desk-messy.jpeg" /><media:content medium="image" url="http://0.0.0.0:4000/assets/img/pexels/desk-messy.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;/blockquote&gt;</content><author><name>Sylhare</name></author><category term="Exploration" /><category term="Practice" /><category term="Technology" /><category term="Solution" /><category term="Jekyll" /><category term="Markdown" /><summary type="html">What a colorful post! This is an idea that came from xukimseven/HardCandy-Jekyll looking at this cheerful and colorful them, I wanted to enable something similar for mine. You can go fork and star hers too! 😉</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://0.0.0.0:4000/assets/img/mac.jpg" /><media:content medium="image" url="http://0.0.0.0:4000/assets/img/mac.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
