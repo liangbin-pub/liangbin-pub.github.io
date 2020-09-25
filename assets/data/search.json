@@ -7,13 +7,13 @@
   
   
   {
-    "title"    : "Ninja",
+    "title"    : "Zeta Project",
     "category" : "",
     "tags"     : " Lorem",
-    "url"      : "/portfolio/os_projects/ninja",
+    "url"      : "/portfolio/os_projects/zeta",
     "date"     : "April 8, 2014",
     "excerpt"  : "",
-    "content"  : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+    "content"  : "What is Zeta project aboutWhat we are designing in Zeta project is a common Networking Service Gateway (NSG for short) inCloud and Data Center virtual networking environment.  To existing virtual networking infrastructure, Zeta NSG serves as a common proxy for offloadedor additional virtual networking functions (VNF for short) in the form of XDP programs  To those VNFs, Zeta NSG serves as a common hosting platform and framework to integrate theminto the overall virtual networking environment  Zeta NSG offers performance, scalability and fault-tolerance for both Gateway service itself andthe VNFs it hosts  Depends on capability and availability of hosted networking functions, Zeta NSG service extendsfrom most basic “Encapsulation proxy” all the way up to complete End-to-End networking service chain.  Zeta NSG can operate in a standalone mode or extends its framework to Compute nodes for some or all its VNFs, in a distributed fashionWhat values Zeta project brings inCompares to traditional central hosted virtual networking solutions, Zeta NSG solution offers:  NSG clustering for scalability and reliability  Unique Transparent Cluster Scaling to the NSG clients  XDP/eBPF based VNF for maximal performance and minimal forwarding overheadCompares to distributed virtual networking solutions, Zeta NSG solution offers:  Support large compute node mesh, scaling up to tens of thousands  Achieves same even better performance and latency characteristics  XDP/eBPF based VNF for maximal performance and minimal forwarding overheadAre you interested, come check it out!Zeta System Design"
   },
   
   
@@ -109,6 +109,17 @@
   
   
   ,
+  {
+    "title"    : "Introduction To Zeta",
+    "category" : "Networked Compute and Storage",
+    "tags"     : " Technology, Solution",
+    "url"      : "/portfolio/posts/introduction-to-zeta",
+    "date"     : "September 25, 2020",
+    "excerpt"  : "Looking forward to see the birth of ZetaA new Open Source Networking Service Gateway and Platform for Private DC and Public Cloud",
+    "content"  : "Looking forward to see the birth of ZetaA new Open Source Networking Service Gateway and Platform for Private DC and Public Cloud"
+  },
+  
+  
   {
     "title"    : "Gmail Aliasing",
     "category" : "Exploration",
@@ -294,7 +305,7 @@
     "category" : "",
     "tags"     : " ",
     "url"      : "/sets/Github-Pages-Practice",
-    "date"     : "August 28, 2020",
+    "date"     : "September 25, 2020",
     "excerpt"  : "",
     "content"  : ""
   },
@@ -305,7 +316,7 @@
     "category" : "",
     "tags"     : " ",
     "url"      : "/sets/HPC",
-    "date"     : "August 28, 2020",
+    "date"     : "September 25, 2020",
     "excerpt"  : "",
     "content"  : ""
   },
@@ -316,7 +327,7 @@
     "category" : "",
     "tags"     : " ",
     "url"      : "/sets/NCS-Reflection",
-    "date"     : "August 28, 2020",
+    "date"     : "September 25, 2020",
     "excerpt"  : "",
     "content"  : ""
   }
